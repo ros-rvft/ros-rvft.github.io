@@ -238,12 +238,12 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>To enable runtime verification and field-based testing, developers should provide an API for injecting faults or emulating runtime errors. For instance, to emulate the consequences of software faults, ros1-fuzzer (git: aliasrobotics/ros1\_fuzzer) provides an API for ROS messages fuzzing. As another example, to imitate the mistakes of programmers, IM-FIT (git: cembglm/imfit) is a tool for injecting faults in ROS applications.</p>
+        <p>To enable runtime verification and field-based testing, developers should provide an API for injecting faults or emulating runtime errors. For instance, to emulate the consequences of software faults, ros1-fuzzer (git: aliasrobotics/ros1_fuzzer) provides an API for ROS messages fuzzing. As another example, to imitate the mistakes of programmers, IM-FIT (git: cembglm/imfit) is a tool for injecting faults in ROS applications.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>There are two identified means to enabling unexpected scenarios injection in ROS: providing an API fault injection and or an API for error emulation. The two methods differ concerning their assumptions. Fault injection is about changing the source code and requires knowledge about the system's internal structure (e.g., imfit). Error emulation is about changing the system during execution and should not require knowledge about the system itself (e.g., ros1\_fuzzer, and ros2\_fuzzer). Thus, from the developer's point of view, enabling faulty scenarios through an API requires deciding whether fault injection or error emulation is the most suitable based on the system's requirements.</p>
+        <p>There are two identified means to enabling unexpected scenarios injection in ROS: providing an API fault injection and or an API for error emulation. The two methods differ concerning their assumptions. Fault injection is about changing the source code and requires knowledge about the system's internal structure (e.g., imfit). Error emulation is about changing the system during execution and should not require knowledge about the system itself (e.g., ros1_fuzzer, and ros2_fuzzer). Thus, from the developer's point of view, enabling faulty scenarios through an API requires deciding whether fault injection or error emulation is the most suitable based on the system's requirements.</p>
 
 
 

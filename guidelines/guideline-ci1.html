@@ -239,7 +239,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>The development team should identify timing constraints to ensure that no real-time requirements will be neglected during the system testing. For instance,  Autoware\_Perf (git: azu-lab/ROS2-E2E-Evaluation) allows for the calculation of response time and latency in  ROS 2 applications; such measurements may be used as hard constraints to testing the system. Also, one may identify real-time constraints with respect to synchronization between robots, sensor data processing time, or fault detection and recovery.</p>
+        <p>The development team should identify timing constraints to ensure that no real-time requirements will be neglected during the system testing. For instance,  AutowarePerf (git: azu-lab/ROS2-E2E-Evaluation) allows for the calculation of response time and latency in  ROS 2 applications; such measurements may be used as hard constraints to testing the system. Also, one may identify real-time constraints with respect to synchronization between robots, sensor data processing time, or fault detection and recovery.</p>
 
 
         <h2>Process (HOW)</h2>
@@ -256,11 +256,11 @@
         </p>
 
         <p>
-          Response time is the period a ROS-based system takes to react to one or more stimuli from the environment. Specific to the ROS domain, Chaaban, K. defines response time in ROS 2 as the ``duration from the release instant to the completion of the job execution''. To collect callback response time, Autoware\_Perf defines a function to get durations of callback instances for a given callback objects.
+          Response time is the period a ROS-based system takes to react to one or more stimuli from the environment. Specific to the ROS domain, Chaaban, K. defines response time in ROS 2 as the ``duration from the release instant to the completion of the job execution''. To collect callback response time, Autoware_Perf defines a function to get durations of callback instances for a given callback objects.
         </p>
 
         <p>
-          Latency is the time a ROS-based system takes to react to a stimulus from the test orchestrating apparatus. Often, field tests include a centralized computer orchestrating the test cases execution and information collection, latency in such cases tends to be significant. Autoware\_Perf illustrates how latency can be computed with an example of a ROS 2 service, where they send a goal to the robot and calculate the time for a response
+          Latency is the time a ROS-based system takes to react to a stimulus from the test orchestrating apparatus. Often, field tests include a centralized computer orchestrating the test cases execution and information collection, latency in such cases tends to be significant. Autoware_Perf illustrates how latency can be computed with an example of a ROS 2 service, where they send a goal to the robot and calculate the time for a response
         </p>
 
         <p>

@@ -243,12 +243,12 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>To facilitate field-based testing, the development team should properly manage the ROS nodes' lifecycle and prepare APIs for querying and updating the internal nodes' life-cycle, e.g., to ensure that nodes are in the right state for testing. For example, developers can use modes (git: ros2/demos) for lifecycle management. In the context of Micro-ROS (git: micro-ROS), developers can define custom lifecycle modes (git: micro-ROS/system\_modes)  like sleep, power saving, starting, processing, and ending modes, and use separate extra nodes for mode monitoring and mode update.</p>
+        <p>To facilitate field-based testing, the development team should properly manage the ROS nodes' lifecycle and prepare APIs for querying and updating the internal nodes' life-cycle, e.g., to ensure that nodes are in the right state for testing. For example, developers can use modes (git: ros2/demos) for lifecycle management. In the context of Micro-ROS (git: micro-ROS), developers can define custom lifecycle modes (git: micro-ROS/system_modes)  like sleep, power saving, starting, processing, and ending modes, and use separate extra nodes for mode monitoring and mode update.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>The team should define a custom life-cycle for the ROS-based application, for instance, the life-cycle phases could be: starting, processing, and ending, using system\_modes from Micro-ROS. Moreover, the processing phase can further be divided into waiting and executing steps and application-specific states, and the transitions between phases should be well-defined by events. The development team should then prepare an API for managing the life-cycle of nodes, which can be queried or updated through ROS interfaces, such as the client-server interface. The API should allow for the representation of all nodes in the application, which can be queried or updated using the interface.</p>
+        <p>The team should define a custom life-cycle for the ROS-based application, for instance, the life-cycle phases could be: starting, processing, and ending, using system_modes from Micro-ROS. Moreover, the processing phase can further be divided into waiting and executing steps and application-specific states, and the transitions between phases should be well-defined by events. The development team should then prepare an API for managing the life-cycle of nodes, which can be queried or updated through ROS interfaces, such as the client-server interface. The API should allow for the representation of all nodes in the application, which can be queried or updated using the interface.</p>
 
 
 
@@ -264,7 +264,7 @@
         <h4 style="text-indent: 25px;">Life-cycle management</h4>
 
         <p>
-          Life-cycle management is the ability to query and update the nodes' life-cycle. the library used by ROS2 provides the functionalities to managing nodes using the ROS2 stack. rclc$\_$lifecycle implements a ROS node that represents all other ROS nodes within the application. The nodes encode finite state machines that can be queried or updated using the ROS service interface. The lifecycle$\_$talker example illustrates how the get$\_$state and change$\_$state services query or update the life-cycle. The ROS2 implementation, however, does not support hierarchical states. To mitigate the problem, defines two extra nodes, the mode monitor node and the mode manager node. The mode monitor infers the state (i.e., mode) of underlying nodes; The mode manager may use the (inferred) state to update modes of sub-systems, modes of nodes, and node parameters.
+          Life-cycle management is the ability to query and update the nodes' life-cycle. the library used by ROS2 provides the functionalities to managing nodes using the ROS2 stack. rclc_lifecycle implements a ROS node that represents all other ROS nodes within the application. The nodes encode finite state machines that can be queried or updated using the ROS service interface. The lifecycle_talker example illustrates how the get_state and change_state services query or update the life-cycle. The ROS2 implementation, however, does not support hierarchical states. To mitigate the problem, defines two extra nodes, the mode monitor node and the mode manager node. The mode monitor infers the state (i.e., mode) of underlying nodes; The mode manager may use the (inferred) state to update modes of sub-systems, modes of nodes, and node parameters.
         </p>
 
 
