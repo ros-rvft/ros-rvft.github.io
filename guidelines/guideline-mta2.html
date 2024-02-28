@@ -217,13 +217,8 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
-
+        <h1 class="post-title">MTA2. Exploit automation for test case generation, test case prioritization and selection, oracle and monitor generation</h1>
       </header>
-
 
       <div class="post-content clearfix">
 
@@ -231,20 +226,8 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>Automation of testing activities is getting increasing attention in the robotic domain, even in the case of field-based testing. Automation can be exploited for various activities, including test case generation, prioritization, selection, and oracle generation. The benefits brought by automation are various: it helps improving the efficiency, effectiveness, and reliability of the software testing processes, e.g. by increasing the test coverage and providing consistency and repeatability in the testing process.</p>
         </blockquote>
-
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,92 +235,66 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>  Automating testing activities can improve efficiency, as they can be run quickly and repeatedly without human intervention. This leads to quicker feedback on the quality of the software. Also, automation  is essential to enhance the efficiency, effectiveness and reliability of the software testing processes. Moreover, as the system grows and evolves, automated test suites can generally be extended easily to accommodate new features and changes.
+          Indeed, there is an initial investment to be made in creating and maintaining the automation machinery.  </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The QA team should exploit automation tools for test case generation, test case selection and oracle generation, as well as other testing activities, to efficiently gain confidence in ROS-based systems in the field. For example, Mithra (pdf: https://afsafzal.github.io/materials/AfzalMithra.pdf) learns oracles from logs generated during the execution, it is motivated by a case from ArduPilot and tested in autonomous racing cars built on ROS. In addition, HAROS (git: git-afsantos/haros) promotes test case generation from properties using a tool called Hypothesis (git: HypothesisWorks/hypothesis). Finally, a technical report (pdf: https://www.cse.chalmers.se/$\sim$bergert/paper/2022-iros-roboticstesting.pdf) details how a company building mobile robots for disinfection uses equivalence partitioning for test case selection for the field.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>
+          To effectively implement test automation, one important step concerns the oracle specification, which is a mechanism or criteria to determine whether a test has passed or failed.
+          An important automation activity is the test case generation, with the aim of crafting tests cases to cover various functionalities, scenarios and edge cases of the system. For achieving this, a viable approach is to use Property Based Testing where test cases are automatically generated to target specific properties of the system. Another important automation activity concerns the test selection, which aims to select, in the search for efficiency, the relevant and representative scenarios to be tested.
+        </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+
+        <h4 style="text-indent: 25px;">Technology enablers</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          As a technology enabler, rostest is a ROS framework that allows us to do full integration testing across multiple nodes. In the task of test case generation in particular, one crucial component of the library is unit test. This module makes it possible to perform ROS node integration-level tests as well as code-level unit tests. In the case of ROS 2, the testing mechanism is ingrained in the structure of the packages, which makes the test development considerably easier. 
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+        <h4 style="text-indent: 25px;">Oracle specification</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          In the area of automated oracle generation, the authors of present Mithra, which is a novel and unsupervised oracle learning technique for Cyber-Physical Systems (CPS). The approach is applied to autonomous racing cars built for ROS.
+    The oracle learning approach builds oracles by clustering telemetry logs represented by a novel formulation of multivariate time series (MTS) that effectively and concisely encodes correct CPS behaviour. 
         </p>
+
+        <h4 style="text-indent: 25px;">Test case generation</h4>
+
+        <p>
+          Santos et al. rely on property-based testing (PBT) to generate test cases driven by properties specified in the form of assertions.
+
+          The tool HypothesisWorks/hypothesis receives a model of ROS configurations and generates customizeable property-based scripts for tests aimed at these configurations. It builds on top of configuration models extracted using HAROS, a static analysis framework for ROS applications.
+        </p>
+
+        <h4 style="text-indent: 25px;">Test case generation</h4>
+
+        <p>As a test selection mechanism, one commonly used technique is Equivalent Partitioning. The objective of equivalence partitioning is to minimize test case explosion, i.e. reduce the high number of possible combinations of the properties that will be tested. 
+    The idea behind Equivalence Partitioning is to group the test cases into equivalence classes according to how they handle valid or invalid data.The authors report the experience of field testing in the domain of service robotics. In particular, the system under study was the Kelo AD disinfection robot whose software stack is based on ROS. To implement the equivalence testing, the criteria for defining the  classes included robot motion, person posture, existence of occlusions and obstacle positions. 
+
+        </p>
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p> 
+          Automation in testing activities can be executed repeatedly with low effort and cost. Moreover, it brings benefits in terms of efficiency, effectiveness, and reliability. 
+        </p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p>
+          There is a high initial investment of time and resources. There is also a maintenance overhead related to maintaining the automation machinery when the system evolves. 
         </p>
 
 
-
-        <!-- ---------------------------------- FORMULA EXAMPLES ---------------------------------- -->
-
-        <h2 id="ltl-template">Formula Examples</h2>
-
-
-
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script>
-          <script type="math/tex"
-            id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
-        </div>
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script>
-          <br><br>
-
-          <script type="math/tex"
-            id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
-
-          <script setup lang="ts">
-            const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
-          </script>
 
           <!-- ---------------------------------- GUIDELINE CONTENT END ---------------------------------- -->
 

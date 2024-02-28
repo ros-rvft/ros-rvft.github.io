@@ -217,10 +217,7 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
+        <h1 class="post-title">CD2. Ensure global time monotonicity of events and states</h1>
 
       </header>
 
@@ -231,20 +228,9 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>As distributed systems, such as ROS-based applications, rely on time scheduling for their operation, ensuring time monotonicity is crucial to guarantee the replicability and reproducibility of test cases. Non-determinism in the scheduling of events can lead to unexpected behavior, compromising the reliability of tests and hindering their reproduction. To address this issue, developers must ensure that the testing team is aware of the expected behavior given the occurrence of events, which requires establishing a clear execution order and priority. For instance, by synchronizing different types of data at package or subscription-level</p>
         </blockquote>
 
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,63 +238,51 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>Ensuring global time monotonicity of events and states permits to address the potential non-determinism in the scheduling of events in ROS-based applications. </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The development team should ensure global time monotonicity of events and states to avoid potential non-determinism in scheduling. Such non-determinism is a threat to getting confidence in the system since repeated tests under the same conditions may turn into different results. A technique that can be used to ensure determinism is annotating messages and requests with timestamps and implementing a logical time synchronizer, similar to what is done by MAVROS (git: mavlink/mavros). Also, the Time Synchronizer message filter (wiki: message\_filters) may be used for this purpose.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>Events are said to be monotonic in time whenever for a set of events scheduled over a global clock, two consecutive events are successive. First the developers should understand how events are scheduled and the limitations of the application towards predictable ordering of events. Then, the developers should analyze and guarantee that all processes are executed in the expected order and will lead to predictable behavior. Developers may accomplish such analysis and guarantee provision with external tools, for instance, formal methods or by embedding timestamps (e.g., SteadyTime) and filtering messages to guarantee ordered events (e.g., MAVROS). </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">Understand the scheduling of ROS events and states</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          Chaaban K. explains that ROS 2 schedules callbacks using a non-preemptive algorithm that consumes messages depending on their type. Unlike typical real-time priority-based scheduling algorithms, ROS 2 does not execute callbacks in their activation instances. Thus non-time-based messages are scheduled in a round-robin fashion. To this extent, ROS 2 (which claims to address real-time) presents limitations when asked for well-defined execution orders and priority inversion. Choi et al. promotes a new scheduling algorithm that adds priority awareness for scheduling in ROS2. 
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+
+        <h4 style="text-indent: 25px;">Analyse starvation-freedom to support monotonicity</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          Bla T. et al. proposes a response-time analysis exploiting the round-robin properties. The authors present an analysis of starvation-freedom using three techniques: modeling processor demand as execution-time curves instead of scalar worst-case execution times (WCETs), accounting for the effects of quiet times and busy windows in the activation curve derivation, and exploiting the round-robin behavior of the ROS callback scheduler. Starvation freedom indicates monotonicity and ordering of events, it helps the developers to understand real-time behavior and set expectations.
         </p>
+
+        <p>
+          Halder R. et. al use model checking (e.g., UPPAAL) to analyze real-time behavior in ROS-based applications. Under the claim that ROS non-deterministically empties the communication queues, the authors focus on modeling the message-passing behavior of ROS and verifying whether the queue overflows. Since overflow here means that some process is starving, thus the application is not monotonic in time. The authors offer the models in timed automata and TCTL (Temporal Computational Tree Logic) properties designed to ensure real-time for the safety controller of the Kobuki exemplar. 
+        </p>
+
+        <h4 style="text-indent: 25px;">Annotating messages with timestamps and synchronization to guarantee ordering</h4>
+
+        <p>
+          The SteadyTime class in ROS represents a monotonic clock, functioning independently of physical time and with steady tick times. MAVROS, a library broadly used in ArduPilot
+for flight control, approaches time monotonicity guarantees by implementing a logical time synchronizer. The synchronizer ensures that the time passing in MAVROS is aligned with the time on ArduPilot's side, avoiding drifts that could lead the application to fail. More importantly, the time synchronizer uses a particular type of message that embeds timestamps for clock synchronization for updating ArduPilot about its time status. Messages such as this can be used for synchronizing the occurrence of events in the system.
+        </p>
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p>Tests reliability increases by enabling the prediction of the expected behavior of a system under scrutiny. In addition, time monotonicity guarantees can facilitate reproducing test results by establishing a clear execution order and priority. Finally, developers can reduce the time taken and resources used to verify the system behavior by implementing time synchronization and annotation messages with timestamps</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p> Implementing time synchronization to ensure time monotonicity may require additional development effort, adding complexity to the system. Also, time synchronization may add performance overhead due to additional operations execution. Achieving real-time behavior depends on the (interaction with the) operating system.
         </p>
 
 

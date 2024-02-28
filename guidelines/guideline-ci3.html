@@ -217,10 +217,7 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
+        <h1 class="post-title">CI3. Identify safety constraints</h1>
 
       </header>
 
@@ -231,20 +228,10 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>The assessment of safety constraints is essential for both runtime verification and field-based testing. When stimulating robotic systems with extreme scenarios, for instance in robustness testing, it's crucial to consider potential threats to personnel and the properties being tested. These threats limit the ability to conduct online assessments for safety-critical applications, particularly in robotics. To ensure the benefits of field-based testing, it's important to carefully address and compensate for the introduced safety risks. Non-negotiable safety constraints should be maintained throughout the confidence-gathering process, as they determine the readiness and release of technology, both in industry and everyday use
+          </p>
         </blockquote>
 
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,63 +239,59 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p> Safety hazards may unable runtime verification or field-based testing since corner cases may pose threats to testing personnel or damage property during runtime assessment.  </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The developers should identify the boundaries of a safe behavior (i.e., safety constraints) to enable the use of mechanisms for preventing the robot from hurting operators or property during testing and verification activities. For example, the developers can identify constraints like speed limit, distance to obstacle, or conditions for emergency stop, which can be used by monitoring tools like ROSMonitoring (git: autonomy-and-verification-uol/ROSMonitoring), or used by an independent safety controller in a separate ROS node to prevent the robot from falling from a cliff, e.g., the Kobuki robot (git: yujinrobot/kobuki). </p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>Safety constraints may be specified in using many specification languages. The known toy example in mobile robotics, Kobuki, specifies safety properties in a separate ROS node using the switch-case in Python; Adam et al. proposes rule-based specifications in the format of boolean equations that predicate over messages over topics; Stadler et al., uses an event processing language offering query-based operations; Finally, Huang et. al enables the specification of temporal properties leveraging monitoring-oriented programming (MOP). </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">Typical safety constraints</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          Emergency stop, 
+          Speed monitoring (e.g., $v < 0.2m/s$)
+           and movement speed limit (e.g., speed limit $0.35 m/s),
+          Timing monitoring (e.g., $t > 10$),
+          Obstacle avoidance (e.g., maintain at least $35cm$ distance from object),
+          Joint effort
         </p>
-
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          The Kobuki robot implements a safety controller (\href. The kobuki's safety controller specifies, using Python at code-level, a state machine ensuring that the robot stops whenever it is close to a cliff, the bumper sensor was pressed, or at least one of the wheels dropped (or was raised in the air). The Kobuki's safety controller is a separate ROS node collecting bumper, cliff and wheel events. A sequence of events may trigger an alert or issues velocity commands to deviate Kobuki from the threat.
         </p>
+
+
+       
+        <p>
+          Adam S. et al. defines a rule-based language for enforcing safety constraints on existing ROS-based software. Their approaches uses a simplified metamodel to describe the ROS software enabling static analysis as well as invariant monitoring. The authors explain that separating the specification of safety issues from functionality facilitates attesting that the robotic behavior conforms to safety requirements. Their rule-based approach enables the specification of actions that preclude rules encoded in boolean equations (e.g. cmd\_vel\_left $>$ 0.02m/s) over messages in topics.
+        </p>
+
+
+        <p>
+          Stadler et al., uses the Esper Constraint Engine to check for violations of the safety constraints. Such constraints are specified using the EPL notation. Event Processing Language (EPL) is a SQL-standard language with extensions, offering SELECT, FROM, WHERE, GROUP BY, HAVING and ORDER BY clauses. For instance, they specify that an event such as JointEffortEvent (AEvent) will not exceed a maximum of 5.0 in an ESL constraint specification.
+        </p>
+
+
+        <p>
+          Huang et al.'s monitoring infrastructure enables the use of any logic plugins of Monitoring-Oriented Programming, thus enabling specification of temporal properties over events, such as regular expressions, linear temporal logics, and context-free grammars. For instance, one of their monitors predicates on the position of the turret installed in the autonomous vehicle, i.e., ``the gun should not exceed a maximum joint angular position otherwise the turret targets itself.''.
+        </p>
+
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p>  By identifying safety constraints, developers can demonstrate compliance with these requirements, providing assurance to stakeholders that appropriate safety measures are in place. Early detection and response to safety violations, such as exceeding speed limits or approaching obstacles too closely. This early detection and response can help prevent accidents and minimize potential damage.</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p> Identification of safety hazards involves understanding the system's behavior, identifying potential risks, and formulating appropriate constraints. This process can be time-consuming and complex, especially for large and intricate systems, potentially increasing development costs. 
         </p>
 
 

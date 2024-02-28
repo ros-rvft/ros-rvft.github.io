@@ -217,13 +217,8 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
-
+        <h1 class="post-title">I2. Provide an API for logging and filtering</h1>
       </header>
-
 
       <div class="post-content clearfix">
 
@@ -231,20 +226,17 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>Dynamically gathering
+            information is a fundamental step for gaining confidence in
+            ROS-based systems. Logging (and playback) is, in fact, one of
+            the most used techniques for testing ROS-based systems.
+            Often named monitoring, or logging, the process of
+            recording textual or numerical information about events of
+            interest may be a valuable input to the testing team. With
+            such data in hand, the testing team will process the data
+            and transform it into useful information to challenge their
+            hypotheses about how the system should work.</p>
         </blockquote>
-
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,92 +244,136 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>Logging important events
+          depends on instrumenting the code (with ‘hooks’) that
+          enables the information retrieval activity. It is unrealistic
+          to assume that the testing team will have access to the source
+          code or that the testing team knows what events to log or
+          how to do so.</p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The development team
+          should provide an API for logging and filtering data to
+          enable access to valuable runtime data which should be used
+          for both runtime verification and field-based testing. The
+          standard approach to logging and filtering is rosbag (wiki:
+          rosbag). Though, in addition, AWS CloudWatch (git: aws-
+          robotics/cloudwatchlogs-ros2) collects data from the rosout
+          topic and provides a filter for eliminating noise from the
+          logged events. Another example is the Robotic Black Box (git:
+          ropod-project/black-box) which allows for listening to data
+          traffic from distinct sources and logging the messages using
+          MongoDB.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>We divide, according to
+          Falcone et al. , techniques for gathering information in
+          two: inline, and outline. Inline logging and filtering stand for
+          techniques that ask for actually inserting snippets of code in
+          the system under scrutiny as a means to provide an API for
+          logging, e.g., . Outline logging and filtering stands for
+          techniques that enable an external means to gather and filter
+          information that does not require changing the source code. Developers may choose one or another
+          given their domain of application. </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">Inline logging and filtering</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          ROS, by standard, contains a
+          system-wide string logging mechanism, namely ROS logging
+          (http://wiki.ros/logging). ROS logging works with a set of
+          macros defined for instrumenting the nodes with information
+          hooks. In the background, the macros send messages with
+          the information to be logged through a standard topic
+          called rosout. On the other side of the topic, an extra node,
+          within the roscore package, persists the data in a textual
+          format (ros/../rosout). Developers can use the macros
+          to log information that might be used for testing in a
+          later stage, given the application-specific requirements.
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+        <p>
+          For instance, the Amazon AWS service for robotics provides AWS
+          CloudWatch Logs (aws-robotics/cloudwatchlogs-ros2)
+          interfaces directly with rosout to monitor applications using
+          the standard ROS logging interface. In addition, the standard
+          library provides logging macros with embedded filtering
+          capabilities, which enables eliminating noise from the logged
+          events and can render a useful tool for testers. ROS Res-
+          cue is another example of inline logging. The tool aims
+          at solving the problem of ROSMaster as a single point of
+          failure. The authors approach check-pointing and restoring
+          state by logging changes in the metadata stored in the master
+          node. Such metadata contains URIs from various nodes,
+          port numbers, published or subscribed topics, services, and
+          parameters from the parameter server. Kaveti P. et al. create
+          an API for the ROS master node (master api.py) using
+          the official logging library from Python14 to persist metadata
+          in YAML format. Their technique opens space for further
+          inspection of ROS applications without access to the source
+          code
+        </p>
+
+        <h4 style="text-indent: 25px;">Outline logging and filtering</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          ROSMonitoring employs
+          monitors to persist events in textual format. The monitors
+          contain filtering capabilities to eliminate entries that are
+          inconsistent with the specification (requires an oracle). In
+          this context, the launch files to configure ROSMonitoring can
+          be seen as an API for logging and filtering (ROSMonitor-
+          ing/../online config.yaml). Monitors in ROSMonitoring
+          are nodes, thus, the API is a set of known topics and
+          message formats. The tester, in that case, only needs to specify what topics ROSMonitoring will listen to and the
+          type of message to be recorded. The logging and filtering
+          happen within a separate service.
+        </p>
+
+        <p>
+          On a similar stance,
+          and inspired by aircraft black box (and software black
+          box), Mitrevski, et al. proposes the concept of
+          Robotic Black Box (ropod-project/black-box). The black
+          box operates as an isolated component responsible for
+          listening to data traffic from distinct sources and logging
+          in an easily retrievable medium. Similarly to ROSMoni-
+          toring, Mitrevski’s black box approach to logging (ropod-
+          project/black-box/../logger main.*) inspects topics and
+          message types that are configured in advance. Different from
+          ROSMonitoring, Robotic Black Box offers logging not only
+          in textual format but also in a MongoDB database, which is
+          essentially useful for data processing, filtering, and retrieval.
+          Robotic Black Box stands out when it comes to its filtering
+          and retrieval capabilities. The approach builds a customized
+          query interface over the MongoDB database using names
+          of collections, timestamps and metadata to filter the results
+          (black box tools/db utils.py)
         </p>
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p> 
+          An API for retrieval and filtering
+          facilitates access to valuable information resulting in effortless observability of inner states and events</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p>
+          Overuse of logging may result
+          in performance issues. Incorrectly implemented logging and
+          filtering capabilities may lead to noise in the data, impacting
+          the reliability of the tests. Finally, insufficient logging may
+          result in an incomplete assessment of the system behavior
+          and might generate false positives
         </p>
 
 
-
-        <!-- ---------------------------------- FORMULA EXAMPLES ---------------------------------- -->
-
-        <h2 id="ltl-template">Formula Examples</h2>
-
-
-
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script>
-          <script type="math/tex"
-            id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
-        </div>
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script>
-          <br><br>
-
-          <script type="math/tex"
-            id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
-
-          <script setup lang="ts">
-            const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
-          </script>
 
           <!-- ---------------------------------- GUIDELINE CONTENT END ---------------------------------- -->
 

@@ -217,13 +217,8 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
-
+        <h1 class="post-title">PE1. Understand the overhead acceptance criteria</h1>
       </header>
-
 
       <div class="post-content clearfix">
 
@@ -231,20 +226,23 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>According to practitioners,
+            performance is among the three most important quality
+            attributes when designing a robotic application in ROS.
+            Performance is often important in robotics because many
+            computations performed by robots tend to be data-intensive,
+            e.g., computer vision, planning, and navigation. Gaining
+            confidence in robotic applications, then, should not interfere
+            with the nominal performance of the robot under scrutiny.
+            Less (or no) impact on performance is especially desirable
+            when the assurance gathering process interacts with the
+            running system, for instance, in-the-field testing and runtime
+            verification. We name the extra load available for gaining
+            confidence on ROS-based applications as overhead acceptance
+            criteria. The overhead acceptance criteria can be allocated to
+            monitoring, isolation, or maintaining the security of privacy
+            during the runtime assessment session</p>
         </blockquote>
-
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,92 +250,149 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>A rule of thumb says that
+          more observations tend to enable more precise assurance
+          arguments within a limit. Observing, however, is never free
+          from side effects, incurring in overhead [28]. Therefore, the
+          quality assurance team must contrast the precision of the
+          assurance arguments against overhead introduced by the
+          observation medium. The overhead acceptance criteria are
+          the basis for deciding the runtime assurance strategy</p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The use of runtime
+          verification or field-based techniques might add computation
+          overhead. The QA team should understand how much
+          overhead is acceptable; this is important to decide on a
+          test strategy that will not severely impact the performance
+          of the running system. Such overhead may be due to moni-
+          toring with ros tracing (git: ros2/ros2 tracing), component
+          isolation, or security and privacy maintenance overhead with
+          ROSploit (git: seanrivera/rosploit).</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>: Typically, understanding the
+          overhead acceptance criteria follows from contrasting the
+          required performance for delivering the required service,
+          aka nominal performance (e.g., time to reaction, latency,
+          speed), against available resources (e.g., computing power).
+          The QA team may use off-the-shelf ROS tooling, like
+          ApexAI/Performance test ß, to understand the nominal
+          performance of the ROS-based application. The difference
+          between nominal performance and expected performance
+          may be allocated to the overhead acceptance criteria. If
+          the nominal performance is close enough to the expected
+          performance, there is not enough space for implementing
+          runtime assurance techniques. We categorise three types
+          of overhead that may affect the runtime assurance process:
+          Runtime Monitoring, Isolation overhead
+          and Security and Privacy overhead </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">Monitoring overhead</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          Monitoring overhead is all extra load put on the system-
+          under-test due to gathering, interpreting, and elaborating
+          data about the execution. For example, ROSMonitoring
+          (autonomy-and-verification-uol/ROSMonitoring) de-
+          termines the monitoring overhead by calculating the delay
+          introduced in the message delivery time between ROS nodes.
+          The authors analyse the overhead by varying the size of
+          the system under monitoring, message passing frequency,
+          and number of monitor nodes. However, their overhead
+          analysis is not transparent with respect to gathering, inter-
+          preting or elaborating on data, the analysis looks at the
+          monitoring overhead as a black box.
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+        <p>
+          Another example is
+          ros2 tracing (ros2/ros2 tracing) that provides a tool
+          for tracing ROS2 systems with low latency overhead. The
+          authors measure monitoring overhead by collecting the time
+          between publishing a message and when it is handled by
+          the subscription callback. In short, monitoring and tracing
+          tools add some overhead that typically affects the message
+          passing latency, the QA team must understand and define a
+          precise time allowance to this overhead
+        </p>
+
+        <h4 style="text-indent: 25px;">Isolation overhead</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          Isolation overhead is all extra load put on the system-under-
+          test for guaranteeing that the runtime assessment will not
+          interfere with the normal operation or produce undesired
+          side effects. As an example, Lahami M. et al. propose
+          a safe and resource-aware approach to test dynamic and
+          distributed systems. Safe by employing testing isolation
+          techniques such as BIT-based, tagging-based, aspect-based,
+          cloning-based, and blocking-based. Resource aware by set-
+          ting resource monitors such as processor load, main memory,
+          and network bandwidth. The authors show that the overall
+          overhead is relatively low and tolerable, mainly if dynamic
+          adaptations are not commonly requested. However, there
+          is no fine-grained evaluation of the overhead introduced
+          by isolation techniques. In fact, isolation overhead is rarely
+          reported.
+        </p>
+
+        <h4 style="text-indent: 25px;">Security and Privacy overhead</h4>
+
+        <p>
+          Security and Privacy overhead is all extra load put on
+          the system-under-test for maintaining security and privacy
+          constraints while testing. For example, ROS-Immunity is a
+          security tool for preventing ROS-based applications from
+          malicious attackers. Rivera S. et al. , determines overhead
+          for maintaining the ROS-based system secure, while operat-
+          ing, in terms of power consumption (in Watts) by comparing
+          the power draw of the system with and without their tool.
+          From another stance, Breiling B. et al present a secure
+          communication channel to enable communication between
+          ROS nodes using protocols such as Transport Layer Security
+          (TLS) and Datagram Transport Layer Security (DTLS) per
+          each ROS topic in the application. The protocols follow
+          three steps: an initial handshake with mutual authentication,
+          using symmetric encryption (AES-256), and using Message
+          Authentication Codes (MAC) for data integrity. Importantly,
+          they evaluate the overhead introduced for each step, totalling
+          in a few percentage points (2%-5%) of increase in average
+          CPU load.
         </p>
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
-
-
-        <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p> 
+          Understanding the overhead ac-
+          ceptance criteria in advance may avoid unexpected interrup-
+          tions in the ROS application functionality due to runtime
+          quality assessment procedures. For example, when testing
+          procedures are mistakenly scheduled whenever the ROS-
+          based application is operating under a high load. Learning
+          about the overhead in advance criteria may also ask for
+          re-design due to a lack of verifiability during runtime. For
+          example, when the nominal performance of the ROS system
+          is close to the expected performance, in value.
         </p>
 
 
+        <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
+        <p>
+          Although there is tooling to
+support the assessment of the overhead acceptance crite-
+ria, the process for understanding involves executing the
+system, collecting performance data and analysis. This may
+conflict with time-to-market requirements, asking for further
+negotiation with the business goals of the ROS-based system.
+        </p>
 
-        <!-- ---------------------------------- FORMULA EXAMPLES ---------------------------------- -->
 
-        <h2 id="ltl-template">Formula Examples</h2>
-
-
-
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script>
-          <script type="math/tex"
-            id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
-        </div>
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script>
-          <br><br>
-
-          <script type="math/tex"
-            id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
-
-          <script setup lang="ts">
-            const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
-          </script>
 
           <!-- ---------------------------------- GUIDELINE CONTENT END ---------------------------------- -->
 

@@ -192,7 +192,7 @@
       <li class="site-nav-item">
         <a title="Replication package"
             href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining">Replication package</a>
-    </li>
+      </li>
 
       <li class="site-nav-item">
         <a title="Evaluation" href="https://ros-rvft.github.io/evaluation">Evaluation</a>
@@ -217,10 +217,7 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
+        <h1 class="post-title">CD1. Developers should strive for ROS nodes with single responsibility</h1>
 
       </header>
 
@@ -231,20 +228,9 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>ROS fosters a rich toolkit for designing modular robotics software.  Developers face design decisions of how to implement a given set of requirements using ROS fundamental concepts, i.e., nodes, topics, services, packages. In order to facilitate runtime assessment, the system's computational units should be designed such that they can be safely exposed to trials with warrantied no side effects on the running system. In addition, it should reduce the cost of observing and controlling modules, or, in robotics, atomic actions (or skills)</p>
         </blockquote>
 
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,63 +238,47 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>Mapping functional units to ROS nodes enables fine-grained observation and control of the robotic behavior.</p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>To facilitate assessment during the robot operation and enable fine-grained observation and control, the developers should implement ROS nodes following the single responsibility principle (i.e., each node should implement a single feature and different nodes can be combined to perform a complex task). For example, developers should implement independent nodes for path planning and reactive manoeuvring, or independent nodes for defining primitive skills like grasping an object or simultaneous localization and mapping (SLAM).</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>We divide the means to designing ROS nodes with single responsibility in two: hierarchical design, and skill-based design. In hierarchical design, ROS nodes are organized based on the goals they achieve, with each node responsible for a specific task or functionality. This approach allows for clear separation of responsibilities and easier maintenance. In skill-based design, ROS nodes are organized based on the skills they possess, with each node responsible for a specific capability or behavior. This approach enables more flexibility and reusability of nodes, as they can be combined to perform various tasks. </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">Hierarchical design</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          Hartswell et al. define components as building blocks that may be hierarchically composed to fulfill the system's functional requirements. Their running example implements ROS nodes with complementary but distinct, and independent, functionalities. One node resolves path planning in a deliberative control setting, and the other is responsible for the low-level PID controller reactively manoeuvring the robot. 
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+        <p>
+          In the healthcare domain, the Body Sensor Network  defines ROS nodes after concrete tasks that, composed, should fulfil the system's goal. Tasks such as collecting SPO2 data, collecting heartbeat data, fuse data, or identifying emergency. For instance, the collect SPO2 data task implements an independent node for collecting, filtering, and transferring data. Given that each sub-task (i.e., collecting, filtering, and transferring) is strictly dependent on each other, yet, should not depend in the environment and together form an atomic behavior. Separating the sub-tasks in different nodes may render incomplete test cases that are hard to read and often meaningless.
+        </p>
+
+        <h4 style="text-indent: 25px;">Skill-based design</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          Skill-based design typically defines skills as fundamental software building blocks operating a modification on the world stage. In such approaches, skills should be modular and reusable. Although ROS nodes provide a natural means for modular design, it is not common to map skills to nodes in current skill-based designs. For instance, SkiROS implements 3 nodes: World Model Manager, Task Manager, Skill Manager.
+        </p>
+
+        <p>
+          In addition, HRMS does not map skills to nodes. It builds skills that under the Behavior Trees notation may reuse existing nodes. Lack of standard mapping from skills to actual computation impairs the verification of skill-based approaches at skill level.
+          Towards verifiable ROS-based applications, a promising architecture, namely RobMoSys, suggests separation of concerns between different levels such as Mission, Task Plot, Skill, Service, Function, whereas Skill concerns to configuration, e.g., grasp object with constraint, and functions concern to computation, e.g. inverse kinematics solver. In this direction, Albore A. et al. promote ROS2 code generation whilst mapping skillsets to ROS nodes with a single responsibility.
         </p>
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p>Modularity enables fine-grained observation of system requirements. In addition, it caters to clear interfaces for runtime inspection and allows for mocking and substituting behavior for assurance scenarios.</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p>Feedback loops, however, may impair testing, i.e., modularity turns out to be costly for systems with feedback loops, whereas the system's behavior is context-dependent
         </p>
 
 

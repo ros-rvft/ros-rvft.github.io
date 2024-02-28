@@ -217,13 +217,8 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
-
+        <h1 class="post-title">SE1. Use record-and-playback when performing exploratory field tests</h1>
       </header>
-
 
       <div class="post-content clearfix">
 
@@ -231,20 +226,8 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>In order to effectively select which test scenarios should be escalated to the field, the testing teams often perform exploratory field tests.  Exploratory testing is an experience-based technique where the tester designs and executes tests based on prior knowledge, previous tests, curiosity, and other heuristics for common failures. For instance, exploratory field tests may be useful for identifying corner cases that could be missed during design, or calibrating (e.g., tuning parameters) the system under scrutiny before committing to the field test scenario. ROS practitioners typically use Record and Playback (aka record-and-replay) for testing, debugging and developing new algorithms. Record-and-playback is especially useful for performing exploratory tests of feedback loop systems since they provide lightweight means to record execution traces without preventing the testing team from freely exploring scenarios in the field. n ROS, record-and-playback is a technique that consists of recording message exchange between ROS nodes and enabling the user to reproduce the set of recorded messages in a specific order. The nominal use of record-and-playback, however, does not necessarily consider information from the field, placing the assessment (i.e., testing, debugging, analysis) in jeopardy. </p>
         </blockquote>
-
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,92 +235,60 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>  Escalating exploration scenarios to the field asks for lightweight means to recording data for scenario reproduction. </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>When running exploratory field testing, the QA team should use record-and-playback in order to keep track of the explored field scenarios, simplify error analysis, find and reproduce corner cases, and help with parameter tuning. The standard tool for record-and-playback in ROS is rosbag (wiki: http://wiki.ros.org/rosbag) but there are a few tool derivations supporting effective record-and-playback. For example, Rerun.io (git: rerun-io/rerun) promotes a graphical interface with a focus on the visualization of bag data leveraging common datatypes used on perception algorithms. In addition, NuBots (git: NUbots/NUbots) uses a genetic algorithm for tuning parameters for the RoboCup over data collected in field explorations after data bags.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>
+          Record-and-playback is well known by the ROS community. The ROS environment provides rosbag, a package that natively enables record-and-replay, which is frequently maintained and active. A few tools extend rosbags with addons to more expressive visualizations and data types (e.g., Rerun.io) or building on largely used behavior models (i.e., behavior trees) to replay robot behavior within mixed-reality scenarios. Moreover, record-and-replay for exploring field testing scenarios used for simplifying error analysis~\cite{beul:2017}, finding corner cases, and parameter tuning.
+        </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+
+        <h4 style="text-indent: 25px;">Technology enablers</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          The standard library for record-and-playback in ROS is rosbag.
+    The rosbag package provides a means for recording exchanged messages in so-called bag files and reproducing the messages between components in release order. In addition, the package contains tools for analyzing, processing logs, and visualizing exchanged messages. 
+    Recent research, builds on top of rosbag to encode more expressive tooling for applying records and reproducing for testing purposes, for instance using behavior trees to replay robot behavior in mixed reality .
+
+    Rerun.io provides a general-purpose tool with focus on visualization of bag data which leverages common datatypes used in perception stack for robotics applications. Rerun enables URDF scene plotting, with 2d and 3d transformations, camera, odometry and tf transforms (e.g., rerun/ros_node example).
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+        <h4 style="text-indent: 25px;">Simplifying error analysis</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          Beul M. et al. extensively used bags to record the state of their unmanned aerial vehicle during field testing, keeping rosbag activated even in between experiments to avoid setting up overhead. Once the experiments are done, the authors filter and analyse the data using in-house tools including recording mission executions, editing traces and loading them for testing purposes. Finally, the authors claim that the toolset helped by simplifying the error analysis that was running over exploratory field scenarios (named experiments) where they logged user-defined missions in terms of ordered sets of 4D waypoints.
+
+          Ortega A. et al. studied field testing experiences with an industrial-strength service robot (i.e., for hospital disinfection) transitioning from lab experiments to an operational environment. They conclude that the field testing strategies employed can be categorized into two phases, exploratory field testing and field endurance tests. Exploratory field testing helps find defects caused by variability in the environment, thus identifying corner cases. However, replicating corner cases is challenging due to a lack of tooling to extract data from the field experiments. After all, the data collected from the fields must be (re-)useable, asking for tooling such as record-and-replay.
         </p>
+
+        <h4 style="text-indent: 25px;">Parameter tuning</h4>
+
+        <p>
+          Algorithms using multi-objective optimization for improving functionality or managing quality attributes (e.g., reliability) at runtime may benefit from recording data in exploration scenarios and playback for tuning parameters. Zahn b. et al. implements NUbots and uses a genetic algorithm (namely NSGA-II) to tune the parameters of a kicking strategy for a football robot player in the Robocup, for that, they rely on record-and-playback. Nubots however, instead of relying on standard ROS tooling to record-and-playback provide their own implementation. Similarly, Caldas et. al uses an implementation of their own to record whether a healthcare system (namely Gil2021) presents faults at task-level execution, then playback the recorded data in a data mining pipeline (using also NSGA-II) to tuning the parameters of a software controller. 
+        </p>
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p> 
+          Record-and-playback is a good instrument to reduce the need for maintenance during quality assurance. It fosters also the repeatability of scenarios that would be rather lost when exploring field scenarios in an ad hoc way. 
+        </p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p>
+          Record-and-replay may not scale well, can be the door for security exploits, and lacks means for fine-grained control of their recording thus the emergence and need for extensions to rosbag.
         </p>
 
 
-
-        <!-- ---------------------------------- FORMULA EXAMPLES ---------------------------------- -->
-
-        <h2 id="ltl-template">Formula Examples</h2>
-
-
-
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script>
-          <script type="math/tex"
-            id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
-        </div>
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script>
-          <br><br>
-
-          <script type="math/tex"
-            id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
-
-          <script setup lang="ts">
-            const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
-          </script>
 
           <!-- ---------------------------------- GUIDELINE CONTENT END ---------------------------------- -->
 

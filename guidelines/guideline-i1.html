@@ -217,13 +217,8 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
-
+        <h1 class="post-title">I1. Provide an API for querying and updating internal lifecycle</h1>
       </header>
-
 
       <div class="post-content clearfix">
 
@@ -231,20 +226,14 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>Autonomous systems, such as robotic applications, often require stateful compute nodes. 
+            However, the internal states within ROS nodes are typically hidden and not easily accessible, 
+            limiting the ability to diagnose and understand unexpected behavior. 
+            Exposing these hidden states is crucial for providing granular information on the system's behavior,
+             rendering increased observability. Furthermore, managing these hidden states allows for actions such as starting, stopping, 
+             and rolling back to a specific state, in other words, increased controllability. 
+             The running system should be both observable and controllable, as these states can be application-specific and not standard.</p>
         </blockquote>
-
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,92 +241,46 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>The use of ROS nodes with lifecycle management can facilitate testing by providing a structured way to manage the state of the nodes and the interactions between them. This structure helps to ensure that nodes are in the right state for testing and that the interactions between nodes are predictable. Furthermore, it helps mitigate dangling references to nodes that are no longer in use </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>To facilitate field-based testing, the development team should properly manage the ROS nodes' lifecycle and prepare APIs for querying and updating the internal nodes' life-cycle, e.g., to ensure that nodes are in the right state for testing. For example, developers can use modes (git: ros2/demos) for lifecycle management. In the context of Micro-ROS (git: micro-ROS), developers can define custom lifecycle modes (git: micro-ROS/system\_modes)  like sleep, power saving, starting, processing, and ending modes, and use separate extra nodes for mode monitoring and mode update.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>The team should define a custom life-cycle for the ROS-based application, for instance, the life-cycle phases could be: starting, processing, and ending, using system\_modes from Micro-ROS. Moreover, the processing phase can further be divided into waiting and executing steps and application-specific states, and the transitions between phases should be well-defined by events. The development team should then prepare an API for managing the life-cycle of nodes, which can be queried or updated through ROS interfaces, such as the client-server interface. The API should allow for the representation of all nodes in the application, which can be queried or updated using the interface.</p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">Customized life-cycle</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          Conte G. et al. define a custom life-cycle in ROS for their autonomous surface vehicle. The life cycle has three phases: starting, processing, and ending. The processing phase can be subdivided into two other: waiting and executing. Events define the transition between phases. The authors claim that such organization helped in the field testing when they had to explicitly shut down a (ROS) agent, shut down the agency infrastructure, or detect a failure in the ROS infrastructure. ROS2 provides the concept of life-cycle by design. Developers may inherit from the LifecycleNode from rclcpp to enable the standardized life-cycle management from ROS2. Belsare K. et al.~\cite, extends the ROS2 life-cycle to the domain of embedded systems. Their extension enables the specification of (sub-)systems or systems-of-systems in a hierarchical finite-state machine style. It creates the concept of modes within the active state. System modes are customizable and can be used to track sleep modes and power saving~\cite{nordmann2021system}. The authors present an example of how can add {\em weak} and {\em strong} as customized modes for an active manipulator.
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+  
+
+        <h4 style="text-indent: 25px;">Life-cycle management</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          Life-cycle management is the ability to query and update the nodes' life-cycle. the library used by ROS2 provides the functionalities to managing nodes using the ROS2 stack. rclc$\_$lifecycle implements a ROS node that represents all other ROS nodes within the application. The nodes encode finite state machines that can be queried or updated using the ROS service interface. The lifecycle$\_$talker example illustrates how the get$\_$state and change$\_$state services query or update the life-cycle. The ROS2 implementation, however, does not support hierarchical states. To mitigate the problem, defines two extra nodes, the mode monitor node and the mode manager node. The mode monitor infers the state (i.e., mode) of underlying nodes; The mode manager may use the (inferred) state to update modes of sub-systems, modes of nodes, and node parameters.
         </p>
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p> 
+          Following this guideline results in reliable and repeatable runtime assessment since the life-cycle manager can ensure that the application is in the desired state. Moreover, it is easier to setup and teardown testing harnesses since it would be possible to understand the current state of the application, avoiding interruptions in critical phases, and planning for start and stop in the appropriate time.</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p>
+          As a drawback, there will be overhead associated with meta-data for life-cycle management, and increasing the number of lines of code may impact the system's latency. Also, custom states may ask for larger models representing the possible life-cycle and management, incurring in cost of modeling and maintenance. 
         </p>
 
 
-
-        <!-- ---------------------------------- FORMULA EXAMPLES ---------------------------------- -->
-
-        <h2 id="ltl-template">Formula Examples</h2>
-
-
-
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script>
-          <script type="math/tex"
-            id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
-        </div>
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script>
-          <br><br>
-
-          <script type="math/tex"
-            id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
-
-          <script setup lang="ts">
-            const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
-          </script>
 
           <!-- ---------------------------------- GUIDELINE CONTENT END ---------------------------------- -->
 

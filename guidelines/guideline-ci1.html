@@ -217,10 +217,7 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
+        <h1 class="post-title">CI1. Identify timing constraints</h1>
 
       </header>
 
@@ -231,20 +228,9 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>Timing constraints, also known as ``deadline'' or ``timing requirements'', define temporal requirements that real-time systems must adhere to. These constraints can be categorized as soft, firm, or hard, and they play a significant role in determining whether the system respects timing concerns. Since ROS-based systems often involve control nodes (such as attitude control and state estimation), which typically have real-time requirements, identifying timing constraints becomes even more critical. </p>
         </blockquote>
 
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,63 +238,56 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p>Identifying timing constraints is crucial for ROS-based systems as these constraints define the system's temporal requirements. However, a recent study highlights the lack of support for real-time constraints in the software engineering research of ROS-based robotic systems, emphasizing the need for more attention in this domain. Initially conceived as a means to handle difficult or costly-to-reproduce failures, field testing has seen limited studies addressing real-time issues, particularly in the realm of autonomous systems~ </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The development team should identify timing constraints to ensure that no real-time requirements will be neglected during the system testing. For instance,  Autoware\_Perf (git: azu-lab/ROS2-E2E-Evaluation) allows for the calculation of response time and latency in  ROS 2 applications; such measurements may be used as hard constraints to testing the system. Also, one may identify real-time constraints with respect to synchronization between robots, sensor data processing time, or fault detection and recovery.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>Typical timing constraints that cross-cut in robotics domains stand for response time, latency, synchronization time, fault detection and recovery time, and power management time. The means to specify such constraints vary from informal to formal languages (we invite the interested reader to check guidelines of the group property specification - SDB1 and SDB2. The developers team may use Autoware_Perf to calculate response time and latency, for example. </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">Typical Timing Constraints</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          Real-time constraints may be subject to the domain and the objectives of the runtime assessment. We provide a comprehensive list of constraints that may be interesting to address when considering testing ROS-based systems. We use Autoware_Perf to illustrate how to collect response time and latency with practical examples.
         </p>
-
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          Response time is the period a ROS-based system takes to react to one or more stimuli from the environment. Specific to the ROS domain, Chaaban, K. defines response time in ROS 2 as the ``duration from the release instant to the completion of the job execution''. To collect callback response time, Autoware\_Perf defines a function to get durations of callback instances for a given callback objects.
         </p>
+
+        <p>
+          Latency is the time a ROS-based system takes to react to a stimulus from the test orchestrating apparatus. Often, field tests include a centralized computer orchestrating the test cases execution and information collection, latency in such cases tends to be significant. Autoware\_Perf illustrates how latency can be computed with an example of a ROS 2 service, where they send a goal to the robot and calculate the time for a response
+        </p>
+
+        <p>
+          Synchronization time is the time taken for a ROS-based system involving more than one robot to share information.
+        </p>
+
+        <p>
+         Sensor Data Processing time is the time taken to transform raw sensorial input into information ready to be used by reasoners or planners. Lewis et al. conclude that it is difficult to predict how long robots might have to wait between measurements since quantifying data collection for real-time systems needs to account for all the [metereological] sensors and their respective response times
+        </p>
+
+        <p>
+          Fault Detection and Recovery time is the time taken to prevent safety hazards. Robots, mainly operating in safety-critical scenarios, often have safety mechanisms to prevent hazards. Testing in the field, in general, asks for safety assessment, thus incurring timing overhead. 
+        </p>
+        <p>
+          Power Management time is the time taken to prevent stop or graceful degradation due to a power outage. Robots may rely on batteries or other embedded power sources (such as solar panels). Power management may affect the testing conditions and be considered when testing in the field. For example, to start a recharging process in the middle of the mission or to slow the velocity to recharge the batteries using solar energy.
+        </p>
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p> Identifying timing constraints is a good practice to avoid neglecting important real-time requirements during development. Is also helps isolating the tested behavior without unintended outcomes due to real-time faults.</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p> Specifying timing constraints may be complex due to the ROS nature presenting interconnected components and dependencies. There is a lack of standardization or best practices for specifying such properties. This may result in an overhead when the application is not real-time critical. Property specification guidelines (SDB1, SDB2) will further investigate this issue. 
         </p>
 
 

@@ -217,13 +217,8 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
-
+        <h1 class="post-title">SDB3. Use languages and tools to scenario-based specification of test cases</h1>
       </header>
-
 
       <div class="post-content clearfix">
 
@@ -231,20 +226,8 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>Scenario specification allows the QA team to test robots on credible and complex activities since it defines the course of a robotic mission. Gathering confidence in autonomous systems through so-called verified scenarios is a cornerstone of simulation testing.  However, designing test cases in the form of scenarios implicitly requires accounting for possible variations and conditions. This makes scenario-based testing a challenging task and often deemed infeasible. In addition, unexpected scenarios frequently underlie failures in robotic systems. Therefore, it is important to consider real-world data during scenario generation since it permits to focus on a range of scenarios that can be unexpected during the design phase.</p>
         </blockquote>
-
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,92 +235,49 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p> Scenario-based test case generation is a powerful approach to verify ROS-based applications because it allows for the systematic exploration of different situations and conditions that the robotic system may encounter in the real world. By defining scenarios, the testing team can ensure that the application behaves correctly under a wide range of circumstances, including both expected and unexpected events. </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The QA team might integrate scenario specification languages and tools to enable a systematic exploration of real-world situations and conditions for ROS-based applications. For example, Geoscenario (git: rodrigoqueiroz/geoscenarioserver) uses behavior trees to program dynamic interactions between the system-under-test and other vehicles in the scenario. In addition, SCENIC (git: BerkeleyLearnVerify/Scenic) is a probability-based programming language that enables the specification of rare events in environment models that are used to generate test cases for vehicles running on the CARLA simulator (git: carla-simulator/carla) that may be further integrated to testing ROS-based systems.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>
+          To implement scenario-based specifications for testing ROS-based applications we recommend describing technology enablers and motivating use cases. Technology enablers, in this case, list a set of languages that assist the design of scenarios for testing ROS-based applications. The technology-enablers vary with respect to human-vehicle behavioral description, to probability-based programming of scenarios, and integrating graphical simulation with Simulink-based control design and ROS. From the point-of-view of use cases, scenario specification may turn useful to perception monitoring, validating multi-layered control strategies, and pedestrian simulation scenarios. </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+
+
+
+        <h4 style="text-indent: 25px;">GeoScenario</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          GeoScenario proposes using a behavior tree-based DSL to describe autonomous human-vehicle models for scenario-based testing. The toolset advocates for scenario specifications that reflect dynamic interactions between humans and the subject system in real traffic conditions. Therefore, behavior trees are used as a fundamental control-flow strategy. GeoScenario interfaces with a simulation layer where LIDAR and camera capture data from the vehicle controller implemented at ROS-level.
         </p>
 
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
+        <h4 style="text-indent: 25px;">SCENIC</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          SCENIC a probability-based programming language, argues for the specification of rare events in environment models for autonomous vehicles and robots for testing purposes. The language relies on the specification of scenarios, i.e., configurations of physical objects and agents, and how they change over time. In combination with CARLA, SCENIC can be used to specify scenarios for ROS-based simulation test scenarios. For example, departing from a Metric Temporal Logic (MTL) safety specification, SCENIC generates (with VERIFAI) 2000 scenarios for a vehicle performing a right turn at an intersection, yielding to the crossing traffic.
         </p>
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p> 
+          Scenario-based testing provides a systematic and comprehensive approach to verify ROS-based applications under various conditions. The integration of scenarios with ROS-compatible simulation environments allows for realistic and repeatable testing.
+        </p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p>
+          The exemplars provided are primarily focused on the automotive domain, which may limit the generalizability of the guideline to other robotic application domains. 
         </p>
 
 
-
-        <!-- ---------------------------------- FORMULA EXAMPLES ---------------------------------- -->
-
-        <h2 id="ltl-template">Formula Examples</h2>
-
-
-
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script>
-          <script type="math/tex"
-            id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
-        </div>
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script>
-          <br><br>
-
-          <script type="math/tex"
-            id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
-
-          <script setup lang="ts">
-            const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
-          </script>
 
           <!-- ---------------------------------- GUIDELINE CONTENT END ---------------------------------- -->
 

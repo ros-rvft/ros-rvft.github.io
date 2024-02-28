@@ -217,10 +217,7 @@
   <div class="container">
     <article class="post-container">
       <header class="post-header">
-        <h1 class="post-title">I4. Isolate components for testing</h1>
-
-        <p class="post-description">Isolation of components
-          to enable field-based testing while avoiding the crash of the system.</p>
+        <h1 class="post-title">CI2. Identify security and privacy constraints</h1>
 
       </header>
 
@@ -231,20 +228,11 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Robotics applications require to be safely field tested with warrantied no side
-            effects on the running system or the environment, including
-            personnel. To this end, it is fundamental to pursue isolation
-            of the components being tested</p>
+          <p>Runtime assessment introduces challenges to security and privacy preservation. Modifying the source code to facilitate testing may, however, open space for security and privacy exploitation.
+            From the point-of-view of runtime verification, security and privacy preservation revolves around specifying flavors of integrity, confidentiality, and availability. For instance, Autonomous Driving Vehicles (ADVs) regulators define policies given the territory they are being used in. However, ADS introduction also requires public trust, w.r.t security and safety. In a scenario of runtime assessment, be it field-based testing or runtime verification, security and privacy exploits may be catastrophic. Yet, security is still under-explored when it comes to architectural designs for ROS-based applications~
+          </p>
         </blockquote>
 
-        <p>MITM can provide isolation of computing nodes for
-          testing, which, as stated by Bertolino et al [30], can guarantee
-          that the execution of the field tests does not interfere with
-          the operation of the tested system. In addition, MITM nodes
-          promotes the ability to drop or modifying internal signals
-          improving the controllability of events and states, which as
-          described by [29], refers to the degree to which a certain
-          specification can be enforced on the system.</p>
 
 
         <pre class="cpp"
@@ -252,63 +240,45 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p>The ROS ecosystem does not provide a native mechanism for node isolation. The MITM node strategy can be a
-          powerful and flexible design pattern to isolate computing nodes in ROS-based systems. It allows for increased
-          visibility into the system's operation, more flexible communication between nodes, and improved reliability
-          and security.</p>
+        <p> Security and Privacy are often under-explored in the design of ROS-based applications. Threats to privacy and security may be catastrophic and may be an unacceptable side-effect of runtime assessment of such robotic applications.  </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>Isolation of components is an important feature to enable field-based testing (by following the "let it
-          crash" philosophy introduced by Netflix web:chaos-monkey) while avoiding the crash of the system. Isolation
-          permits catching immediately the component that is crashing and executing countermeasures to keep the system
-          up. Examples of solutions for isolation are: (i) the use of proxy nodes of ROSRV, or (ii) introducing
-          intermediary nodes between original nodes by exploiting the topic remapping functionality of ROSMonitoring,
-          which enables swapping topic names just before running the application.</p>
+        <p>The development team should identify security or privacy vulnerabilities that may pose a risk to participants' integrity, confidentiality, and availability, that may be caused by the testing and runtime verification activities. The ros-security workgroup, in collaboration with Alias Robotics, maintains SROS (git: ros2/sros2) for the analysis of such vulnerabilities and fixes. In addition, Alias Robotics maintains a database of vulnerabilities detected in ROS applications (git: aliasrobotics/RVD) as a means of awareness.</p>
 
 
         <h2>Process (HOW)</h2>
 
-        <p>In ROS, the man-in-the-middle (MITM) strategy consists of introducing intermediary ROS nodes between
-          components, in this context the term `components' stands for one or more ROS nodes presenting unique
-          functionality and well-defined interfaces.
-          Such intermediary nodes may react by blocking, dropping, modifying, or inspecting the messages passed between
-          components. </p>
+        <p>Jeong S. Y. et al. list a set of vulnerabilities typically encountered in ROS applications, including broken authentication, the rosbag replay attack, and service hijacking. Neither preparing the code for runtime assessment nor the runtime assessment procedure itself should enable or facilitate the exploitation of such vulnerabilities. The developers must be aware of such vulnerabilities and specify constraints specific to the domain of the application, enforcing or informing the testing of the danger. From one side, the ros-security working group works on mitigating security vulnerabilities provided by design from ROS. From another stance, other approaches focus on confidentiality, integrity, and availability while providing means to specify control access policies and generate firewall rules based on the fundamental elements of ROS~ </p>
 
 
 
         <h2>Exemplars</h2>
-        <h4 style="text-indent: 25px;">Proxy</h4>
+        <h4 style="text-indent: 25px;">FAST-DDS</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
-          the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
-          that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
-          according to user-provided specifications of access policies, even though it does not require any change to
-          the system under scrutiny. Listing 4 portrays the createInterceptors() method from the RVMaster that enacts
-          MITM monitor nodes by re-subscribing to a new set of topics.
+          FAST-DDS is the current technology used in ROS 2. FAST-DDS enables features such as authentication of domain participants using a Certificate Authority (CA), access control to constrain specific operations, authenticated encryption following the Authentication Encryption Standard (AES), logging security events, and data tagging by enabling security labels to data.
+In addition, the ros-security working group, in tandem with Alias Robotics, works on SROS, a tool for securing ROS within the DevOps model
         </p>
-
-        <h4 style="text-indent: 25px;">Topic remapping</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
-          swapping topic names just before running the application. Remap, enables inserting an intermediary node
-          between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
-          ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including
-          the node names, original (‘from’) topic and new (‘to’) topic name.
+          Hu et al. specify security properties of ROS-based. The specified security properties follow the definition of a composite of attributes on confidentiality, integrity, and availability, according to Avizienis. Hu et al. define the properties following two scenarios: (i) attackers get access to a ROS node and freely allocate memory until reaching an out-of-memory state, (ii) topics or services are hijacked, and the information flowing between ROS nodes is changed to provoke a failure. In such scenarios, the developer's team should specify constraints to the runtime assessment procedure placing a barrier to facilitating the control of ROS nodes in such a way that enables free memory allocation and should specify conditions to allow ROS topics and services remapping without any certification, for instance. The testing team may want to assess whether their runtime assessment will open up exploit opportunities given a set of constraints.
         </p>
+
+
+        <h4 style="text-indent: 25px;">ROSRV</h4>
+        <p>
+          ROSRV, a runtime verification framework for safety and security properties of ROS-based applications, provides a specification language for access control policies and enforces them at runtime. Such access control policies may prevent the system from exploiting security breaches, such as enabling the control of safety-critical nodes to the application. More specifically, ROSRV provides access control specifications based on a user-provided specification of access policies using text file inputs. The policies are defined under five categories: groups, nodes, publishers, subscribers, and commands. Nodes represent node names and machine identities, publishers/subscribers define topic names and node identity associated, and commands define the access policy, e.g., full access, localhost.
+
+        </p>
+
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p>The MITM strategy enables freezing of the application at the software level without the normal operation, and
-          rollback in case the test scenarios are prone to side-effects and do not require any change in the code.</p>
+        <p>  Identifying security and privacy constraints can help protect participants and resources during runtime assessment. This guideline encourages developers to consider security and privacy early on in the design process, rather than as an afterthought. It encourages the development of more secure and trustworthy ROS-based applications and runtime assessment of ROS-based applications, which can improve public trust and acceptance.</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p>Placing nodes between computations may cause performance overhead in the system under scrutiny. In addition,
-          erroneous intermediary nodes may affect the functionality of the system, and thus represent a threat to the
-          test's reliability. This guideline does not directly apply to server-based or parameter-based communication.
+        <p> The guideline, intentionally, does not provide specific details on how to implement security and privacy constraints, leaving it up to the developers to decide which constraints are necessary and how to enforce them, since this is domain-dependent. It may be challenging to understand the various security vulnerabilities associated with ROS-based applications, making it difficult to specify appropriate security and privacy constraints. The guideline may require additional time and resources to implement security and privacy constraints, which may delay the development process.
         </p>
 
 
