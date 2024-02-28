@@ -287,31 +287,6 @@ for flight control, approaches time monotonicity guarantees by implementing a lo
 
 
 
-        <!-- ---------------------------------- FORMULA EXAMPLES ---------------------------------- -->
-
-        <h2 id="ltl-template">Formula Examples</h2>
-
-
-
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script>
-          <script type="math/tex"
-            id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
-        </div>
-
-        <div class="patternformulae has-jax">
-          <script type="math/tex"
-            id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script>
-          <br><br>
-
-          <script type="math/tex"
-            id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
-
-          <script setup lang="ts">
-            const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
-          </script>
 
           <!-- ---------------------------------- GUIDELINE CONTENT END ---------------------------------- -->
 
