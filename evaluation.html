@@ -157,32 +157,164 @@
 
 
             <p>
-                Eval desc
+                This section discusses the outcomes of the validation with
+                experts from industry and academia made through questionnaires (available in the replication package section of the
+                website). Our goal is to check whether the guidelines
+                synthesized from literature and insights extracted from open-
+                source ROS repositories are considered to be useful, clear,
+                and applicable by developers and QA teams testing and
+                verifying ROS code. To this end, we elicit three hypotheses
+                per guideline:
             </p>
 
+            <ul>
+                <li>H1. Overall, the guideline is useful. (Usefulness)</li>
+                <li>H2. The formulation of the guideline is clear. (Clarity)</li>
+                <li>H3. The guideline is applicable to ROS-based systems.
+                    (Applicability)</li>
+            </ul>
 
-            <h2> Graph1 </h2>
-            <img  class="center" src="./img/likert_draft.png">
-            <p>
-                Graph1 desc
+            <p>                
+                Differently from usefulness, we note that applicability
+                refers to the extent to which the respondents consider that
+                the guideline could be directly applied to ROS-based systems
+                that they have worked with at the moment of the survey or in
+                the past. In turn, usefulness refers to ROS-based systems in
+                general.
             </p>
 
-            <h2> Graph2 </h2>
-            <img src="./img/likert.png">
+        
+
+            <h2>  Summary of the representative profiles for the 55 questionnaire respondents </h2>
+            <img  class="center" src="./img/eval_table.png">
+
             <p>
-                Graph2 desc
+
+                We received 55 answers to the questionnaire, of which 33
+            were from developers and 22 from quality assurance (QA)
+            teams. To obtain those answers, we sent 1032 emails out of
+            which: 306 targeted paper authors, 772 targeted developers
+            (extracted from repositories), and 68 targeted experts we met
+            personally. We excluded 114 emails due to intersections, e.g.
+            paper authors that were also targeted developers. Addition-
+            ally, we shared posts in the ROS discourse forum. Duplicated
+            emails were removed. The 39-day campaign stopped when
+            we did not receive any more answers from the candidate
+            respondents. The questionnaires were tailored to check the
+            three hypotheses. In addition, we asked each respondent
+            to answer four other questions:
             </p>
 
-            <h2> Graph3 </h2>
-            <img src="./img/bubbleplot.png">
+            
+            <ul>
+                <li>(i) for how long they have
+                    worked in robotics</li>
+                <li>(ii) what their experience with ROS was</li>
+                <li>(iii) what kinds of organizations they have worked in</li>
+                <li>(iv) what robotics domains they have worked on</li>
+            </ul>
+
+
+
+            <h2>  Likert plot for the questionnaire answers </h2>
+            <img  class="center" src="./img/linkert2.png">
             <p>
-                Graph3 desc
+                The Likert plot above provides an overview of the answers
+                from the questionnaire. While the majority of votes lean to the
+                ‘Agree’ side, some guideline descriptions (i.e., CD2, CI1, CI2,
+                CI3, I1, I2, I3, I4, MTA1, MTA2, PE2, SDB1, SDB2, SDB3, SE2)
+                received ‘Strongly Disagree’ votes. This subsection mostly
+                analyses disagreements in contrast to agreements since they
+                might shed light on new research opportunities. To clarify
+                the disagreements, we collected comments left in free text
+                from the online questionnaire14. The questionnaire targeted
+                per group comments, in which respondents could direct their
+                suggestion either to the whole group or to specific guidelines,
+                usually indicating their identifier.
             </p>
 
-            <h2> Graph4 </h2>
-            <img src="./img/effect_size.png">
+            <h2> Boxplots for the results bird’s eye view </h2>
+            <img class="center" src="./img/boxplots.png">
             <p>
-                Graph4 desc
+                In complement to the Likert plot analysis, we back up the
+                responses using statistical analysis. First, we assume that the
+                answers from the Likert items are symmetric and this allows
+                us to use boxplots and visualize whether the hypotheses
+                (H1 − H3) hold for each guideline from a bird’s eye view.
+                We map the Likert items to integer values according to
+                the following rule: Strongly Disagree=1, Disagree=2, Agree=3,
+                Strongly Agree=4.
+            </p>
+
+            <p>
+                At first glance to the boxplot above, we observe that
+                the medians revolve around Agree and Strongly Agree for the 
+                three dimensions (i.e., applicability, clarity, and usefulness).
+            </p>
+            
+            <p>
+                Therefore, overall developers and QA teams agree that
+                the synthesized guidelines are applicable, useful, and clear.
+                However, the boxplots’ smallest value for a set of guidelines
+                (i.e., SDB1, SDB3, PE2, I1, I3, MTA2, CI2) reveals there were
+                respondents that Strongly Disagree with their applicability.
+                In light of such results, we further analysed the statistical
+                and practical significance regarding the agreement for these
+                guidelines (see Sect. 5.3.1 of the report). For those guidelines where
+                the significance test failed or practical significance had a
+                small effect, we conducted a follow-up discussion with
+                the questionnaire respondents to understand the causes for
+                disagreement (see Sect. 5.4 of the report).
+
+            </p>
+
+            <h2> Statistical Significance </h2>
+            <img class="center" src="./img/statistical_sig.png">
+            <p>
+                We test our hypotheses for sta-
+                tistical significance by employing the one-sample Wilcoxon
+                test. The test checks whether the sum of all the respondents
+                for each guideline, e.g. AR1, and each dimension, e.g., applicability, is greater than 0 with a 5% significance level. The
+                resulting plot above summarises all the tests, combinations
+                of guidelines, and dimensions.
+            </p>
+
+            <p>
+                Importantly, the plot highlights that guidelines CI2, MTA2,
+                and PE2 resulted in p-values larger than 0.05, specifically for applicability. Precisely, CI2p−value = 0.1948536,
+                MTA2p−value = 0.3416874, and PE2p−value = 0.1037148.
+                The result suggests that the data collected does not confirm
+                that the aforementioned guidelines are applicable to ROS-
+                based systems, as pointed out by the medians from Fig. 7. In
+                complement, the tests confirm that the remaining correlation
+                between guideline (below the red dashed line in Fig. 8) and
+                attributes applicability, clarity, and usefulness is statistically
+                significant.
+            </p>
+
+            <h2> Practical significance </h2>
+            <img class="center" src="./img/practical_sig.png">
+            <p>
+                We test our hypotheses for practical significance by calculating the effect size given by the one-
+                sample Wilcoxon signed-rank test. Similarly to the statistical
+                significance test, the test checks whether the effect size for
+                one sample Wilcoxon test is greater than zero for the sum of
+                all respondent’s answers to the combinations of guidelines
+                and dimensions. The resulting plot, illustrated above, summarises the
+                effect size for all combinations of guidelines and dimensions.
+            </p>
+
+            <p>
+                According to the definitions from Cohen J. limiting
+                values for effect size are small effect < 0.3, moderate effect
+                > 0.3 and < 0.5, and large effect > 0.5. When it comes
+                to applicability, guidelines CI2, MTA2, and PE2 fall in the
+                small effect category, confirming that we need further data
+                to strengthen our conclusions. Guidelines AR2, CI2, I1, I3,
+                SDB1, and SDB3 are ranked with moderate size effect, which
+                is enough in our case to justify their practical significance.
+                Finally, the large-size effect guidelines are the rest, which
+                confirms their practical significance.
             </p>
 
 
