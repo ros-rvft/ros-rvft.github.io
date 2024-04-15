@@ -225,12 +225,6 @@ table tr { border-bottom: 1px dotted #aeadad; }
  .footer-copyright { padding: 0 10px; }
 }
 
-
-
-
-
-
-
 .titlespan {
     display: flex;
     align-items: center;
@@ -302,7 +296,6 @@ table tr { border-bottom: 1px dotted #aeadad; }
   }
   
 
-
 .center {
   display: block;
   margin-left: auto;
@@ -342,3 +335,24 @@ pre {
   font-style: italic;
 }
 
+
+.citation-block {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.citation-block pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
+.citation-block code {
+    color: #333;
+}

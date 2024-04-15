@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <link href="./files/css/shCore.css" rel="stylesheet" type="text/css" />
+  <link href="./files/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Verification of ROS-based Systems: Guidelines for Developers and QA Teams</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.57.2">
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Verification of ROS-based Systems">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="-">
+        <link rel="stylesheet" href="./files/styles.css">
+        <link rel="stylesheet" href="./files/css">
+        <link rel="stylesheet" href="./files/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+ 
+
+        
+            <link href="-index.xml" rel="alternate" type="application/rss+xml">
+        
+        
+
+
+<!-- <script async="" src="./files/analytics.js"></script><script src="./files/MathJax.js" id="">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script> -->
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML">
+
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    autoload: {
+      color: [],
+      colorv2: ['color']
+    },
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"], packages: {'[+]': ['noerrors']} }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+    MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+    
+  });
+
+
+  MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+  //  do something with the error.  message[2] is the Error object that records the problem.
+});
+
+
+
+  
+/* 	MathJax.Hub.Config({
+	tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+	"HTML-CSS": {
+	  linebreaks: { automatic: true, width: "container" }          
+	}              
+	}); */
+// 	window.MathJax = {
+//   tex: {
+//     inlineMath: [["$","$"],["\\(","\\)"]],
+//     autoload: {
+//       color: [],
+//       colorv2: ['color']
+//     },
+//     packages: {'[+]': ['noerrors']}
+//   },
+// 		  chtml: {
+  
+//    displayOverflow: 'linebreak'
+//    },
+//   options: {
+//     ignoreHtmlClass: 'tex2jax_ignore',
+//     processHtmlClass: 'tex2jax_process'
+//   },
+//   loader: {
+//     load: ['[tex]/noerrors']
+//   }
+// };
+	
+</script>
+
+
+<style>
+
+
+code.has-jax {font: inherit;
+              font-size: 100%;
+              background: inherit;
+              border: inherit;
+              color: #515151;}
+
+
+.patternformulae {display: block;
+    margin-left: auto;
+    margin-right: auto; padding: 70px; width: 90%;}
+
+
+</style>
+    <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+/* .MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: baseline; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid} */
+</style></head>
+    <body><div id="MathJax_Message" style="display: none;"></div>
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-33213501-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+        
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <!-- <div class="site-title-wrapper">
+                        
+                        
+                        
+                    </div> -->
+                    <div class="titlespan">
+                        <div class="perspective-text">
+                          <div class="perspective-line">
+                            <p class="paragraph"></p>
+                            <p class="paragraph">Verification</p>
+                          </div>
+                          <div class="perspective-line">
+                            <p class="paragraph">Verification</p>
+                            <p class="paragraph">of</p>
+                          </div>
+                          <div class="perspective-line">
+                            <p class="paragraph">of</p>
+                            <p class="paragraph">ROS-based</p>
+                          </div>
+                          <div class="perspective-line">
+                            <p class="paragraph">ROS-based</p>
+                            <p class="paragraph">Systems</p>
+                          </div>
+                          <div class="perspective-line">
+                            <p class="paragraph">Systems</p>
+                            <p></p>
+                          </div>
+                        </div>
+                       </div>
+                      </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Guideline Catalog" href="https://chalmers-ros-rm-ft-guidelines.github.io/index">Guideline Catalog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Research" href="https://chalmers-ros-rm-ft-guidelines.github.io/research">Research</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Repositories" href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining">Repositories</a>
+    </li>
+
+    <li class="site-nav-item">
+      <a title="Contribute" href="https://chalmers-ros-rm-ft-guidelines.github.io/contribute">Contribute</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Authors" href="https://chalmers-ros-rm-ft-guidelines.github.io/authors">Authors</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div class="container">
+                <article class="post-container">
+                    <header class="post-header">
+                <h1 class="post-title">Guideline Title</h1>
+                
+                    <p class="post-description">Guideline Short Description</p>
+                
+            </header>
+            
+            
+                    <div class="post-content clearfix">
+                
+            
+                
+            
+            <h2 id="intent">Context (WHEN)</h2>
+            
+            <blockquote>
+            <p>Content block example</p>
+            </blockquote>
+
+
+            <p>Code example:</p>
+<pre class="cpp" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    def instrument_launch_files<span style="color: #008000;">&#40;</span>nodes<span style="color: #008000;">&#41;</span><span style="color: #008080;">:</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">        ...</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">        <span style="color: #0000ff;">for</span> <span style="color: #008000;">&#40;</span>name, package, topics<span style="color: #008000;">&#41;</span> in launch_files<span style="color: #008000;">&#91;</span>path<span style="color: #008000;">&#93;</span><span style="color: #008080;">:</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">            <span style="color: #0000ff;">if</span> node.<span style="color: #007788;">get</span><span style="color: #008000;">&#40;</span>’name’<span style="color: #008000;">&#41;</span> <span style="color: #000080;">==</span> name <span style="color: #0000ff;">and</span> node.<span style="color: #007788;">get</span><span style="color: #008000;">&#40;</span>’pkg</div></li><li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">                ’<span style="color: #008000;">&#41;</span> <span style="color: #000080;">==</span> package<span style="color: #008080;">:</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">                <span style="color: #0000ff;">for</span> topic in topics<span style="color: #008080;">:</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">                    remap <span style="color: #000080;">=</span> ET.<span style="color: #007788;">SubElement</span><span style="color: #008000;">&#40;</span>node, ’remap’<span style="color: #008000;">&#41;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">                    remap.<span style="color: #007788;">set</span><span style="color: #008000;">&#40;</span>’from’, topic<span style="color: #008000;">&#41;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">                    remap.<span style="color: #007788;">set</span><span style="color: #008000;">&#40;</span>’to’, topic <span style="color: #000040;">+</span> ’_mon’<span style="color: #008000;">&#41;</span></div></li><li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">                <span style="color: #0000ff;">break</span></div></li></ol></pre>
+            
+
+            <h2 id="relationships"> Reason (WHY)</h2>
+            <p>Content</p>
+            
+            <h2 id="occurences">Suggestion (WHAT)</h2>
+            
+            <p>Content</p>
+
+                
+            <h2>Process (HOW)</h2>
+                        
+            <p>Content</p>
+            
+
+
+
+            <h2 id="ltl-template">Formula Examples</h2>
+
+        
+            <div class="patternformulae has-jax">
+            <script type="math/tex" id="MathJax-Element-1">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G}( \mathcal{F} (l_i))</script> 
+            <script type="math/tex" id="MathJax-Element-2">\overset{n}{\underset{i=1}{\bigwedge}} \mathcal{G} (l_{i} \rightarrow \mathcal{X} ((\neg l_i)\ \mathcal{W}\ l_{(i+1)\%n}))</script>
+            </div>
+            
+            <div class="patternformulae has-jax">
+            <script type="math/tex" id="MathJax-Element-15">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G}( \forall \mathcal{F} (l_i))</script> <br><br>
+
+            <script type="math/tex" id="MathJax-Element-16">\overset{n}{\underset{i=1}{\bigwedge}} \forall \mathcal{G} (l_{i} \rightarrow \forall \mathcal{X} (\forall (\neg l_i) \mathcal{W} l_{(i+1)\%n}))</script>
+            
+            <script setup lang="ts">
+                const formula = ref('$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$');
+            </script>
+
+            </div>
+            
+            </div>
+            
+                    <footer class="post-footer clearfix">
+                
+            
+                <div class="share">
+            
+    
+            
+    
+        </div>   
+            
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="VERIFICATION OF ROS-BASED SYSTEMS" href="-">VERIFICATION OF ROS-BASED SYSTEMS</a>
+                    </h1>
+
+                </div>
+
+                <p class="footer-copyright">
+                    <span>Ricardo Caldas, Juan Antonio Piñera García, Patrizio Pelliccione and Matei Schiopu  © 2024 </span>
+                </p>
+                <p class="footer-copyright">
+                    
+                    
+                </p>
+            </div>
+        </footer>
+
+        <script src="./files/jquery-1.11.3.min.js.download"></script>
+        <script src="./files/jquery.fitvids.js.download"></script>
+        <script src="./files/highlight.min.js.download"></script>
+        <script src="./files/scripts.js.download"></script>
+    
+
+</body></html>
