@@ -283,7 +283,7 @@
         <h4 style="text-indent: 25px;">Proxy</h4>
 
         <p>
-          ROSRV [52] deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
+          ROSRV <a href="https://github.com/cansuerdogan/ROSRV/tree/master/src/RVMaster"> (ROSRV)</a> deploys a ROS master node proxy, namely RVMaster, that acts as a firewall, blocking the access to
           the ROS master node port. This node, in turn, is responsible for creating MITM nodes (also called monitors)
           that intercept the messages flowing between nodes in the system. RVMaster instantiates the MITM nodes
           according to user-provided specifications of access policies, even though it does not require any change to
@@ -294,8 +294,8 @@
         <h4 style="text-indent: 25px;">Topic remapping</h4>
 
         <p>
-          ROSMonitoring [73] utilizes topic remapping to ensure safety and security in the system by creating
-          intermediary nodes via topic name remapping (roslaunch/remap). Remapping is a core tool from ROS that enables
+          ROSMonitoring <a href="https://github.com/autonomy-and-verification-uol/ROSMonitoring"> (ROSMonitoring)</a> utilizes topic remapping to ensure safety and security in the system by creating
+          intermediary nodes via topic name remapping <a href="http://wiki.ros.org/roslaunch/XML/remap"> (roslaunch/remap)</a> (roslaunch/remap). Remapping is a core tool from ROS that enables
           swapping topic names just before running the application. Remap, enables inserting an intermediary node
           between the other two original nodes. Listing 5 exemplifies the topic remapping-based MITM strategy applied by
           ROS- Monitoring. The code snippet shows that the launch files are incremented with remap statements including

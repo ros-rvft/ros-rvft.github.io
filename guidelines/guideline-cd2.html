@@ -268,14 +268,14 @@
         </p>
 
         <p>
-          Halder R. et. al use model checking (e.g., UPPAAL) to analyze real-time behavior in ROS-based applications. Under the claim that ROS non-deterministically empties the communication queues, the authors focus on modeling the message-passing behavior of ROS and verifying whether the queue overflows. Since overflow here means that some process is starving, thus the application is not monotonic in time. The authors offer the models in timed automata and TCTL (Temporal Computational Tree Logic) properties designed to ensure real-time for the safety controller of the Kobuki exemplar. 
+          Halder R. et. al use model checking (e.g., UPPAAL) to analyze real-time behavior in ROS-based applications. Under the claim that ROS non-deterministically empties the communication queues, the authors focus on modeling the message-passing behavior of ROS and verifying whether the queue overflows. Since overflow here means that some process is starving, thus the application is not monotonic in time. The authors offer the models in timed automata and TCTL (Temporal Computational Tree Logic) properties designed to ensure real-time for the safety controller of the Kobuki <a href="http://wiki.ros.org/kobuki">(Kobuki)</a> exemplar. 
         </p>
 
         <h4 style="text-indent: 25px;">Annotating messages with timestamps and synchronization to guarantee ordering</h4>
 
         <p>
-          The SteadyTime class in ROS represents a monotonic clock, functioning independently of physical time and with steady tick times. MAVROS, a library broadly used in ArduPilot
-for flight control, approaches time monotonicity guarantees by implementing a logical time synchronizer. The synchronizer ensures that the time passing in MAVROS is aligned with the time on ArduPilot's side, avoiding drifts that could lead the application to fail. More importantly, the time synchronizer uses a particular type of message that embeds timestamps for clock synchronization for updating ArduPilot about its time status. Messages such as this can be used for synchronizing the occurrence of events in the system.
+          The SteadyTime <a href="https://design.ros2.org/articles/clock_and_time.html">(SteadyTime)</a> class in ROS represents a monotonic clock, functioning independently of physical time and with steady tick times. MAVROS <a href="https://github.com/mavlink/mavros">(MAVROS)</a>, a library broadly used in ArduPilot
+for flight control, approaches time monotonicity guarantees by implementing a logical time synchronizer. The synchronizer ensures that the time passing in MAVROS is aligned with the time on ArduPilot's side, avoiding drifts that could lead the application to fail. More importantly, the time synchronizer uses a particular type of message that embeds timestamps for clock synchronization for updating ArduPilot about its time status <a href="https://github.com/mavlink/mavros/blob/ros2/mavros_msgs/msg/TimesyncStatus.msg">(status)</a>. Messages such as this can be used for synchronizing the occurrence of events in the system.
         </p>
 
 

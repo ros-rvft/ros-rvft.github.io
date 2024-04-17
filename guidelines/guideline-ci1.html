@@ -247,7 +247,7 @@
 
         <h2>Process (HOW)</h2>
 
-        <p>Typical timing constraints that cross-cut in robotics domains stand for response time, latency, synchronization time, fault detection and recovery time, and power management time. The means to specify such constraints vary from informal to formal languages (we invite the interested reader to check guidelines of the group property specification - SDB1 and SDB2. The developers team may use Autoware_Perf to calculate response time and latency, for example. </p>
+        <p>Typical timing constraints that cross-cut in robotics domains stand for response time, latency, synchronization time, fault detection and recovery time, and power management time. The means to specify such constraints vary from informal to formal languages (we invite the interested reader to check guidelines of the group property specification - SDB1 and SDB2. The developers team may use Autoware_Perf <a href="https://github.com/azu-lab/ROS2-E2E-Evaluation">(Autoware_Perf)</a> to calculate response time and latency, for example. </p>
 
 
 
@@ -255,15 +255,15 @@
         <h4 style="text-indent: 25px;">Typical Timing Constraints</h4>
 
         <p>
-          Real-time constraints may be subject to the domain and the objectives of the runtime assessment. We provide a comprehensive list of constraints that may be interesting to address when considering testing ROS-based systems. We use Autoware_Perf to illustrate how to collect response time and latency with practical examples.
+          Real-time constraints may be subject to the domain and the objectives of the runtime assessment. We provide a comprehensive list of constraints that may be interesting to address when considering testing ROS-based systems. We use Autoware_Perf <a href="https://github.com/azu-lab/ROS2-E2E-Evaluation">(Autoware_Perf)</a> to illustrate how to collect response time and latency with practical examples.
         </p>
 
         <p>
-          Response time is the period a ROS-based system takes to react to one or more stimuli from the environment. Specific to the ROS domain, Chaaban, K. defines response time in ROS 2 as the ``duration from the release instant to the completion of the job execution''. To collect callback response time, Autoware_Perf defines a function to get durations of callback instances for a given callback objects.
+          Response time is the period a ROS-based system takes to react to one or more stimuli from the environment. Specific to the ROS domain, Chaaban, K. defines response time in ROS 2 as the ``duration from the release instant to the completion of the job execution''. To collect callback response time, Autoware_Perf <a href="https://github.com/azu-lab/ROS2-E2E-Evaluation/blob/main/autoware_perf_galactic/tracetools_analysis-galactic_add_tp/tracetools_analysis/analysis/callback_duration.ipynb">(Autoware_Perf)</a> defines a function to get durations of callback instances for a given callback objects.
         </p>
 
         <p>
-          Latency is the time a ROS-based system takes to react to a stimulus from the test orchestrating apparatus. Often, field tests include a centralized computer orchestrating the test cases execution and information collection, latency in such cases tends to be significant. Autoware_Perf illustrates how latency can be computed with an example of a ROS 2 service, where they send a goal to the robot and calculate the time for a response
+          Latency is the time a ROS-based system takes to react to a stimulus from the test orchestrating apparatus. Often, field tests include a centralized computer orchestrating the test cases execution and information collection, latency in such cases tends to be significant. Autoware_Perf <a href="https://github.com/azu-lab/ROS2-E2E-Evaluation/blob/main/autoware_perf_galactic/tracetools_analysis-galactic_add_tp/tracetools_analysis/analysis/galactic/e2elatency.ipynb">(Autoware_Perf)</a> illustrates how latency can be computed with an example of a ROS 2 service, where they send a goal to the robot and calculate the time for a response
         </p>
 
         <p>

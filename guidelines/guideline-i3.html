@@ -254,7 +254,7 @@
         <h4 style="text-indent: 25px;">Fault injection</h4>
 
         <p>
-          Fault injection imitates the mistakes of programmers by changing the system under scrutiny's source code. Developers can embed an interface for enabling source code modifications to inject faults in the ROS-based system. For instance, IM-FIT is a tool tailored to mutation-based software fault injection for ROS applications. Listing describes a subset of the IM-FIT ROS mutations library which offering three operations (delete, change, and external) on defined ROS primitives, such as publishers, subscribers, timers, global variables, namespaces, service clients. Moreover, IM-FIT offers an interface to decide when, where and how the mutators will inflict faults in the source code. Embedding IM-FIT in the project as an API to fault injection facilitates robustness testing for the QA team. 
+          Fault injection imitates the mistakes of programmers by changing the system under scrutiny's source code. Developers can embed an interface for enabling source code modifications to inject faults in the ROS-based system. For instance, IM-FIT <a href="https://github.com/cembglm/imfit"> (IM-FIT)</a> is a tool tailored to mutation-based software fault injection for ROS applications. Listing describes a subset of the IM-FIT ROS mutations library which offering three operations (delete, change, and external) on defined ROS primitives, such as publishers, subscribers, timers, global variables, namespaces, service clients. Moreover, IM-FIT offers an interface to decide when, where and how the mutators will inflict faults in the source code. Embedding IM-FIT in the project as an API to fault injection facilitates robustness testing for the QA team. 
         </p>
 
   
@@ -266,8 +266,8 @@
         </p>
 
         <p>
-          For instance, ros1-fuzzer provides an API for ROS messages fuzzing. The API requests the topic's name, the message type and datatype strategies to fuzzing the message's content. Although the datatype and constraints are hard coded in the API, defining the topic name and message type are done in the command line. For example,  ros_fuzzer -t /rosout -m rosgraph_msgs/Log, in which the user is fuzzing a |Log| message sent to the |/rosout| topic. 
-The authors evolved ros1-fuzzer to suit ROS 2 applications, resulting in ros2-fuzzer. ros2-fuzzer extends the interface enabling service-level fuzzing, not only message fuzzing as was ros1-fuzzer. The addition affected the API asking for an extra argument (|service| or |message|) in the command.
+          For instance, ros1-fuzzer <a href="https://github.com/aliasrobotics/ros1_fuzzer"> (ros1-fuzzer)</a> provides an API for ROS messages fuzzing. The API requests the topic's name, the message type and datatype strategies to fuzzing the message's content. Although the datatype and constraints are hard coded in the API, defining the topic name and message type are done in the command line. For example,  ros_fuzzer -t /rosout -m rosgraph_msgs/Log, in which the user is fuzzing a |Log| message sent to the |/rosout| topic. 
+The authors evolved ros1-fuzzer to suit ROS 2 applications, resulting in ros2-fuzzer <a href="https://github.com/aliasrobotics/ros2_fuzzer"> (ros2-fuzzer)</a>. ros2-fuzzer extends the interface enabling service-level fuzzing, not only message fuzzing as was ros1-fuzzer. The addition affected the API asking for an extra argument (|service| or |message|) in the command.
         </p>
 
 

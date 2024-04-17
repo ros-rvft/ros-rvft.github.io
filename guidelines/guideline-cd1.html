@@ -260,18 +260,18 @@
         </p>
 
         <p>
-          In the healthcare domain, the Body Sensor Network  defines ROS nodes after concrete tasks that, composed, should fulfil the system's goal. Tasks such as collecting SPO2 data, collecting heartbeat data, fuse data, or identifying emergency. For instance, the collect SPO2 data task implements an independent node for collecting, filtering, and transferring data. Given that each sub-task (i.e., collecting, filtering, and transferring) is strictly dependent on each other, yet, should not depend in the environment and together form an atomic behavior. Separating the sub-tasks in different nodes may render incomplete test cases that are hard to read and often meaningless.
+          In the healthcare domain, the Body Sensor Network  defines ROS nodes after concrete tasks that, composed, should fulfil the system's goal. Tasks such as collecting SPO2 data, collecting heartbeat data, fuse data, or identifying emergency. For instance, the collect SPO2 data task implements an independent node for collecting, filtering, and transferring data <a href="https://github.com/lesunb/bsn/blob/master/src/sa-bsn/target_system/components/component/src/g3t1_1/G3T1_1.cpp">(code)</a>. Given that each sub-task (i.e., collecting, filtering, and transferring) is strictly dependent on each other, yet, should not depend in the environment and together form an atomic behavior. Separating the sub-tasks in different nodes may render incomplete test cases that are hard to read and often meaningless.
         </p>
 
         <h4 style="text-indent: 25px;">Skill-based design</h4>
 
         <p>
-          Skill-based design typically defines skills as fundamental software building blocks operating a modification on the world stage. In such approaches, skills should be modular and reusable. Although ROS nodes provide a natural means for modular design, it is not common to map skills to nodes in current skill-based designs. For instance, SkiROS implements 3 nodes: World Model Manager, Task Manager, Skill Manager.
+          Skill-based design typically defines skills as fundamental software building blocks operating a modification on the world stage. In such approaches, skills should be modular and reusable. Although ROS nodes provide a natural means for modular design, it is not common to map skills to nodes in current skill-based designs. For instance, SkiROS implements 3 nodes: World Model Manager, Task Manager, Skill Manager <a href="https://github.com/RVMI/skiros2/blob/de00abafffe78c8da6ba35e8259d6ad075ec72b6/skiros2_skill/src/skiros2_skill/core/skill.py#L622">(skill manager)</a>.
         </p>
 
         <p>
-          In addition, HRMS does not map skills to nodes. It builds skills that under the Behavior Trees notation may reuse existing nodes. Lack of standard mapping from skills to actual computation impairs the verification of skill-based approaches at skill level.
-          Towards verifiable ROS-based applications, a promising architecture, namely RobMoSys, suggests separation of concerns between different levels such as Mission, Task Plot, Skill, Service, Function, whereas Skill concerns to configuration, e.g., grasp object with constraint, and functions concern to computation, e.g. inverse kinematics solver. In this direction, Albore A. et al. promote ROS2 code generation whilst mapping skillsets to ROS nodes with a single responsibility.
+          In addition, HRMS does not map skills to nodes. It builds skills that under the Behavior Trees notation may reuse existing nodes <a href="https://github.com/Gastd/py_trees_ros_behaviors/tree/devel/py_trees_ros_behaviors">(behaviour)</a>. Lack of standard mapping from skills to actual computation impairs the verification of skill-based approaches at skill level.
+          Towards verifiable ROS-based applications, a promising architecture, namely RobMoSys <a href="https://robmosys.eu/wiki/general_principles:separation_of_levels_and_separation_of_concern">(RobMoSys)</a>, suggests separation of concerns between different levels such as Mission, Task Plot, Skill, Service, Function, whereas Skill concerns to configuration, e.g., grasp object with constraint, and functions concern to computation, e.g. inverse kinematics solver. In this direction, Albore A. et al. promote ROS2 code generation whilst mapping skillsets to ROS nodes with a single responsibility.
         </p>
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>

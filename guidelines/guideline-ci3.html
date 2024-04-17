@@ -266,7 +266,7 @@
         </p>
 
         <p>
-          The Kobuki robot implements a safety controller (\href. The kobuki's safety controller specifies, using Python at code-level, a state machine ensuring that the robot stops whenever it is close to a cliff, the bumper sensor was pressed, or at least one of the wheels dropped (or was raised in the air). The Kobuki's safety controller is a separate ROS node collecting bumper, cliff and wheel events. A sequence of events may trigger an alert or issues velocity commands to deviate Kobuki from the threat.
+          The Kobuki robot implements a safety controller <a href="https://github.com/yujinrobot/kobuki/blob/23748ed3dfb082831ca8eaaef1a0b08588dbcb65/kobuki_safety_controller/include/kobuki_safety_controller/safety_controller.hpp">(controller)</a>. The kobuki's safety controller specifies, using Python at code-level, a state machine ensuring that the robot stops whenever it is close to a cliff, the bumper sensor was pressed, or at least one of the wheels dropped (or was raised in the air). The Kobuki's safety controller is a separate ROS node collecting bumper, cliff and wheel events. A sequence of events may trigger an alert or issues velocity commands to deviate Kobuki from the threat.
         </p>
 
 
@@ -277,7 +277,7 @@
 
 
         <p>
-          Stadler et al., uses the Esper Constraint Engine to check for violations of the safety constraints. Such constraints are specified using the EPL notation. Event Processing Language (EPL) is a SQL-standard language with extensions, offering SELECT, FROM, WHERE, GROUP BY, HAVING and ORDER BY clauses. For instance, they specify that an event such as JointEffortEvent (AEvent) will not exceed a maximum of 5.0 in an ESL constraint specification.
+          Stadler et al., uses the Esper Constraint Engine to check for violations of the safety constraints. Such constraints are specified using the EPL notation. Event Processing Language (EPL) is a SQL-standard language with extensions, offering SELECT, FROM, WHERE, GROUP BY, HAVING and ORDER BY clauses. For instance, they specify that an event such as JointEffortEvent (AEvent) will not exceed a maximum of 5.0 in an ESL constraint specification (i.e. <a href="https://github.com/MStadler-Organization/ROMoSu/blob/main/services/constraint_engines/src/main/resources/constraints/c1_mx_joint_effort.cst">max joint effort constraint</a>).
         </p>
 
 

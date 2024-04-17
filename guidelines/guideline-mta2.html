@@ -241,7 +241,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>The QA team should exploit automation tools for test case generation, test case selection and oracle generation, as well as other testing activities, to efficiently gain confidence in ROS-based systems in the field. For example, Mithra (pdf: https://afsafzal.github.io/materials/AfzalMithra.pdf) learns oracles from logs generated during the execution, it is motivated by a case from ArduPilot and tested in autonomous racing cars built on ROS. In addition, HAROS (git: git-afsantos/haros) promotes test case generation from properties using a tool called Hypothesis (git: HypothesisWorks/hypothesis). Finally, a technical report (pdf: https://www.cse.chalmers.se/$\sim$bergert/paper/2022-iros-roboticstesting.pdf) details how a company building mobile robots for disinfection uses equivalence partitioning for test case selection for the field.</p>
+        <p>The QA team should exploit automation tools for test case generation, test case selection and oracle generation, as well as other testing activities, to efficiently gain confidence in ROS-based systems in the field. For example, Mithra (pdf: <a href="https://afsafzal.github.io/materials/AfzalMithra.pdf">(Mithra)</a>) learns oracles from logs generated during the execution, it is motivated by a case from ArduPilot and tested in autonomous racing cars built on ROS. In addition, HAROS (git: git-afsantos/haros) promotes test case generation from properties using a tool called Hypothesis (git: HypothesisWorks/hypothesis). Finally, a technical report (pdf: <a href="https://www.cse.chalmers.se/$\sim$bergert/paper/2022-iros-roboticstesting.pdf">(bergert)</a>) details how a company building mobile robots for disinfection uses equivalence partitioning for test case selection for the field.</p>
 
 
         <h2>Process (HOW)</h2>
@@ -258,7 +258,7 @@
         <h4 style="text-indent: 25px;">Technology enablers</h4>
 
         <p>
-          As a technology enabler, rostest is a ROS framework that allows us to do full integration testing across multiple nodes. In the task of test case generation in particular, one crucial component of the library is unit test. This module makes it possible to perform ROS node integration-level tests as well as code-level unit tests. In the case of ROS 2, the testing mechanism is ingrained in the structure of the packages, which makes the test development considerably easier. 
+          As a technology enabler, rostest <a href="http://wiki.ros.org/rostest">(rostest)</a> is a ROS framework that allows us to do full integration testing across multiple nodes. In the task of test case generation in particular, one crucial component of the library is unit test. This module makes it possible to perform ROS node integration-level tests as well as code-level unit tests. In the case of ROS 2, the testing mechanism is ingrained in the structure of the packages, which makes the test development considerably easier. 
         </p>
 
         <h4 style="text-indent: 25px;">Oracle specification</h4>
@@ -273,7 +273,7 @@
         <p>
           Santos et al. rely on property-based testing (PBT) to generate test cases driven by properties specified in the form of assertions.
 
-          The tool HypothesisWorks/hypothesis receives a model of ROS configurations and generates customizeable property-based scripts for tests aimed at these configurations. It builds on top of configuration models extracted using HAROS, a static analysis framework for ROS applications.
+          The tool HypothesisWorks/hypothesis <a href="https://github.com/HypothesisWorks/hypothesis">(hypothesis)</a> receives a model of ROS configurations and generates customizeable property-based scripts for tests aimed at these configurations. It builds on top of configuration models extracted using HAROS, a static analysis framework for ROS applications.
         </p>
 
         <h4 style="text-indent: 25px;">Test case generation</h4>

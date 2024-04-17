@@ -286,21 +286,20 @@
 
         <p>
           ROS, by standard, contains a
-          system-wide string logging mechanism, namely ROS logging
-          (http://wiki.ros/logging). ROS logging works with a set of
+          system-wide string logging mechanism, namely ROS logging <a href="http://wiki.ros/logging">(logging)</a>. ROS logging works with a set of
           macros defined for instrumenting the nodes with information
           hooks. In the background, the macros send messages with
           the information to be logged through a standard topic
           called rosout. On the other side of the topic, an extra node,
           within the roscore package, persists the data in a textual
-          format (ros/../rosout). Developers can use the macros
+          format (ros/../rosout) <a href="https://github.com/ros/ros_comm/blob/noetic-devel/clients/rospy/src/rospy/impl/rosout.py">(rosout)</a>. Developers can use the macros
           to log information that might be used for testing in a
           later stage, given the application-specific requirements.
         </p>
 
         <p>
           For instance, the Amazon AWS service for robotics provides AWS
-          CloudWatch Logs (aws-robotics/cloudwatchlogs-ros2)
+          CloudWatch Logs (aws-robotics/cloudwatchlogs-ros2) <a href="https://github.com/aws-robotics/cloudwatchlogs-ros2">(cloudwatchlogs-ros2)</a>
           interfaces directly with rosout to monitor applications using
           the standard ROS logging interface. In addition, the standard
           library provides logging macros with embedded filtering
@@ -313,7 +312,7 @@
           node. Such metadata contains URIs from various nodes,
           port numbers, published or subscribed topics, services, and
           parameters from the parameter server. Kaveti P. et al. create
-          an API for the ROS master node (master api.py) using
+          an API for the ROS master node (master api.py) <a href="https://github.com/PushyamiKaveti/fault-tolerant-ros-master/blob/master/src/ros_comm/rosmaster/src/rosmaster/master_api.py">(master-api)</a> using
           the official logging library from Python14 to persist metadata
           in YAML format. Their technique opens space for further
           inspection of ROS applications without access to the source
@@ -323,7 +322,7 @@
         <h4 style="text-indent: 25px;">Outline logging and filtering</h4>
 
         <p>
-          ROSMonitoring employs
+          ROSMonitoring <a href="https://github.com/autonomy-and-verification-uol/ROSMonitoring/blob/master/generator/online_config.yaml">(ROSMonitoring)</a> employs
           monitors to persist events in textual format. The monitors
           contain filtering capabilities to eliminate entries that are
           inconsistent with the specification (requires an oracle). In
@@ -340,12 +339,12 @@
           On a similar stance,
           and inspired by aircraft black box (and software black
           box), Mitrevski, et al. proposes the concept of
-          Robotic Black Box (ropod-project/black-box). The black
+          Robotic Black Box <a href="https://github.com/ropod-project/black-box">(ropod-project/black-box)</a>. The black
           box operates as an isolated component responsible for
           listening to data traffic from distinct sources and logging
           in an easily retrievable medium. Similarly to ROSMoni-
-          toring, Mitrevski’s black box approach to logging (ropod-
-          project/black-box/../logger main.*) inspects topics and
+          toring, Mitrevski’s black box approach to logging <a href="https://github.com/ropod-project/black-box/blob/master/pybb/logger_main.py">(ropod-
+            project/black-box/../logger main.*)</a>  inspects topics and
           message types that are configured in advance. Different from
           ROSMonitoring, Robotic Black Box offers logging not only
           in textual format but also in a MongoDB database, which is
@@ -354,7 +353,7 @@
           and retrieval capabilities. The approach builds a customized
           query interface over the MongoDB database using names
           of collections, timestamps and metadata to filter the results
-          (black box tools/db utils.py)
+         <a href="https://github.com/ropod-project/black-box-tools/blob/master/black_box_tools/db_utils.py"> (black box tools/db utils.py)</a>
         </p>
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>

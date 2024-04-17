@@ -255,11 +255,13 @@
         <h4 style="text-indent: 25px;">Technology enablers</h4>
 
         <p>
-          The standard library for record-and-playback in ROS is rosbag.
+          The standard library for record-and-playback in ROS is rosbag <a href="https://github.com/ros/ros_comm/tree/noetic-devel/tools/rosbag">(rosbag)</a>.
     The rosbag package provides a means for recording exchanged messages in so-called bag files and reproducing the messages between components in release order. In addition, the package contains tools for analyzing, processing logs, and visualizing exchanged messages. 
     Recent research, builds on top of rosbag to encode more expressive tooling for applying records and reproducing for testing purposes, for instance using behavior trees to replay robot behavior in mixed reality .
 
-    Rerun.io provides a general-purpose tool with focus on visualization of bag data which leverages common datatypes used in perception stack for robotics applications. Rerun enables URDF scene plotting, with 2d and 3d transformations, camera, odometry and tf transforms (e.g., rerun/ros_node example).
+    Rerun.io <a href="https://github.com/rerun-io/rerun">(Rerun)</a> provides a general-purpose tool with focus on visualization of bag data which leverages common datatypes used in perception stack for robotics applications. Rerun enables URDF scene plotting, with 2d and 3d transformations, camera, odometry and tf transforms (e.g., rerun/ros_node
+    
+    <a href="https://github.com/rerun-io/rerun/blob/main/examples/python/ros_node/main.py">(ros_node example)</a>).
         </p>
 
         <h4 style="text-indent: 25px;">Simplifying error analysis</h4>
@@ -273,7 +275,7 @@
         <h4 style="text-indent: 25px;">Parameter tuning</h4>
 
         <p>
-          Algorithms using multi-objective optimization for improving functionality or managing quality attributes (e.g., reliability) at runtime may benefit from recording data in exploration scenarios and playback for tuning parameters. Zahn b. et al. implements NUbots and uses a genetic algorithm (namely NSGA-II) to tune the parameters of a kicking strategy for a football robot player in the Robocup, for that, they rely on record-and-playback. Nubots however, instead of relying on standard ROS tooling to record-and-playback provide their own implementation. Similarly, Caldas et. al uses an implementation of their own to record whether a healthcare system (namely Gil2021) presents faults at task-level execution, then playback the recorded data in a data mining pipeline (using also NSGA-II) to tuning the parameters of a software controller. 
+          Algorithms using multi-objective optimization for improving functionality or managing quality attributes (e.g., reliability) at runtime may benefit from recording data in exploration scenarios and playback for tuning parameters. Zahn b. et al. implements NUbots and uses a genetic algorithm (namely NSGA-II) to tune the parameters of a kicking strategy for a football robot player in the Robocup, for that, they rely on record-and-playback. Nubots <a href="https://github.com/NUbots/NUbots">(Nubots)</a> however, instead of relying on standard ROS tooling to record-and-playback provide their own implementation. Similarly, Caldas et. al uses an implementation of their own to record whether a healthcare system (namely Gil2021 <a href="https://github.com/lesunb/bsn">(Gil2021)</a>) presents faults at task-level execution, then playback the recorded data in a data mining pipeline (using also NSGA-II) to tuning the parameters of a software controller. 
         </p>
 
 

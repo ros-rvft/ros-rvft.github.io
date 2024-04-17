@@ -248,7 +248,7 @@
         <p>
           Fault injection is a testing technique to evaluate the robustness of a system that consists of intentionally introducing faults, failures and errors into the software system. The fault injection can occur at various levels, these generally are defined as the software, the hardware and the network layer. In the software layer, for instance, typical operations include the modification of variables and the manipulation of input data.
     Noise injection, instead, refers to introducing noise or interference into a system with the aim of improving the system's resilience. 
-    Several tools have been developed in recent years to apply these concepts in the ROS domain, either based on noise injection ros1_fuzzer, ros2_fuzzer </p>
+    Several tools have been developed in recent years to apply these concepts in the ROS domain, either based on noise injection ros1_fuzzer <a href="https://github.com/aliasrobotics/ros1_fuzzer">(ros1_fuzzer)</a>, ros2_fuzzer <a href="https://github.com/aliasrobotics/ros2_fuzzer">(ros2_fuzzer)</a> </p>
 
 
 
@@ -259,9 +259,9 @@
         <h4 style="text-indent: 25px;">Noise Injection</h4>
 
         <p>
-          RoboFuzz, which is based on a data type-aware mutation technique aimed at finding correctness bugs in the system. RoboFuzz takes a target system and a test strategy as input and outputs the report of found bugs after performing a fuzzing technique based on message mutation.
+          RoboFuzz <a href="https://github.com/sslab-gatech/RoboFuzz">(RoboFuzz)</a>, which is based on a data type-aware mutation technique aimed at finding correctness bugs in the system. RoboFuzz takes a target system and a test strategy as input and outputs the report of found bugs after performing a fuzzing technique based on message mutation.
 
-          In addition, RosPenTo provides the operations of unregistering and registering publishers/subscribers, isolating nodes and services, and injecting false data in messages. As an example, the authors show how to use the tool to isolate the safety monitor node and to inject fault data in a robotic operation in such a way that the robot may harm humans
+          In addition, RosPenTo <a href="https://github.com/jr-robotics/ROSPenTo">(RosPenTo)</a> provides the operations of unregistering and registering publishers/subscribers, isolating nodes and services, and injecting false data in messages. As an example, the authors show how to use the tool to isolate the safety monitor node and to inject fault data in a robotic operation in such a way that the robot may harm humans
         </p>
 
         <h4 style="text-indent: 25px;">Fault Injection</h4>
@@ -269,7 +269,7 @@
         <p>
           Targeting the inclusion of Fault Injection in the system, the imfit tool, which is based on applying mutation testing to relevant files with the ROS source code, is of great value. The tool allows the user to create fault injection plans and select the operating conditions for the mutation process. Furthermore, fault metrics and diagrams can be obtained afterwards to analyze the system's response.
 
-          In addition, ROS Fault Injection Toolkit is a tool that aims to test the reliability and fault-tolerance of a ROS-based system while allowing for user-controlled fault injection, targeting especially the domain of image processing for autonomous driving. Similarly, \href{http://wiki.ros.org/camfitool}{camfitool} is an official ROS tool which also allows the user to inject faults in images, but it additionally provides a simple intuitive graphical interface as well as the ability to perform the injection retrospectively or in real-time.
+          In addition, ROS Fault Injection Toolkit is a tool that aims to test the reliability and fault-tolerance of a ROS-based system while allowing for user-controlled fault injection, targeting especially the domain of image processing for autonomous driving. Similarly, camfitool <a href="http://wiki.ros.org/camfitool">(camfitool)</a> is an official ROS tool which also allows the user to inject faults in images, but it additionally provides a simple intuitive graphical interface as well as the ability to perform the injection retrospectively or in real-time.
         </p>
 
 

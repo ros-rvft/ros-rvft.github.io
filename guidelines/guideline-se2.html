@@ -244,7 +244,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>When it is possible to test or verify without human supervision, the QA team should prioritize headless simulation to avoid unnecessary overhead, enable large-scale experimentation, and facilitate integration with CI/CD pipelines. Example of tools supporting headless simulation are Gazebo (git: gazebosim/gz-sim), V-REP, ARGOS, MORSE, and MVSim (git: MRPT/mvsim). As a complement, OpenDaVINCI (git: se-research/OpenDaVINCI) interfaces with ROS and has been widely used for testing autonomous driving systems.</p>
+        <p>When it is possible to test or verify without human supervision, the QA team should prioritize headless simulation to avoid unnecessary overhead, enable large-scale experimentation, and facilitate integration with CI/CD pipelines. Example of tools supporting headless simulation are Gazebo (git: gazebosim/gz-sim), V-REP <a href="http://wiki.ros.org/vrep\_ros\_bridge">(V-REP)</a>, ARGOS <a href="https://www.argos-sim.info/">(ARGOS)</a>, MORSE <a href="https://morse-simulator.github.io/">(MORSE)</a>, and MVSim (git: MRPT/mvsim). As a complement, OpenDaVINCI (git: se-research/OpenDaVINCI) interfaces with ROS and has been widely used for testing autonomous driving systems.</p>
 
 
         <h2>Process (HOW)</h2>
@@ -262,7 +262,7 @@
         <p>
           Most of the widely used simulators in the domain of robotics have a way to specify the intention of running the simulation headless. In Gazebo, it is done by specifying an option either through the command line or in the launch file, although as stated in, there is still some instability in the support of this feature. V-REP also allows a user to set a headless simulation by adding a special option in the execution of the program. Furthermore, the ARGOS simulator, created to support the simulation of large scales swarms of robots, efficiently supports a headless mode of operation; it has been proven to outperform Gazebo and V-Rep simulators when running headless in small scenes with up to 10 robots.
 
-          Other simulators that allow headless operations include MORSE, although the feature has only been tested in Linux, and MRPT/mvsim, which is a lightweight simulator capable of running real-time scenarios for multiple vehicles.
+          Other simulators that allow headless operations include MORSE<a href="https://morse-simulator.github.io/">(MORSE)</a>, although the feature has only been tested in Linux, and MRPT/mvsim <a href="https://github.com/MRPT/mvsim">(mvsim)</a>, which is a lightweight simulator capable of running real-time scenarios for multiple vehicles.
         </p>
 
         

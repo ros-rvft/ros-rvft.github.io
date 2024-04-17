@@ -253,7 +253,7 @@
         <p>A rule of thumb says that
           more observations tend to enable more precise assurance
           arguments within a limit. Observing, however, is never free
-          from side effects, incurring in overhead [28]. Therefore, the
+          from side effects, incurring in overhead. Therefore, the
           quality assurance team must contrast the precision of the
           assurance arguments against overhead introduced by the
           observation medium. The overhead acceptance criteria are
@@ -280,7 +280,7 @@
           aka nominal performance (e.g., time to reaction, latency,
           speed), against available resources (e.g., computing power).
           The QA team may use off-the-shelf ROS tooling, like
-          ApexAI/Performance test ß, to understand the nominal
+          <a href="https://gitlab.com/ApexAI/performance_test">ApexAI/Performance</a> test ß, to understand the nominal
           performance of the ROS-based application. The difference
           between nominal performance and expected performance
           may be allocated to the overhead acceptance criteria. If
@@ -300,8 +300,9 @@
           Monitoring overhead is all extra load put on the system-
           under-test due to gathering, interpreting, and elaborating
           data about the execution. For example, ROSMonitoring
-          (autonomy-and-verification-uol/ROSMonitoring) de-
-          termines the monitoring overhead by calculating the delay
+          (autonomy-and-verification-uol/ROSMonitoring) 
+          <a href="https://github.com/autonomy-and-verification-uol/ROSMonitoring">autonomy-and-verification-uol/ROSMonitoring</a>
+          determines the monitoring overhead by calculating the delay
           introduced in the message delivery time between ROS nodes.
           The authors analyse the overhead by varying the size of
           the system under monitoring, message passing frequency,
@@ -313,7 +314,9 @@
 
         <p>
           Another example is
-          ros2 tracing (ros2/ros2 tracing) that provides a tool
+          ros2 tracing
+          <a href="https://github.com/ros2/ros2_tracing">(ros2/ros2 tracing)</a>
+          that provides a tool
           for tracing ROS2 systems with low latency overhead. The
           authors measure monitoring overhead by collecting the time
           between publishing a message and when it is handled by
