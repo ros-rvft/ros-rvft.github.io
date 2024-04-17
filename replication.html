@@ -160,6 +160,12 @@
             </p>
 
             <img style="width: auto;" class="center" src="./img/cycles.png">
+            <p class="center" style="text-align: center;"> Figure 1: Overview of the activities to synthesizing guidelines
+                according to design science </p>
+
+
+
+            <h1> First Cycle </h1>
 
             <p>
 
@@ -175,6 +181,80 @@
 
             </p>
 
+            <p>The surveys used withing this cycle are:</p>
+            <ul style="list-style-type: none;">
+                <li>1. Afzal, Afsoon, et al. "A study on challenges of testing robotic systems." 2020 IEEE 13th International Conference on Software Testing, Validation and Verification (ICST). IEEE, 2020. </li>
+
+                <li>2. Albonico, Michel, et al. "Software engineering research on the Robot Operating System: A systematic mapping study." Journal of Systems and Software 197 (2023): 111574.</li>
+
+                <li>3. Bertolino, Antonia, et al. "A survey of field-based testing techniques." ACM Computing Surveys (CSUR) 54.5 (2021): 1-39. </li>
+
+                <li>4. Falcone, Yliès, et al. "A taxonomy for classifying runtime verification tools." International Journal on Software Tools for Technology Transfer 23.2 (2021): 255-284. </li>
+
+                <li>5. Garousi, Vahid, Michael Felderer, and Feyza Nur Kılıçaslan. "A survey on software testability." Information and Software Technology 108 (2019): 35-64. </li>
+
+                <li>6. Luckcuck, Matt, et al. "Formal specification and verification of autonomous robotic systems: A survey." ACM Computing Surveys (CSUR) 52.5 (2019): 1-41. </li>
+
+                <li> 7. Malavolta, Ivano, et al. "Mining guidelines for architecting robotics software." Journal of Systems and Software 178 (2021): 110969. </li>
+            </ul>
+
+            <img style="width: auto;" class="center" src="./img/systematic_mapping_process.png">
+            <p class="center" style="text-align: center;"> Figure 2: Systematic mapping process </p>
+
+
+
+            <p> The literature review was built around a study protocol, to provide a systematic method for reviewing papers within the topic.
+                We use automatic search-engines for collecting an initial set of papers, i.e., IEEEXplore, ACM Digital
+                Library, and Scopus.</p>
+
+
+                <table>
+                    <tr>
+                        <td>ID</td>
+                        <td>Description</td>
+                        <td>Reasoning</td>
+                    </tr>
+                    <tr>
+                        <td>IC_1</td>
+                        <td>ROS-based application. Including ROS1 and ROS2.</td>
+                        <td>Robotic Operating System (ROS) is a must</td>
+                    </tr>
+                    <tr>
+                        <td>IC_2</td>
+                        <td>Explicit description (or reference to peer-reviwed venue)</td>
+                        <td>Papers that do not explicitely describe the employed technique may lead to ambiguous interpretation.</td>
+                    </tr>
+                    <tr>
+                        <td>EC_1</td>
+                        <td>Tutorial, artifact, short paper (less than 5pgs), keynote,</td>
+                        <td>Such papers do not provide enough contextual information</td>
+                    </tr>
+                    <tr>
+                        <td>EC_2</td>
+                        <td>Verification, validation, or testing techniques that</td>
+                        <td>Papers targeting V&amp;V of non-ROS applications should be excluded.</td>
+                    </tr>
+                    <tr>
+                        <td>EC_3</td>
+                        <td>Verification, validation, or testing techniques that</td>
+                        <td>Papers targeting V&amp;V of hardware should be excluded</td>
+                    </tr>
+                </table>
+                <p class="center" style="text-align: center;"> Table 1: Inclusion Criterion (IC) and Exclusion Criterion (EC) </p>
+
+                <p>Screening papers consists of passing the complete set of potentially useful papers through a filter. The
+                    outcome is the set of relevant papers. Thus, in this section we define the filter, by means of inclusion
+                    and exclusion criteria, and then the procedure to be followed when discarding papers.
+                    The individual work of screening consists of checking if the paper is in compliance with the criteria
+                    presented in Table 1. This is done by parsing the paper in search for ROS or ”robotic operating system”,
+                    which is usually spotted in the abstract and introduction. Then, looking for verification, validation, and
+                    testing techniques names (e.g., runtime monitoring, testing, theorem proving, model checking). Once a
+                    technique is found, the surrounding text is read to confirm if there is an explicit description of how it is
+                    used–or reference. Finally, scanning whether the used technique uses the ROS ecosystem.</p>
+
+
+            <h1> Second Cycle </h1>
+
             <p>
                 For the Second Cycle, we then used the search strings defined in
                 the previous cycle to perform a systematic literature review.
@@ -186,6 +266,64 @@
                 through a questionnaire and subsequent discussion.
 
             </p>
+
+            <table>
+                <tr>
+                    <td><b>Element</b></td>
+                    <td><b>Description</b></td>
+                </tr>
+                <tr>
+                    <td><b>ID</b></td>
+                    <td>Identifier used to facilitate tracing guidelines between groups</td>
+                </tr>
+                <tr>
+                    <td><b>Title</b></td>
+                    <td>Title summarizes an action that practitioners should follow to mitigate or avoid a recurring problem.</td>
+                </tr>
+                <tr>
+                    <td><b>Context (WHEN)</b></td>
+                    <td>The Context is a paragraph placing the
+            guideline among a known set of conditions. This paragraph
+            should delimit the scope in which the guideline is applicable.
+            It should also introduce the conceptual terminology used
+            in the guideline, which is defined by the conditions under which the guideline is valid.</td>
+                </tr>
+                <tr>
+                    <td><b>Reason (WHY)</b></td>
+                    <td> Reason introduces the recurring problem
+            faced by practitioners. It intends to leverage the relevance of the guideline to practitioners</td>
+                </tr>
+                <tr>
+                    <td><b>Suggestion (WHAT)</b></td>
+                    <td>Suggestion is a sentence or two
+            introducing WHAT should the practitioners do to mitigate the recurring problem</td>
+                </tr>
+                <tr>
+                    <td><b>Process (HOW)</b></td>
+                    <td>Process is a paragraph that carefully
+            guides the practitioners through HOW they can practice
+            the guideline. In this paragraph, there should be references to tools that may help, concrete examples, or references to precise explanations of researchers or practitioners who have done something similar.</td>
+                </tr>
+                <tr>
+                    <td><b>Exemplars</b></td>
+                    <td>Exemplars are concrete descriptions of papers/artifacts that follow the guidelines. An exemplar can be generic such as an artifact or rather specific such as a model problem in testing ROS-based systems in the field.</td>
+                </tr>
+                <tr>
+                    <td><b>Strengths</b></td>
+                    <td>Strengths is a list of benefits that the practitioners should consider when applying the guideline</td>
+                </tr>
+                <tr>
+                    <td><b>Weaknesses</b></td>
+                    <td>Weaknesses is a list of technological/theoretical barriers that may slow the actual implementation of the guideline, either by undesired side-effects or scenarios in which applying the guideline might not lead to the desired effect.</td>
+                </tr>
+            </table>
+            <p class="center" style="text-align: center;"> Table 2: Template for Guideline Specification </p>
+
+            <p>Here is the validation<a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/pre-external_questionnaire.pdf"> questionaire </a>  for this segment, and it's <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/pre-external_answers.xlsx"> answers</a>, in an anonymized form.  </p>
+
+            <h1> Third Cycle </h1>
 
             <p>
                 The third cycle was devoted to consolidating
@@ -254,6 +392,19 @@
                 The mailer script used to distribute the questionnaire is also published on <a title="Replication package"
                 href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining/tree/master/dataset/repos_mining_scripts/online_questionnaire_scripts"> this repository</a>.
             </p>
+
+            <p><b> The clustered guidelines can be found <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/clustered_guidelines_3rd cycle.pdf"> here</a>.</b></p>
+
+            <p><b> The final online surveys, and their answers, can be found here: </b> </p>
+            <p></p>Developers <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.pdf"> questionaire </a>  and <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.xlsx"> answers</a>  </p>
+
+            <p></p>QA Team <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.pdf"> questionaire </a>  and <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.xlsx"> answers</a>  </p>
+
 
 
             <div class="post-navigation">
