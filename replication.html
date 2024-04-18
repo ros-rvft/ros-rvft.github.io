@@ -326,96 +326,63 @@
 
             <p>
                 The third cycle was devoted to consolidating the guidelines with concrete examples,
-                clustering and organizing the guidelines, and performing a validation with researchers and practitioners. 
+                clustering, organizing the guidelines, and validating with researchers and practitioners. 
             </p>
+            
             <h3>Consolidating the Guidelines</h3>
-            <h3>Guidlines with Exemplars</h3>
-            <h3>Online Survey</h3>
-               <p>industry and academia. The comments from the expert
-                evaluation in cycle 2 suggested a need to complement the
-                guidelines with concrete examples, e.g. “Can you provide code
-                examples?” or “Without examples I wonder how such a specification pattern could look like.”. 
-                Thus, guided by such comments,
-                we decided to perform a specific search and to mine online
-                repositories.
-            </p>
-
-
-
-
-            <h3> Datamining Scripts </h3>
-            <img  style="width: 20%;"  src="./img/datamining.png">
 
             <p>
-                The scripts adapted from Ivano Malavolta et. al from the project 'Mining guidelines for architecting robotics software'. 
-
-                They can be found in the project's <a title="Replication package"
-                href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining">github repository</a> along with instructions 
-                for generating the filtered repository database used in the project.
-
+            To consolidate the guidelines we further looked for specific papers on the topic of the guideline
+            and performed a data mining. For the specific search, we used Google Scholar with terms extracted from
+            the guideline sketches. The repositories mining followed the procedure described in Fig. 3.
             </p>
-
-            <p>A paper detailing our whole process used in datamining the exemplars can be found <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/Datamining_Paper.pdf"> here</a>.</p>
-
+            
             <img class="center" style="width: 90%;"  src="./replication_package_extras/methodology.png">
-            <p class="center" style="text-align: center;"> Figure 3: Datamining Methodology </p>
-
-
-            <p>
-                We searched for repositories mentioned in the documents in complement
-                to repositories that touched upon the theme of each guideline
-                sketch. In the solution phase, we then developed the final
-                version of the guidelines, provided exemplars for each of
-                them, and clustered the guidelines as they are presented
-                in this paper. Finally, we validated the final set of guidelines with practitioners and researchers. We designed and
-                distributed an online questionnaire to experts from industry
-                and academia, through the ROS community forum (namely
-                ROS Discourse), LinkedIn, X (Twitter), and to experts we
-                met at robotics and software engineering conferences. Before
-                releasing the questionnaire to the wider community, we
-                performed a pre-study with an experienced roboticist and
-                active member of the ROS community and two members
-                with widely recognized contributions to robotic software
-                engineering from academia. The results from the third cycle
-                confirmed the relevance of the guidelines and helped us to
-                fine-tune them.
-            </p>
-
-
-
-        
-
-            <h3> Questionnaire </h3>
-            <img  style="width: 20%;" src="./img/questionaire.png">
+            <p class="center" style="text-align: center;"> <b>Figure 3:</b> Data mining activities </p>
 
             <p>
-                This is the the validation questionnaire used to gather insights from
-                experts from industry and academia.
-
-                The main objective of the questionnaire was to check 
-                whether the guidelines synthesized from literature and insights extracted from open-source 
-                ROS repositories are considered to be useful, clear,
-                and applicable by developers and QA teams testing and
-                verifying ROS code.
-
-                The mailer script used to distribute the questionnaire is also published on <a title="Replication package"
-                href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining/tree/master/dataset/repos_mining_scripts/online_questionnaire_scripts"> this repository</a>.
+            For more details, check the <a title="Replication package" 
+            href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining">github repository</a>
+            with scripts and the <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/Datamining_Paper.pdf"> protocol</a> with details explaining the steps in Fig. 3.
             </p>
 
-            <p><b> The clustered guidelines can be found <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/clustered_guidelines_3rd cycle.pdf"> here</a>.</b></p>
+            <p>This step resulted in the guidelines catalog. Each guideline follows a template and they
+            are all documented in a separate <a title="Replication package"
+            href="https://ros-rvft.github.io/replication_package_extras/clustered_guidelines_3rd cycle.pdf">guidelines.pdf file</a>.
+            
+            <h3>Online Survey</h3>
 
-            <p><b> The final online surveys, and their answers, can be found here: </b> </p>
-            <p></p>Developers <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.pdf"> questionaire </a>  and <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.csv"> answers</a>  </p>
+            <p>
+                Finally, we validated the final set of guidelines with practitioners and researchers. 
+                To this end, we designed and distributed an online questionnaire. 
+            </p>
 
-            <p></p>QA Team <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.pdf"> questionaire </a>  and <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.csv"> answers</a>  </p>
+            <p> 
+                The questionnaire was split in two targeting developers or quality assurance teams.
+                <ul>
+                    <li> Developers </li>
+                    <ul>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.pdf"> Developer's Questionnaire Form</a></li>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.csv"> Developer's Answers</a></li>
+                    </ul>
+                </ul>    
+                <ul>
+                    <li>Quality Assurance Teams</li>
+                    <ul>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.pdf">QA Team's Questionnaire Form</a></li>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.csv"> QA Team's Answers </a></li>
+                    </ul>
+                </ul>
 
-
+            <p>
+                The results from the third cycle confirmed the guidelines' relevance and helped us fine-tune them.
+                The analysis that followed up the questionnaires is available in the <a href="https://ros-rvft.github.io/evaluation">Validation</a> section.
+            </p>
 
             <div class="post-navigation">
 
@@ -430,7 +397,7 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="site-title-wrapper">
+            <div class="site-title-wrapper">.
                 <h2 class="site-title">
                     <a title="VERIFICATION OF ROS-BASED SYSTEMS" href="-patterns/">VERIFICATION OF ROS-BASED SYSTEMS</a>
                 </h2>
