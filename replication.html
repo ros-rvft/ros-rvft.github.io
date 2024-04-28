@@ -147,66 +147,81 @@
         <div id="post-index" class="container">
 
             <header class="post-header">
-                <h1 class="post-title" itemprop="name">Replication Package</h1>
+                <h2 class="post-title" itemprop="name">Replication Package</h2>
                 <p></p>
             </header>
 
 
 
+            <p><i>Would you like to replicate our study?</i> This page will take you through the steps to replicate our study. We use the methodology to guide you through the replication process. We understand that some steps are hard or even impossible to replicate, thus we provide artifacts (protocols, scripts, spreadsheets with results) generated during our study to help you follow along. Please, contact us in case you have any doubts.</p>
 
+            <p>Before you start, <a href="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/replication_package.zip">click here</a> to download the replication package as a .zip</p>
+            
+            <p>We followed design science to synthesize the guidelines. We guide you through each cycle of the design science process from Fig 1.</p>
 
-            <p>
-                The methodology for the paper is split into 3 consecutive cycles.
-            </p>
-
-            <img style="width: auto;" class="center" src="./img/cycles.png">
-            <p class="center" style="text-align: center;"> Figure 1: Overview of the activities to synthesizing guidelines
+            <img style="width: 75%;" class="center" src="./img/cycles.png">
+            <p class="center" style="text-align: center;"> <b>Figure 1:</b> Activities to synthesizing guidelines
                 according to design science </p>
 
-
-
-            <h1> First Cycle </h1>
+            <h2> First Cycle: Survey Elicitation and Terminology </h2>
 
             <p>
-
-                The first cycle is devoted to establishing
-                awareness of the state-of-the-art of field-based testing and
-                runtime verification in robotics through existing surveys.
-                We, then, reviewed the surveys to define the terminology
-                to delimit the scope of the study and the search strings that
-                we would use in the next iteration. We then validated the
-                terminology and the search strings internally, through peer
-                reviews and discussions with co-authors to consolidate the
-                terminology and scope. 
-
+                The first cycle is devoted to establishing awareness of the state-of-the-art and building
+                the terminology used in the study. 
+            </p>
+            
+            <p>
+                We elicit important surveys in runtime verification and field-based testing:
+                <ul style="list-style-type: none;">
+                <li>1. Afzal, Afsoon, et al. "A study on challenges of testing robotic systems." 2020 IEEE 13th International Conference on Software Testing, Validation and Verification (ICST). IEEE, 2020. </li>
+                <li>2. Albonico, Michel, et al. "Software engineering research on the Robot Operating System: A systematic mapping study." Journal of Systems and Software 197 (2023): 111574.</li>
+                <li>3. Bertolino, Antonia, et al. "A survey of field-based testing techniques." ACM Computing Surveys (CSUR) 54.5 (2021): 1-39. </li>
+                <li>4. Falcone, Yliès, et al. "A taxonomy for classifying runtime verification tools." International Journal on Software Tools for Technology Transfer 23.2 (2021): 255-284. </li>
+                <li>5. Garousi, Vahid, Michael Felderer, and Feyza Nur Kılıçaslan. "A survey on software testability." Information and Software Technology 108 (2019): 35-64. </li>
+                <li>6. Luckcuck, Matt, et al. "Formal specification and verification of autonomous robotic systems: A survey." ACM Computing Surveys (CSUR) 52.5 (2019): 1-41. </li>
+                <li> 7. Malavolta, Ivano, et al. "Mining guidelines for architecting robotics software." Journal of Systems and Software 178 (2021): 110969. </li>
+                </ul>
             </p>
 
-            <p>The surveys used withing this cycle are:</p>
-            <ul style="list-style-type: none;">
-                <li>1. Afzal, Afsoon, et al. "A study on challenges of testing robotic systems." 2020 IEEE 13th International Conference on Software Testing, Validation and Verification (ICST). IEEE, 2020. </li>
+            <p>
+                From the surveys, we extracted the following terminology. We present it in the format
+                of a search string since the terminology intended to be used in a systematic literature 
+                review (in Cycle 2):
+            </p>
 
-                <li>2. Albonico, Michel, et al. "Software engineering research on the Robot Operating System: A systematic mapping study." Journal of Systems and Software 197 (2023): 111574.</li>
+            <div class="citation-block">
+                <pre>
+Search String = ( ros OR ”robotic operating system” ) AND ( ”runtime verification” OR ”runtime assurance” OR ”online assurance” OR ”online verification” OR ”runtime monitoring” OR ”runtime testing” OR ”online testing” OR ”on-line testing” OR ”field-based testing” OR ”field testing” OR ”in-vivo testing” 
+                </pre>
+            </div>
+            
+            <p>   
+                The terminology was validated internally, through peer reviews and discussions with co-authors
+                to consolidate the scope of our study. 
+            </p>
 
-                <li>3. Bertolino, Antonia, et al. "A survey of field-based testing techniques." ACM Computing Surveys (CSUR) 54.5 (2021): 1-39. </li>
+            <h2> Second Cycle: Literature Review, Guideline Templates, External Validation </h2>
 
-                <li>4. Falcone, Yliès, et al. "A taxonomy for classifying runtime verification tools." International Journal on Software Tools for Technology Transfer 23.2 (2021): 255-284. </li>
+            <p>
+                The Second Cycle focused on performing a literature review, synthesizing the 
+                guideline templates, and performing an external validation of the template.
+            </p>
 
-                <li>5. Garousi, Vahid, Michael Felderer, and Feyza Nur Kılıçaslan. "A survey on software testability." Information and Software Technology 108 (2019): 35-64. </li>
+            <h3> Systematic Literature Review </h3>
 
-                <li>6. Luckcuck, Matt, et al. "Formal specification and verification of autonomous robotic systems: A survey." ACM Computing Surveys (CSUR) 52.5 (2019): 1-41. </li>
+                We used the search string to perform a systematic literature review 
+                to understand the studies discussing runtime verification and field-based testing
+                for ROS applications. The SLR followed the activities in Fig. 2.
 
-                <li> 7. Malavolta, Ivano, et al. "Mining guidelines for architecting robotics software." Journal of Systems and Software 178 (2021): 110969. </li>
-            </ul>
+                <img style="width: 75%;" class="center" src="./img/systematic_literature_review.png">
+                <p class="center" style="text-align: center;"> <b>Figure 2:</b> Activities to conducting the systematic literature review </p>
 
-            <img style="width: auto;" class="center" src="./img/systematic_literature_review.png">
-            <p class="center" style="text-align: center;"> Figure 2: Systematic literature review </p>
+                <p>We present precise descriptions for each activity in a <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/slr_protocol.pdf"> protocol</a> </p>
 
-
-
-            <p> The literature review was built around a study protocol, to provide a systematic method for reviewing papers within the topic.
-                We use automatic search-engines for collecting an initial set of papers, i.e., IEEEXplore, ACM Digital
-                Library, and Scopus.</p>
-
+                <p> In short, we searched for the string in IEEEXplore, ACM Digital Library, and Scopus.</p>
+                <p>Then, we used the inclusion and exclusion criteria from Tab. 1 to filter out relevant studies</p>
 
                 <table>
                     <tr>
@@ -221,7 +236,7 @@
                     </tr>
                     <tr>
                         <td>IC_2</td>
-                        <td>Explicit description (or reference to peer-reviwed venue)</td>
+                        <td>Explicit description (or reference to peer-reviewed venue)</td>
                         <td>Papers that do not explicitely describe the employed technique may lead to ambiguous interpretation.</td>
                     </tr>
                     <tr>
@@ -240,37 +255,15 @@
                         <td>Papers targeting V&amp;V of hardware should be excluded</td>
                     </tr>
                 </table>
-                <p class="center" style="text-align: center;"> Table 1: Inclusion Criterion (IC) and Exclusion Criterion (EC) </p>
+                <p class="center" style="text-align: center;"> <b>Table 1:</b> Inclusion Criterion (IC) and Exclusion Criterion (EC) </p>
+                <p> Finally, we selected the runtime verification and field-based testing
+                approaches according to a classification scheme. The classified approached
+                are detailed in a  <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/literature_review.xlsx"> spreadsheet</a></p>
 
-                <p>Screening papers consists of passing the complete set of potentially useful papers through a filter. The
-                    outcome is the set of relevant papers. Thus, in this section we define the filter, by means of inclusion
-                    and exclusion criteria, and then the procedure to be followed when discarding papers.
-                    The individual work of screening consists of checking if the paper is in compliance with the criteria
-                    presented in Table 1. This is done by parsing the paper in search for ROS or ”robotic operating system”,
-                    which is usually spotted in the abstract and introduction. Then, looking for verification, validation, and
-                    testing techniques names (e.g., runtime monitoring, testing, theorem proving, model checking). Once a
-                    technique is found, the surrounding text is read to confirm if there is an explicit description of how it is
-                    used–or reference. Finally, scanning whether the used technique uses the ROS ecosystem.</p>
-
-            <p>The entire systematic literature review protocol can be found <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/slr_protocol.pdf">here</a>, with all the details related to the processing of ROS papers for the study.</p>
-        
-
-
-            <h1> Second Cycle </h1>
-
-            <p>
-                For the Second Cycle, we then used the search strings defined in
-                the previous cycle to perform a systematic literature review.
-                Then, we defined a template for describing the guidelines
-                and a first draft of the guidelines. As a preliminary validation
-                step, we presented a subset of the guidelines’ sketches at
-                the Robotics Software Engineering workshop. We received
-                feedback on the guidelines from three experts in robotics
-                through a questionnaire and subsequent discussion.
-
-            </p>
-
+            <h3>Guidelines Template</h3>
+            Then, we understood what was necessary for a guideline and designed a template, see Tab. 2. 
+            We used the template to synthesize our initial set of guideline sketches.
             <table>
                 <tr>
                     <td><b>Element</b></td>
@@ -321,106 +314,74 @@
                     <td>Weaknesses is a list of technological/theoretical barriers that may slow the actual implementation of the guideline, either by undesired side-effects or scenarios in which applying the guideline might not lead to the desired effect.</td>
                 </tr>
             </table>
-            <p class="center" style="text-align: center;"> Table 2: Template for Guideline Specification </p>
+            <p class="center" style="text-align: center;"> <b>Table 2:</b> Template for Guideline Specification </p>
 
-            <p>The process of the literature review has been tracked in the <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/literature_review.xlsx"> following document</a>, including initial pilot screening, final screening and data extraction.</p>
+            <h3>External validation </h3>
+            Finally, we shared, through a <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/pre-external_questionnaire.pdf">questionnaire</a>, the sketches with members of the Robotics Software Engineering Workshop. Three experts sent us their <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/pre-external_answers.xlsx">feedback</a>.  
 
-
-            <p>Here is the validation<a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/pre-external_questionnaire.pdf"> questionaire </a>  for this segment, and it's <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/pre-external_answers.xlsx"> answers</a>, in an anonymized form.  </p>
-
-            <h1> Third Cycle </h1>
+            <h2> Third Cycle: Repos mining, Guidelines with Exemplars, Online Survey </h2>
 
             <p>
-                The third cycle was devoted to consolidating
-                the set of guidelines and validating them with experts from
-                industry and academia. The comments from the expert
-                evaluation in cycle 2 suggested a need to complement the
-                guidelines with concrete examples, e.g. “Can you provide code
-                examples?” or “Without examples I wonder how such a specification pattern could look like.”. 
-                Thus, guided by such comments,
-                we decided to perform a specific search and to mine online
-                repositories.
+                The third cycle was devoted to consolidating the guidelines with concrete examples,
+                clustering, organizing the guidelines, and validating with researchers and practitioners. 
             </p>
-
-
-
-
-            <h3> Datamining Scripts </h3>
-            <img  style="width: 20%;"  src="./img/datamining.png">
+            
+            <h3>Consolidating the Guidelines</h3>
 
             <p>
-                The scripts adapted from Ivano Malavolta et. al from the project 'Mining guidelines for architecting robotics software'. 
-
-                They can be found in the project's <a title="Replication package"
-                href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining">github repository</a> along with instructions 
-                for generating the filtered repository database used in the project.
-
+            To consolidate the guidelines we further looked for specific papers on the topic of the guideline
+            and performed a data mining. For the specific search, we used Google Scholar with terms extracted from
+            the guideline sketches. The repositories mining followed the procedure described in Fig. 3.
             </p>
-
-            <p>A paper detailing our whole process used in datamining the exemplars can be found <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/Datamining_Paper.pdf"> here</a>.</p>
-
-            <img class="center" style="width: 90%;"  src="./replication_package_extras/methodology.png">
-            <p class="center" style="text-align: center;"> Figure 3: Datamining Methodology </p>
-
+            
+            <img class="center" style="width: 75%;"  src="./replication_package_extras/methodology.png">
+            <p class="center" style="text-align: center;"> <b>Figure 3:</b> Data mining activities </p>
 
             <p>
-                We searched for repositories mentioned in the documents in complement
-                to repositories that touched upon the theme of each guideline
-                sketch. In the solution phase, we then developed the final
-                version of the guidelines, provided exemplars for each of
-                them, and clustered the guidelines as they are presented
-                in this paper. Finally, we validated the final set of guidelines with practitioners and researchers. We designed and
-                distributed an online questionnaire to experts from industry
-                and academia, through the ROS community forum (namely
-                ROS Discourse), LinkedIn, X (Twitter), and to experts we
-                met at robotics and software engineering conferences. Before
-                releasing the questionnaire to the wider community, we
-                performed a pre-study with an experienced roboticist and
-                active member of the ROS community and two members
-                with widely recognized contributions to robotic software
-                engineering from academia. The results from the third cycle
-                confirmed the relevance of the guidelines and helped us to
-                fine-tune them.
+            For more details, check the <a title="Replication package" 
+            href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining">github repository</a>
+            with scripts and the <a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/Datamining_Paper.pdf"> protocol</a> with details explaining the steps in Fig. 3.
             </p>
 
-
-
-        
-
-            <h3> Questionnaire </h3>
-            <img  style="width: 20%;" src="./img/questionaire.png">
+            <p>This step resulted in the guidelines catalog. Each guideline follows a template and they
+            are all documented in a separate <a title="Replication package"
+            href="https://ros-rvft.github.io/replication_package_extras/clustered_guidelines_3rd cycle.pdf">guidelines.pdf file</a>.
+            
+            <h3>Online Survey</h3>
 
             <p>
-                This is the the validation questionnaire used to gather insights from
-                experts from industry and academia.
-
-                The main objective of the questionnaire was to check 
-                whether the guidelines synthesized from literature and insights extracted from open-source 
-                ROS repositories are considered to be useful, clear,
-                and applicable by developers and QA teams testing and
-                verifying ROS code.
-
-                The mailer script used to distribute the questionnaire is also published on <a title="Replication package"
-                href="https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining/tree/master/dataset/repos_mining_scripts/online_questionnaire_scripts"> this repository</a>.
+                Finally, we validated the final set of guidelines with practitioners and researchers. 
+                To this end, we designed and distributed an online questionnaire. 
             </p>
 
-            <p><b> The clustered guidelines can be found <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/clustered_guidelines_3rd cycle.pdf"> here</a>.</b></p>
+            <p> 
+                The questionnaire was split in two targeting developers or quality assurance teams.
+                <ul>
+                    <li> Developers </li>
+                    <ul>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.pdf"> Developer's Questionnaire Form</a></li>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.csv"> Developer's Answers</a></li>
+                    </ul>
+                </ul>    
+                <ul>
+                    <li>Quality Assurance Teams</li>
+                    <ul>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.pdf">QA Team's Questionnaire Form</a></li>
+                        <li><a title="Replication package"
+                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.csv"> QA Team's Answers </a></li>
+                    </ul>
+                </ul>
 
-            <p><b> The final online surveys, and their answers, can be found here: </b> </p>
-            <p></p>Developers <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.pdf"> questionaire </a>  and <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/DevelopersSurvey.csv"> answers</a>  </p>
-
-            <p></p>QA Team <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.pdf"> questionaire </a>  and <a title="Replication package"
-                href="https://ros-rvft.github.io/replication_package_extras/QATeamSurvey.csv"> answers</a>  </p>
-
-
+            <p>
+                The results from the third cycle confirmed the guidelines' relevance and helped us fine-tune them.
+                The analysis that followed up the questionnaires is available in the <a href="https://ros-rvft.github.io/evaluation">Validation</a> section.
+            </p>
 
             <div class="post-navigation">
 
@@ -435,10 +396,10 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="site-title-wrapper">
-                <h1 class="site-title">
+            <div class="site-title-wrapper">.
+                <h2 class="site-title">
                     <a title="VERIFICATION OF ROS-BASED SYSTEMS" href="-patterns/">VERIFICATION OF ROS-BASED SYSTEMS</a>
-                </h1>
+                </h2>
 
             </div>
 
