@@ -229,7 +229,7 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Scenario specification allows the QA team to test robots on credible and complex activities since it defines the course of a robotic mission. Gathering confidence in autonomous systems through so-called verified scenarios is a cornerstone of simulation testing.  However, designing test cases in the form of scenarios implicitly requires accounting for possible variations and conditions. This makes scenario-based testing a challenging task and often deemed infeasible. In addition, unexpected scenarios frequently underlie failures in robotic systems. Therefore, it is important to consider real-world data during scenario generation since it permits to focus on a range of scenarios that can be unexpected during the design phase.</p>
+          <p>Scenario specification allows the QA team to test robots on credible and complex activities since it defines the course of a robotic mission [1]. Gathering confidence in autonomous systems through so-called verified scenarios is a cornerstone of simulation testing [2]. However, designing test cases in the form of scenarios implicitly requires accounting for possible variations and conditions. This makes scenario-based testing a challenging task and often deemed infeasible. In addition, unexpected scenarios frequently underlie failures in robotic systems [1]. Therefore, it is important to consider real-world data during scenario generation since it permits to focus on a range of scenarios that can be unexpected during the design phase [3]. </p>
         </blockquote>
 
 
@@ -237,17 +237,17 @@
 
 
         <h2 id="relationships"> Reason (WHY)</h2>
-        <p> Scenario-based test case generation is a powerful approach to verify ROS-based applications because it allows for the systematic exploration of different situations and conditions that the robotic system may encounter in the real world. By defining scenarios, the testing team can ensure that the application behaves correctly under a wide range of circumstances, including both expected and unexpected events. </p>
+        <p> Scenario-based test case generation is a powerful approach to verify ROS-based applications because it allows for the systematic exploration of different situations and conditions that the robotic system may encounter in the real world. By defining scenarios, the testing team can ensure that the application behaves correctly under a wide range of circumstances, including both expected and unexpected events.  </p>
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>The QA team might integrate scenario specification languages and tools to enable a systematic exploration of real-world situations and conditions for ROS-based applications. For example, Geoscenario (git: rodrigoqueiroz/geoscenarioserver) uses behavior trees to program dynamic interactions between the system-under-test and other vehicles in the scenario. In addition, SCENIC (git: BerkeleyLearnVerify/Scenic) is a probability-based programming language that enables the specification of rare events in environment models that are used to generate test cases for vehicles running on the CARLA simulator (git: carla-simulator/carla) that may be further integrated to testing ROS-based systems.</p>
+        <p>The QA team might integrate scenario specification languages and tools to enable a systematic exploration of real-world situations and conditions for ROS-based applications. For example, Geoscenario (git: rodrigoqueiroz/geoscenarioserver) uses behavior trees to program dynamic interactions between the system-under-test and other vehicles in the scenario. In addition, SCENIC (git: BerkeleyLearn- Verify/Scenic) is a probability-based programming language that enables the specification of rare events in environment models that are used to generate test cases for vehicles running on the CARLA simulator (git: carla-simulator/carla) that may be further integrated to testing ROS-based systems.</p>
 
 
         <h2>Process (HOW)</h2>
 
         <p>
-          To implement scenario-based specifications for testing ROS-based applications we recommend describing technology enablers and motivating use cases. Technology enablers, in this case, list a set of languages that assist the design of scenarios for testing ROS-based applications. The technology-enablers vary with respect to human-vehicle behavioral description, to probability-based programming of scenarios, and integrating graphical simulation with Simulink-based control design and ROS. From the point-of-view of use cases, scenario specification may turn useful to perception monitoring, validating multi-layered control strategies, and pedestrian simulation scenarios. </p>
+          To implement scenario-based specifications for testing ROS-based applications we recommend describing technology enablers and motivating use cases. Technology enablers, in this case, list a set of languages that assist the design of scenarios for testing ROS-based applications. The technology-enablers vary with respect to human-vehicle behavioral description [4], to probability-based programming of scenarios [5], and integrating graphical simulation with Simulink-based control design and ROS [6]. From the point-of-view of use cases, scenario specification 1 may turn useful to perception monitoring [7], validating multi-layered control strategies [8], and pedestrian simulation scenarios [9].  </p>
 
 
 
@@ -258,19 +258,32 @@
         <h4 style="text-indent: 25px;">GeoScenario</h4>
 
         <p>
-          GeoScenario proposes using a behavior tree-based DSL to describe autonomous human-vehicle models for scenario-based testing. The toolset advocates for scenario specifications that reflect dynamic interactions between humans and the subject system in real traffic conditions. Therefore, behavior trees are used as a fundamental control-flow strategy. GeoScenario interfaces with a simulation layer where LIDAR and camera capture data from the vehicle controller implemented at ROS-level.
+          GeoScenario [4] proposes using a behavior tree-based DSL to describe autonomous human-vehicle models for scenario-based testing. The toolset advocates for scenario specifications that reflect dynamic interactions between humans and the subject system in real traffic conditions. Therefore, behavior trees are used as a fundamental control-flow strategy. GeoScenario interfaces with a simulation layer where LIDAR and camera capture data from the vehicle controller implemented at ROS-level. Listing 1 showcases an implementation of one of the agent’s behavior in a pre-crash scenario from NHTSA. The vehicle changes the lane to the left, then continues driving using another drive tree implementation. The operator ’?’ stands for fallback operation, ’-’ is sequential, ’condition’ evaluates to a Boolean value, and ’maneuver’ executes a task. 
         </p>
+        <p> Listing 1: <blockquote>Lane change human-vehicle implementation in Geoscenario. 1 behaviortree 
+          LaneChange: 2 ? 3 -> 4 condition c_trigger(sim_time (tmin=4)) 5 -> 6 condition c_reach(gap(target_lane=Left,range=5,repeat=False)) 7 maneuver cutin(MCutInConfig(target_lane=Left,delta_s=(5,-3,0))) 8 subtree drive_tree(m_vel_keep=MVelKeepConfig(vel=MP(14.0,10,6))) </blockquote></p>
+
+
 
         <h4 style="text-indent: 25px;">SCENIC</h4>
 
         <p>
-          SCENIC a probability-based programming language, argues for the specification of rare events in environment models for autonomous vehicles and robots for testing purposes. The language relies on the specification of scenarios, i.e., configurations of physical objects and agents, and how they change over time. In combination with CARLA, SCENIC can be used to specify scenarios for ROS-based simulation test scenarios. For example, departing from a Metric Temporal Logic (MTL) safety specification, SCENIC generates (with VERIFAI) 2000 scenarios for a vehicle performing a right turn at an intersection, yielding to the crossing traffic.
+          SCENIC [5], a probability-based programming language, argues for the specification of rare events in environment models for autonomous vehicles and robots for testing purposes. The language relies on the specification of scenarios, i.e., configurations of physical objects and agents, and how they change over time. In combination with CARLA [10], SCENIC can be used to specify scenarios for ROS-based simulation test scenarios. For example, departing from a Metric Temporal Logic (MTL) safety specification, SCENIC generates (with VERIFAI [11]) 2000 scenarios for a vehicle performing a right turn at an intersection, yielding to the crossing traffic. Supporting Software-In-the-Loop (SIL) simulation testing, Xu C., et al. [6], introduces a platform that unites PreScan [12], MATLAB/Simulink [13], and ROS. The three-layered platform enables virtual sensors and scenarios designed in PreScan, control design in MATLAB/Simulink, and environment perception, planning and control execution at ROS-level. The proposed stack features graphical scenario specification including sensor simulation and may be used for mobile robotics with a focus on self-driving simulation testing. 
         </p>
+
+        <p>Use Cases: The work in [7] integrates PerceMon , a tool for monitoring spatio-temporal specifications for perception systems, with the CARLA simulator 2 (integrated with ROS), and, in cohort with the OpenSCENARIO specification format defines a set of high-level scenarios for their experimentation setting. Their experimental scenario features sunlight exposure, cyclists crossing or poorly occluded pedestrians, and rendering corner case test fixtures. Similarly, [8] utilizes a ROS-CoppeliaSim [14] integration to validate their three-layered control decoupling strategy for lateral and longitudinal motion. The tool permits defining motion constraints to the mechanical joint points of the high-precision vehicle model, which forms a front-wheel steering and rear-wheel drive smart car model powered by Ackerman steering. [9] uses pedsim ros , a pedestrian simulator tool that relies on XML scene specification, for example Listing 2. </p>
+
+        <p>Listing 2: Corridor scenario specification with pedsim ros.</p>
+        <blockquote>
+        <p>
+          1 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 2 &lt;scenario&gt; 3 &lt;!--Obstacles--&gt; 4 &lt;obstacle x1=&quot;-0.5&quot; y1=&quot;-0.5&quot; x2=&quot;29.5&quot; y2=&quot;-0.5&quot;/&gt; 5 &lt;obstacle x1=&quot;-0.5&quot; y1=&quot;-0.5&quot; x2=&quot;-0.5&quot; y2=&quot;14.5&quot;/&gt; 6 &lt;obstacle x1=&quot;-0.5&quot; y1=&quot;14.5&quot; x2=&quot;29.5&quot; y2=&quot;14.5&quot;/&gt; 7 &lt;obstacle x1=&quot;29.5&quot; y1=&quot;-0.5&quot; x2=&quot;29.5&quot; y2=&quot;14.5&quot;/&gt; 8 9 &lt;waypoint id=&quot;east&quot; x=&quot;5&quot; y=&quot;5&quot; r=&quot;2&quot; b=&quot;1&quot;/&gt; 10 &lt;!-- Sink --&gt; 11 &lt;waypoint id=&quot;west&quot; x=&quot;25&quot; y=&quot;5&quot; r=&quot;2&quot; b=&quot;2&quot;/&gt; 12 13 &lt;waypoint id=&quot;robot_goal&quot; x=&quot;22&quot; y=&quot;27&quot; r=&quot;2&quot;/&gt; 14 &lt;waypoint id=&quot;robot_start&quot; x=&quot;4&quot; y=&quot;4&quot; r=&quot;2&quot;/&gt; 15 16 &lt;agent x=&quot;4&quot; y=&quot;4&quot; n=&quot;1&quot; dx=&quot;0&quot; dy=&quot;0&quot; type=&quot;2&quot;&gt; 17 &lt;addwaypoint id=&quot;robot_start&quot;/&gt; 18 &lt;addwaypoint id=&quot;robot_goal&quot;/&gt; 19 &lt;/agent&gt; 20 21 &lt;!--AgentClusters--&gt; 22 &lt;source x=&quot;2&quot; y=&quot;5&quot; n=&quot;8&quot; dx=&quot;3&quot; dy=&quot;5&quot; type=&quot;0&quot;&gt; 23 &lt;addwaypoint id=&quot;east&quot;/&gt; 24 &lt;addwaypoint id=&quot;west&quot;/&gt; 25 &lt;/source&gt; 26 &lt;/scenario&gt;
+        </p>
+        </blockquote>
 
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
         <p> 
-          Scenario-based testing provides a systematic and comprehensive approach to verify ROS-based applications under various conditions. The integration of scenarios with ROS-compatible simulation environments allows for realistic and repeatable testing.
+          Scenario-based testing provides a systematic and comprehensive approach to verify ROS-based applications under various conditions. The integration of scenarios with ROS-compatible simulation environments allows for realistic and repeatable testing. 
         </p>
 
 
@@ -278,6 +291,27 @@
         <p>
           The exemplars provided are primarily focused on the automotive domain, which may limit the generalizability of the guideline to other robotic application domains. 
         </p>
+
+
+        <p class="" style="text-indent: 25px;"> References </p> 
+        <blockquote>
+
+
+        <p>[1] A. Afzal, C. Le Goues et al., “A study on challenges of testing robotic systems,” in 2020 IEEE 13th International Conference on Software Testing, Validation and Verification (ICST). IEEE, 2020, pp. 96–107. </p>
+          <p>[2] M. Luckcuck, M. Farrell et al., “Formal specification and verification of autonomous robotic systems: A survey,” ACM Computing Surveys (CSUR), vol. 52, no. 5, pp. 1–41, 2019.</p>
+            <p>[3] A. Bertolino, P. Braione et al., “A survey of field-based testing techniques,” ACM Computing Surveys (CSUR), vol. 54, no. 5, pp. 1–39, 2021. </p>
+              <p>[4] R. Queiroz, D. Sharma et al., “A driver-vehicle model for ads scenario-based testing,” arXiv preprint arXiv:2205.02911, 2022. </p>
+                <p>[5] D. J. Fremont, E. Kim et al., “Scenic: A language for scenario specification and data generation,” Machine Learning, pp. 1–45, 2022. </p>
+                  <p>[6] C. Xu, H. Huang et al., “Sil simulation test platform based on prescan and ros,” in 2022 International Conference on Cyber-Physical Social Intelligence (ICCSI). IEEE, 2022, pp. 240–244. </p>
+                    <p>[7] A. Balakrishnan, J. Deshmukh et al., “Percemon: Online monitoring for perception systems,” in International Conference on Runtime Verification. Springer, 2021, pp. 297–308. </p>
+                      <p>[8] X. Duan, Q. Wang et al., “Implementing trajectory tracking control algorithm for autonomous vehicles,” in 2021 IEEE International Conference on Unmanned Systems (ICUS). IEEE, 2021, pp. 947–953. </p>
+                        <p>[9] S. B. Liu, H. Roehm et al., “Provably safe motion of mobile robots in human environments,” in 2017 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEE, 2017, pp. 1351–1357. </p>
+                          <p>[10] A. Dosovitskiy, G. Ros et al., “Carla: An open urban driving simulator,” in Conference on robot learning. PMLR, 2017, pp. 1–16. </p>
+                            <p>[11] D. Tommaso, D. J. Fremont et al., “Verifai: A toolkit for the design and analysis of artificial intelligence-based systems,” in Proceedings of the 31st Conference on Computer Aided Verification, CAV 2019, 2019. </p>
+                              <p>[12] M. Tideman, “Scenario-based simulation environment for assistance systems,” ATZautotechnology, vol. 10, no. 1, pp. 28–32, 2010. 4 </p>
+                                <p>[13] S. Documentation, “Simulation and model-based design,” 2020. [Online]. Available: https://www.mathworks.com/products/simulink.html </p>
+                                  <p>[14] E. Rohmer, S. P. N. Singh et al., “V-rep: A versatile and scalable robot simulation framework,” in 2013 IEEE/RSJ International Conference on Intelligent Robots and Systems, 2013, pp. 1321–1326. 5</p>
+        </blockquote>
 
 
 
