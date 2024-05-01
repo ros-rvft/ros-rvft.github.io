@@ -231,7 +231,7 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>As distributed systems, such as ROS-based applications, rely on time scheduling for their operation, ensuring time monotonicity is crucial to guarantee the replicability and reproducibility of test cases. Non-determinism in the scheduling of events can lead to unexpected behavior, compromising the reliability of tests and hindering their reproduction. To address this issue, developers must ensure that the testing team is aware of the expected behavior given the occurrence of events, which requires establishing a clear execution order and priority. For instance, by synchronizing different types of data at package or subscription-level</p>
+          <p>As distributed systems, such as ROS-based applications, rely on time scheduling for their operation, ensuring time monotonicity is crucial to guarantee the replicability and reproducibility of test cases. Non-determinism in the scheduling of events can lead to unexpected behavior, compromising the reliability of tests and hindering their reproduction. To address this issue, developers must ensure that the testing team is aware of the expected behavior given the occurrence of events, which requires establishing a clear execution order and priority. For instance, by synchronizing different types of data at package or subscriptionlevel [1]. </p>
         </blockquote>
 
 
@@ -249,7 +249,7 @@
 
         <h2>Process (HOW)</h2>
 
-        <p>Events are said to be monotonic in time whenever for a set of events scheduled over a global clock, two consecutive events are successive. First the developers should understand how events are scheduled and the limitations of the application towards predictable ordering of events. Then, the developers should analyze and guarantee that all processes are executed in the expected order and will lead to predictable behavior. Developers may accomplish such analysis and guarantee provision with external tools, for instance, formal methods or by embedding timestamps (e.g., SteadyTime) and filtering messages to guarantee ordered events (e.g., MAVROS). </p>
+        <p>Events are said to be monotonic in time whenever for a set of events scheduled over a global clock, two consecutive events are successive. First the developers should understand how events are scheduled and the limitations of the application towards predictable ordering of events [2, 3]. Then, the developers should analyze and guarantee that all processes are executed in the expected order and will lead to predictable behavior. Developers may accomplish such analysis and guarantee provision with external tools, for instance, formal methods [4, 5] or by embedding timestamps (e.g., SteadyTime) and filtering messages to guarantee ordered events (e.g., MAVROS).  </p>
 
 
 
@@ -257,25 +257,27 @@
         <h4 style="text-indent: 25px;">Understand the scheduling of ROS events and states</h4>
 
         <p>
-          Chaaban K. explains that ROS 2 schedules callbacks using a non-preemptive algorithm that consumes messages depending on their type. Unlike typical real-time priority-based scheduling algorithms, ROS 2 does not execute callbacks in their activation instances. Thus non-time-based messages are scheduled in a round-robin fashion. To this extent, ROS 2 (which claims to address real-time) presents limitations when asked for well-defined execution orders and priority inversion. Choi et al. promotes a new scheduling algorithm that adds priority awareness for scheduling in ROS2. 
+          Chaaban K. [2] explains that ROS 2 schedules callbacks using a non-preemptive algorithm that consumes messages depending on their type. Unlike typical real-time prioritybased scheduling algorithms, ROS 2 does not execute callbacks in their activation instances. Thus non-time-based messages are scheduled in a round-robin fashion. To this extent, ROS 2 (which claims to address real-time) presents limitations when asked for well-defined execution orders and priority inversion. Choi et al. [3] promotes rtenlab/ros2-picas, a new scheduling algorithm that adds priority awareness for scheduling in ROS2. 
         </p>
 
 
         <h4 style="text-indent: 25px;">Analyse starvation-freedom to support monotonicity</h4>
 
         <p>
-          Bla T. et al. proposes a response-time analysis exploiting the round-robin properties. The authors present an analysis of starvation-freedom using three techniques: modeling processor demand as execution-time curves instead of scalar worst-case execution times (WCETs), accounting for the effects of quiet times and busy windows in the activation curve derivation, and exploiting the round-robin behavior of the ROS callback scheduler. Starvation freedom indicates monotonicity and ordering of events, it helps the developers to understand real-time behavior and set expectations.
+          Blaß T. et al. [4] proposes a response-time analysis exploiting the round-robin properties. The authors present an analysis of starvation-freedom using three techniques: modeling processor demand as execution-time curves instead of scalar worst-case execution times (WCETs), accounting for the effects of quiet times and busy windows in the activation curve derivation, and exploiting the round-robin behavior of the ROS callback scheduler. Starvation freedom indicates monotonicity and ordering of events, it helps the developers to understand real-time behavior and set expectations. 
         </p>
 
         <p>
-          Halder R. et. al use model checking (e.g., UPPAAL) to analyze real-time behavior in ROS-based applications. Under the claim that ROS non-deterministically empties the communication queues, the authors focus on modeling the message-passing behavior of ROS and verifying whether the queue overflows. Since overflow here means that some process is starving, thus the application is not monotonic in time. The authors offer the models in timed automata and TCTL (Temporal Computational Tree Logic) properties designed to ensure real-time for the safety controller of the Kobuki <a href="http://wiki.ros.org/kobuki">(Kobuki)</a> exemplar. 
+
+          Halder R. et. al [5] use model checking (e.g., UPPAAL [6]) to analyze real-time behavior in ROS-based applications. Under the claim that ROS non-deterministically empties the communication queues, the authors focus on modeling the message-passing behavior of ROS and verifying whether the queue overflows. Since overflow here means that some process is starving, thus the application is not monotonic in time. The authors offer the models in timed automata and TCTL (Temporal Computational Tree Logic) properties designed to ensure real-time for the safety controller of the Kobuki <a href="http://wiki.ros.org/kobuki">(Kobuki)</a> exemplar. 
         </p>
 
         <h4 style="text-indent: 25px;">Annotating messages with timestamps and synchronization to guarantee ordering</h4>
 
         <p>
-          The SteadyTime <a href="https://design.ros2.org/articles/clock_and_time.html">(SteadyTime)</a> class in ROS represents a monotonic clock, functioning independently of physical time and with steady tick times. MAVROS <a href="https://github.com/mavlink/mavros">(MAVROS)</a>, a library broadly used in ArduPilot
-for flight control, approaches time monotonicity guarantees by implementing a logical time synchronizer. The synchronizer ensures that the time passing in MAVROS is aligned with the time on ArduPilot's side, avoiding drifts that could lead the application to fail. More importantly, the time synchronizer uses a particular type of message that embeds timestamps for clock synchronization for updating ArduPilot about its time status <a href="https://github.com/mavlink/mavros/blob/ros2/mavros_msgs/msg/TimesyncStatus.msg">(status)</a>. Messages such as this can be used for synchronizing the occurrence of events in the system.
+
+
+          The SteadyTime <a href="https://design.ros2.org/articles/clock_and_time.html">(SteadyTime)</a> class in ROS represents a monotonic clock, functioning independently of physical time and with steady tick times. MAVROS <a href="https://github.com/mavlink/mavros">(MAVROS)</a>, a library broadly used in ArduPilot for flight control, approaches time monotonicity guarantees by implementing a logical time synchronizer. The synchronizer ensures that the time passing in MAVROS is aligned with the time on ArduPilot’s side, avoiding drifts that could lead the application to fail. More importantly, the time synchronizer uses a particular type of message that embeds timestamps for clock synchronization for updating ArduPilot about its time status <a href="https://github.com/mavlink/mavros/blob/ros2/mavros_msgs/msg/TimesyncStatus.msg">(TimesyncStatus)</a>. Messages such as this can be used for synchronizing the occurrence of events in the system. The Time Synchronizer message filter3, for example, reads timestamps from the header of messages and synchronize message by outputting channels to a single callback.
         </p>
 
 
@@ -286,6 +288,19 @@ for flight control, approaches time monotonicity guarantees by implementing a lo
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
         <p> Implementing time synchronization to ensure time monotonicity may require additional development effort, adding complexity to the system. Also, time synchronization may add performance overhead due to additional operations execution. Achieving real-time behavior depends on the (interaction with the) operating system.
         </p>
+
+
+        <p class="" style="text-indent: 25px;"> References </p> 
+<blockquote>
+
+  <p> [1] I. Malavolta, G. A. Lewis et al., “Mining guidelines for architecting robotics software,” Journal of Systems and Software, vol. 178, p. 110969, 2021. </p>
+    <p> [2] K. Chaaban, “A new algorithm for real-time scheduling and resource mapping for robot operating systems (ros),” Applied Sciences, vol. 13, no. 3, p. 1532, 2023. </p>
+      <p> [3] H. Choi, Y. Xiang et al., “Picas: New design of priority-driven chain-aware scheduling for ros2,” in 2021 IEEE 27th Real-Time and Embedded Technology and Applications Symposium (RTAS). IEEE, 2021, pp. 251–263. </p>
+        <p> [4] T. Blaß, D. Casini et al., “A ros 2 response-time analysis exploiting starvation freedom and execution-time variance,” in 2021 IEEE Real-Time Systems Symposium (RTSS). IEEE, 2021, pp. 41–53. </p>
+          <p> [5] R. Halder, J. Proen¸ca et al., “Formal verification of ros-based robotic applications using timed-automata,” in 2017 IEEE/ACM 5th International FME Workshop on Formal Methods in Software Engineering (FormaliSE). IEEE, 2017, pp. 44–50.</p> 
+            <p> [6] J. Bengtsson, K. Larsen et al., “Uppaal—a tool suite for automatic verification of real-time systems,” in Proceedings of the DIMACS/SYCON Workshop on Hybrid Systems III: Verification and Control: Verification and Control. Berlin, Heidelberg: Springer-Verlag, 1996, p. 232–243. </p>
+<blockquote>
+
 
 
 
