@@ -229,7 +229,7 @@
         <h2 id="intent">Context (WHEN)</h2>
 
         <blockquote>
-          <p>Stimulating ROS-based systems with unexpected scenarios is a cornerstone of gathering confidence in the system's robustness. Such unexpected scenarios either emerge from faults in the robot's control logic or unforeseen inputs unfolding from complex interactions with the environment. Therefore, preparing the ROS-based systems to systematically explore unintended behavior and complex environmental interactions becomes important in runtime verification and field-based testing for robust ROS-based applications. Fault injection and error emulation are the two fundamental approaches to systematically stimulating a computing system with unexpected scenarios for confidence-gathering purposes</p>
+          <p>Stimulating ROS-based systems with unexpected scenarios is a cornerstone of gathering confidence in the system’s robustness [1, 2]. Such unexpected scenarios either emerge from faults in the robot’s control logic or unforeseen inputs unfolding from complex interactions with the environment. Therefore, preparing the ROS-based systems to systematically explore unintended behavior and complex environmental interactions becomes important in runtime verification [3] and field-based testing [4] for robust ROS-based applications. Fault injection and error emulation are the two fundamental approaches to systematically stimulating a computing system with unexpected scenarios for confidence-gathering purposes [5].</p>
         </blockquote>
 
 
@@ -246,7 +246,8 @@
 
         <h2>Process (HOW)</h2>
 
-        <p>There are two identified means to enabling unexpected scenarios injection in ROS: providing an API fault injection and or an API for error emulation. The two methods differ concerning their assumptions. Fault injection is about changing the source code and requires knowledge about the system's internal structure (e.g., imfit). Error emulation is about changing the system during execution and should not require knowledge about the system itself (e.g., ros1_fuzzer, and ros2_fuzzer). Thus, from the developer's point of view, enabling faulty scenarios through an API requires deciding whether fault injection or error emulation is the most suitable based on the system's requirements.</p>
+        <p>There are two identified means to enabling unexpected scenarios injection in ROS: providing an API fault injection and or an API for error emulation. The two methods differ concerning their assumptions. Fault injection is about changing the source code and requires knowledge about the system’s internal structure (e.g., imfit [6]). Error emulation is about changing the system during execution and should not require knowledge about the system itself (e.g., ros1 fuzzer, and ros2 fuzzer). Thus, from the developer’s point of view, enabling faulty scenarios through an API requires deciding whether fault injection or error emulation is the most suitable based on the system’s requirements.  
+        </p>
 
 
 
@@ -254,20 +255,19 @@
         <h4 style="text-indent: 25px;">Fault injection</h4>
 
         <p>
-          Fault injection imitates the mistakes of programmers by changing the system under scrutiny's source code. Developers can embed an interface for enabling source code modifications to inject faults in the ROS-based system. For instance, IM-FIT <a href="https://github.com/cembglm/imfit"> (IM-FIT)</a> is a tool tailored to mutation-based software fault injection for ROS applications. Listing describes a subset of the IM-FIT ROS mutations library which offering three operations (delete, change, and external) on defined ROS primitives, such as publishers, subscribers, timers, global variables, namespaces, service clients. Moreover, IM-FIT offers an interface to decide when, where and how the mutators will inflict faults in the source code. Embedding IM-FIT in the project as an API to fault injection facilitates robustness testing for the QA team. 
+          Fault injection imitates the mistakes of programmers by changing the system under scrutiny’s source code [7]. Developers can embed an interface for enabling source code modifications to inject faults in the ROS-based system. For instance, IM-FIT<a href="https://github.com/cembglm/imfit"> (cembglm/imfit)</a> is a tool tailored to mutationbased software fault injection for ROS applications [6]. Listing 1 describes a subset of the IM-FIT ROS mutations library which offering three operations (delete, change, and external) on defined ROS primitives, such as publishers, subscribers, timers, global variables, namespaces, service clients. Moreover, IM-FIT offers an interface to decide when, where and how the mutators will inflict faults in the source code. Embedding IM-FIT in the project as an API to fault injection facilitates robustness testing for the QA team. 
         </p>
 
-  
+        <p>Listing 1: Snippet of the IM-FIT’s JSON library containing mutations for fault injection in ROS-based systems. </p>
+        <blockquote>
+        <p>1 {"all_faults": [ 2 {"fault": { 3 "Fault_Name": "Subscriber Delete", 4 "Target_to_Change": "rospy.Subscriber", 5 "Changed": " ", 6 "Explanation": "Subscriber deletes" 7 }}, 8 ... 9 {"fault": { 10 "Fault_Name": "Periodic Timer Change", 11 "Target_to_Change": "rospy.Timer", 12 "Changed": "rospy.Time", 13 "Explanation": "Periodic timer is wrong" 14 }}, 15 ... 16 {"fault": { 17 "Fault_Name": "External ROS Message", 18 "Target_to_Change": "[rospy.Message]{13}", 19 "Changed": "rospy.Message rospy.Message", 20 "Explanation": "External ROS Message"" 21 }} 22 ]} API for error emulation. 
+        </p></blockquote>
 
         <h4 style="text-indent: 25px;">API for error emulation</h4>
 
-        <p>
-          Error injection attempts to emulate the consequences of software faults by manipulating the runtime states/events of the system under scrutiny. Developers can embed an interface within the ROS-based system enabling a set of operations to disturb it during runtime. 
-        </p>
 
         <p>
-          For instance, ros1-fuzzer <a href="https://github.com/aliasrobotics/ros1_fuzzer"> (ros1-fuzzer)</a> provides an API for ROS messages fuzzing. The API requests the topic's name, the message type and datatype strategies to fuzzing the message's content. Although the datatype and constraints are hard coded in the API, defining the topic name and message type are done in the command line. For example,  ros_fuzzer -t /rosout -m rosgraph_msgs/Log, in which the user is fuzzing a |Log| message sent to the |/rosout| topic. 
-The authors evolved ros1-fuzzer to suit ROS 2 applications, resulting in ros2-fuzzer <a href="https://github.com/aliasrobotics/ros2_fuzzer"> (ros2-fuzzer)</a>. ros2-fuzzer extends the interface enabling service-level fuzzing, not only message fuzzing as was ros1-fuzzer. The addition affected the API asking for an extra argument (|service| or |message|) in the command.
+          Error injection attempts to emulate the consequences of software faults by manipulating the runtime states/events of the system under scrutiny [8]. Developers can embed an interface within the ROS-based system enabling a set of operations to disturb it during runtime. For instance, ros1- fuzzer <a href="https://github.com/aliasrobotics/ros1_fuzzer"> (aliasrobotics/ros1 fuzzer)</a> provides an API for ROS messages fuzzing. The API requests the topic’s name, the message type and datatype strategies to fuzzing the message’s content. Although the datatype and constraints are hard coded in the API, defining the topic name and message type are done in the command line. For example, $ ros_fuzzer -t / rosout -m rosgraph_msgs / Log, in which the user is fuzzing a Log message sent to the / rosout topic. The 2 authors evolved ros1-fuzzer to suit ROS 2 applications, resulting in ros2-fuzzer (<a href="https://github.com/aliasrobotics/ros2_fuzzer"> aliasrobotics/ros2 fuzzer</a>). ros2-fuzzer extends the interface enabling servicelevel fuzzing, not only message fuzzing as was ros1-fuzzer. The addition affected the API asking for an extra argument (service or message) in the command, e.g., $ ros2_fuzzer .py service example_interfaces / AddTwoInts add_two_ints. 
         </p>
 
 
@@ -280,6 +280,21 @@ The authors evolved ros1-fuzzer to suit ROS 2 applications, resulting in ros2-fu
         <p>
           Embedding an interface for enabling source code modifications or runtime disturbances can be time-consuming for developers whenever there are no third-party tools that provide the required operations. 
         </p>
+
+
+        <p class="" style="text-indent: 25px;"> References </p> 
+        <blockquote>
+
+          <p>[1] A. Afzal, C. Le Goues et al., “A study on challenges of testing robotic systems,” in 2020 IEEE 13th International Conference on Software Testing, Validation and Verification (ICST). IEEE, 2020, pp. 96–107. </p>
+          <p>[2] C. Hutchison, M. Zizyte et al., “Robustness testing of autonomy software,” in 2018 IEEE/ACM 40th International Conference on Software Engineering: Software Engineering in Practice Track (ICSE-SEIP). IEEE, 2018, pp. 276–285. </p>
+          <p>[3] Y. Falcone, S. Krsti´c et al., “A taxonomy for classifying runtime verification tools,” International Journal on Software Tools for Technology Transfer, vol. 23, no. 2, pp. 255–284, 2021. </p>
+          <p>[4] A. Bertolino, P. Braione et al., “A survey of field-based testing techniques,” ACM Computing Surveys (CSUR), vol. 54, no. 5, pp. 1–39, 2021. </p>
+          <p>[5] J. A. Duraes and H. S. Madeira, “Emulation of software faults: A field data study and a practical approach,” Ieee transactions on software engineering, vol. 32, no. 11, pp. 849–867, 2006. </p>
+          <p>[6] U. Yayan and C. Baglum, “Tailored mutation-based software fault injection tool (im-fit),” SoftwareX, p. 101463, 2023. </p>
+          <p>[7] R. Barbosa, J. Karlsson et al., “Fault injection,” Resilience Assessment and Evaluation of Computing Systems, pp. 263–281, 2012. 3</p> 
+          <p>[8] R. K. Lenka, S. Padhi et al., “Fault injection techniques-a brief review,” in 2018 International Conference on Advances in Computing, Communication Control and Networking (ICACCCN). IEEE, 2018, pp. 832–837. 4</p>
+        <blockquote>
+
 
 
 
