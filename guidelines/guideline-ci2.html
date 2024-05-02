@@ -242,7 +242,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>The development team should identify security or privacy vulnerabilities that may pose a risk to participants' integrity, confidentiality, and availability, that may be caused by the testing and runtime verification activities. The ros-security workgroup maintains SROS (git: ros2/sros2) for the analysis of such vulnerabilities and fixes. In addition, Alias Robotics maintains a database of vulnerabilities detected in ROS applications (git: aliasrobotics/RVD) as a means of awareness.</p>
+        <p>The development team should identify security or privacy vulnerabilities that may pose a risk to participants' integrity, confidentiality, and availability, that may be caused by the testing and runtime verification activities. The ros-security workgroup maintains SROS (git: <a href="https://github.com/ros2/sros2">ros2/sros2</a>) for the analysis of such vulnerabilities and fixes. In addition, Alias Robotics maintains a database of vulnerabilities detected in ROS applications (git: <a href="https://github.com/aliasrobotics/RVD">aliasrobotics/RVD</a>) as a means of awareness.</p>
 
 
         <h2>Process (HOW)</h2>
@@ -255,7 +255,7 @@
         <h4 style="text-indent: 25px;">FAST-DDS</h4>
 
         <p>
-          FAST-DDS <a href="https://fast-dds.docs.eprosima.com/en/latest/fastdds/security/security.html">(FAST-DDS)</a> is the current technology used in ROS 2. FAST-DDS enables features such as authentication of domain participants using a Certificate Authority (CA), access control to constrain specific operations, authenticated encryption following the Authentication Encryption Standard (AES), logging security events, and data tagging by enabling security labels to data. In addition, the ros-security working group, in tandem with Alias Robotics, works on SROS, a tool for securing ROS within the DevOps model (ros2/sros) [6]. 
+          <a href="https://fast-dds.docs.eprosima.com/en/latest/fastdds/security/security.html">FAST-DDS</a> is the current technology used in ROS 2. FAST-DDS enables features such as authentication of domain participants using a Certificate Authority (CA), access control to constrain specific operations, authenticated encryption following the Authentication Encryption Standard (AES), logging security events, and data tagging by enabling security labels to data. In addition, the ros-security working group, in tandem with Alias Robotics, works on SROS, a tool for securing ROS within the DevOps model (<a href="https://github.com/ros2/sros2">ros2/sros2</a>) [6]. 
         </p>
 
         <p>
@@ -265,7 +265,7 @@
 
         <h4 style="text-indent: 25px;">ROSRV</h4>
         <p>
-          ROSRV <a href="https://github.com/cansuerdogan/ROSRV/blob/master/docs/Usage.md">(ROSRV)</a>, a runtime verification framework for safety and security properties of ROS-based applications, provides a specification language for access control policies and enforces them at runtime [8]. Such access control policies may prevent the system from exploiting security breaches, such as enabling the control of safety-critical nodes to the application. More specifically, ROSRV provides access control specifications based on a user-provided specification of access policies using text file inputs. The policies are defined under five categories: groups, nodes, publishers, subscribers, and commands. Nodes represent node names and machine identities, publishers/subscribers define topic names and node identity associated, and commands define the access policy, e.g., full access, localhost (ROSRV).
+          <a href="https://github.com/cansuerdogan/ROSRV/blob/master/docs/Usage.md">ROSRV</a>, a runtime verification framework for safety and security properties of ROS-based applications, provides a specification language for access control policies and enforces them at runtime [8]. Such access control policies may prevent the system from exploiting security breaches, such as enabling the control of safety-critical nodes to the application. More specifically, ROSRV provides access control specifications based on a user-provided specification of access policies using text file inputs. The policies are defined under five categories: groups, nodes, publishers, subscribers, and commands. Nodes represent node names and machine identities, publishers/subscribers define topic names and node identity associated, and commands define the access policy, e.g., full access, localhost (ROSRV).
 
         </p>
 
@@ -275,7 +275,7 @@
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
-        <p> The guideline, intentionally, does not provide specific details on how to implement security and privacy constraints, leaving it up to the developers to decide which constraints are necessary and how to enforce them, since this is domain-dependent. It may be challenging to understand the various security vulnerabilities associated with ROS-based applications, making it difficult to specify appropriate security and privacy constraints. The guideline may require additional time and resources to implement security and privacy constraints, which may delay the development process. Systems with lower technology readiness level, such as academic prototypes, may not need a thorough security assessment, making this guideline irrelevant in those cases.
+        <p> The guideline, intentionally, does not provide specific details on how to implement security and privacy constraints, leaving it up to the developers to decide which constraints are necessary and how to enforce them, since this is domain-dependent. It may be challenging to understand the various security vulnerabilities associated with ROS-based applications, making it difficult to specify appropriate security and privacy constraints. The guideline may require additional time and resources to implement security and privacy constraints, which may delay the development process. Systems with lower technology readiness levels, such as academic prototypes, may not need a thorough security assessment, making this guideline irrelevant in those cases.
         </p>
 
 

@@ -262,21 +262,21 @@
 
         <p>
 
-          In the healthcare domain, the Body Sensor Network (lesunb/bsn) defines ROS nodes after concrete tasks that, composed, should fulfill the system’s goal. Tasks such as collecting SPO2 data, collecting heartbeat data, fuse data, or identifying emergency [6]. For instance, the collect SPO2 data task implements an independent node for collecting, filtering, and transferring data <a href="https://github.com/lesunb/bsn/blob/master/src/sa-bsn/target_system/components/component/src/g3t1_1/G3T1_1.cpp">(code)</a>. Given that each sub-task (i.e., collecting, filtering, and transferring) is strictly dependent on each other, yet, should not depend in the environment and together form an atomic behavior. Separating the sub-tasks in different nodes may render incomplete test cases that are hard to read and often meaningless. 
+          In the healthcare domain, the Body Sensor Network (git: <a href="https://github.com/lesunb/bsn">lesunb/bsn</a>) defines ROS nodes after concrete tasks that, composed, should fulfill the system’s goal. Tasks such as collecting SPO2 data, collecting heartbeat data, fuse data, or identifying emergency [6]. For instance, the <a href="https://github.com/lesunb/bsn/blob/master/src/sa-bsn/target_system/components/component/src/g3t1_1/G3T1_1.cpp">collect SPO2 data task</a> implements an independent node for collecting, filtering, and transferring data. Given that each sub-task (i.e., collecting, filtering, and transferring) is strictly dependent on each other, yet, should not depend in the environment and together form an atomic behavior. Separating the sub-tasks in different nodes may render incomplete test cases that are hard to read and often meaningless. 
 
         </p>
 
         <h4 style="text-indent: 25px;">Skill-based design</h4>
 
         <p>
-          Skill-based design typically defines skills as fundamental software building blocks operating a modification on the world stage. In such approaches, skills should be modular and reusable. Although ROS nodes provide a natural means for modular design, it is not common to map skills to nodes in current skill-based designs. For instance, SkiROS [7] implements 3 nodes: World Model Manager, Task Manager, Skill Manager <a href="https://github.com/RVMI/skiros2/blob/de00abafffe78c8da6ba35e8259d6ad075ec72b6/skiros2_skill/src/skiros2_skill/core/skill.py#L622">(skill manager)</a>. 
+          Skill-based design typically defines skills as fundamental software building blocks operating a modification on the world stage. In such approaches, skills should be modular and reusable. Although ROS nodes provide a natural means for modular design, it is not common to map skills to nodes in current skill-based designs. For instance, SkiROS [7] implements 3 nodes: World Model Manager, Task Manager, Skill Manager (i.e., <a href="https://github.com/RVMI/skiros2/blob/de00abafffe78c8da6ba35e8259d6ad075ec72b6/skiros2_skill/src/skiros2_skill/core/skill.py#L622">skill manager</a>). 
           
 
         </p>
 
         <p>
 
-          In addition, HRMS [8] does not map skills to nodes. It builds skills that under the Behavior Trees notation may reuse existing nodes <a href="https://github.com/Gastd/py_trees_ros_behaviors/tree/devel/py_trees_ros_behaviors">(behaviour)</a>. Lack of standard mapping from skills to actual computation impairs the verification of skill-based approaches at skill level. Towards verifiable ROS-based applications, a promising architecture, namely RobMoSys1 <a href="https://robmosys.eu/wiki/general_principles:separation_of_levels_and_separation_of_concern">(RobMoSys)</a>, suggests separation of concerns between different levels such as Mission, Task Plot, Skill, Service, Function, whereas Skill concerns to configuration, e.g., grasp object with constraint, and functions concern to computation, e.g. inverse kinematics solver. In this direction, Albore A. et al. [9] promote ROS2 code generation whilst mapping skillsets to ROS nodes with a single responsibility.
+          In addition, HRMS [8] does not map skills to nodes. It builds skills that under the Behavior Trees notation may reuse existing <a href="https://github.com/Gastd/py_trees_ros_behaviors/tree/devel/py_trees_ros_behaviors">nodes</a>. Lack of standard mapping from skills to actual computation impairs the verification of skill-based approaches at skill level. Towards verifiable ROS-based applications, a promising architecture, namely <a href="https://robmosys.eu/wiki/general_principles:separation_of_levels_and_separation_of_concern">RobMoSys</a>, suggests separation of concerns between different levels such as Mission, Task Plot, Skill, Service, Function, whereas Skill concerns to configuration, e.g., grasp object with constraint, and functions concern to computation, e.g. inverse kinematics solver. In this direction, Albore A. et al. [9] promote ROS2 code generation whilst mapping skillsets to ROS nodes with a single responsibility.
         </p>
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
@@ -297,7 +297,7 @@
   <p> [2] I. Malavolta, G. A. Lewis et al., “Mining guidelines for architecting robotics software,” Journal of Systems and Software, vol. 178, p. 110969, 2021. </p>
   <p> [3] A. Bertolino, P. Braione et al., “A survey of field-based testing techniques,” ACM Computing Surveys (CSUR), vol. 54, no. 5, pp. 1–39, 2021. </p>
   <p> [4] M. Efatmaneshnik and M. Ryan, “A study of the relationship between system testability and modularity,” INSIGHT, vol. 20, no. 1, pp. 20–24, 2017. </p>
-  <p> [5] C. Hartsell, N. Mahadevan et al., “Model-based design for cps with learningenabled components,” in Proceedings of the Workshop on Design Automation for CPS and IoT, 2019, pp. 1–9. </p>
+  <p> [5] C. Hartsell, N. Mahadevan et al., “Model-based design for cps with learning-enabled components,” in Proceedings of the Workshop on Design Automation for CPS and IoT, 2019, pp. 1–9. </p>
   <p> [6] E. B. Gil, R. Caldas et al., “Body sensor network: A self-adaptive system exemplar in the healthcare domain,” in 2021 International Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS). IEEE, 2021, pp. 224–230. </p>
   <p> [7] F. Rovida, M. Crosby et al., “Skiros—a skill-based robot control platform on top of ros,” Robot Operating System (ROS) The Complete Reference (Volume 2), pp. 121–160, 2017. </p>
   <p> [8] G. Rodrigues, R. Caldas et al., “An architecture for mission coordination of heterogeneous robots,” Journal of Systems and Software, vol. 191, p. 111363, 2022. </p>
