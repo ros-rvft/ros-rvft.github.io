@@ -241,7 +241,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>To enable runtime verification and field-based testing, developers should provide an API for injecting faults or emulating runtime errors. For instance, to emulate the consequences of software faults, ros1-fuzzer (git: aliasrobotics/ros1_fuzzer) provides an API for ROS messages fuzzing. As another example, to imitate the mistakes of programmers, IM-FIT (git: cembglm/imfit) is a tool for injecting faults in ROS applications.</p>
+        <p>To enable runtime verification and field-based testing, developers should provide an API for injecting faults or emulating runtime errors. For instance, to emulate the consequences of software faults, ros1-fuzzer (git: <a href="https://github.com/aliasrobotics/ros1_fuzzer">aliasrobotics/ros1_fuzzer</a>) provides an API for ROS messages fuzzing. As another example, to imitate the mistakes of programmers, IM-FIT (git: <a href="https://github.com/cembglm/imfit">cembglm/imfit</a>) is a tool for injecting faults in ROS applications.</p>
 
 
         <h2>Process (HOW)</h2>
@@ -255,25 +255,46 @@
         <h4 style="text-indent: 25px;">Fault injection</h4>
 
         <p>
-          Fault injection imitates the mistakes of programmers by changing the system under scrutiny’s source code [7]. Developers can embed an interface for enabling source code modifications to inject faults in the ROS-based system. For instance, IM-FIT<a href="https://github.com/cembglm/imfit"> (cembglm/imfit)</a> is a tool tailored to mutationbased software fault injection for ROS applications [6]. Listing 1 describes a subset of the IM-FIT ROS mutations library which offering three operations (delete, change, and external) on defined ROS primitives, such as publishers, subscribers, timers, global variables, namespaces, service clients. Moreover, IM-FIT offers an interface to decide when, where and how the mutators will inflict faults in the source code. Embedding IM-FIT in the project as an API to fault injection facilitates robustness testing for the QA team. 
+          Fault injection imitates the mistakes of programmers by changing the system under scrutiny’s source code [7]. Developers can embed an interface for enabling source code modifications to inject faults in the ROS-based system. For instance, <a href="https://github.com/cembglm/imfit">IM-FIT</a> is a tool tailored to mutation-based software fault injection for ROS applications [6]. Listing 1 describes a subset of the IM-FIT ROS mutations library which offering three operations (delete, change, and external) on defined ROS primitives, such as publishers, subscribers, timers, global variables, namespaces, service clients. Moreover, IM-FIT offers an interface to decide when, where and how the mutators will inflict faults in the source code. Embedding IM-FIT in the project as an API to fault injection facilitates robustness testing for the QA team. 
         </p>
 
         <p>Listing 1: Snippet of the IM-FIT’s JSON library containing mutations for fault injection in ROS-based systems. </p>
         <blockquote>
-        <p>1 {"all_faults": [ 2 {"fault": { 3 "Fault_Name": "Subscriber Delete", 4 "Target_to_Change": "rospy.Subscriber", 5 "Changed": " ", 6 "Explanation": "Subscriber deletes" 7 }}, 8 ... 9 {"fault": { 10 "Fault_Name": "Periodic Timer Change", 11 "Target_to_Change": "rospy.Timer", 12 "Changed": "rospy.Time", 13 "Explanation": "Periodic timer is wrong" 14 }}, 15 ... 16 {"fault": { 17 "Fault_Name": "External ROS Message", 18 "Target_to_Change": "[rospy.Message]{13}", 19 "Changed": "rospy.Message rospy.Message", 20 "Explanation": "External ROS Message"" 21 }} 22 ]} API for error emulation. 
+        <p>1 {"all_faults": [ 
+          2 {"fault": { 
+          3 "Fault_Name": "Subscriber Delete", 
+          4 "Target_to_Change": "rospy.Subscriber", 
+          5 "Changed": " ", 6 "Explanation": "Subscriber deletes" 
+          7 }}, 
+          8 ... 
+          9 {"fault": { 
+          10 "Fault_Name": "Periodic Timer Change", 
+          11 "Target_to_Change": "rospy.Timer", 
+          12 "Changed": "rospy.Time", 
+          13 "Explanation": "Periodic timer is wrong" 
+          14 }}, 
+          15 ... 
+          16 {"fault": { 
+          17 "Fault_Name": "External ROS Message", 
+          18 "Target_to_Change": "[rospy.Message]{13}", 
+          19 "Changed": "rospy.Message rospy.Message", 
+          20 "Explanation": "External ROS Message"" 
+          21 }} 
+          22 ]} 
+          API for error emulation. 
         </p></blockquote>
 
         <h4 style="text-indent: 25px;">API for error emulation</h4>
 
 
         <p>
-          Error injection attempts to emulate the consequences of software faults by manipulating the runtime states/events of the system under scrutiny [8]. Developers can embed an interface within the ROS-based system enabling a set of operations to disturb it during runtime. For instance, ros1- fuzzer <a href="https://github.com/aliasrobotics/ros1_fuzzer"> (aliasrobotics/ros1 fuzzer)</a> provides an API for ROS messages fuzzing. The API requests the topic’s name, the message type and datatype strategies to fuzzing the message’s content. Although the datatype and constraints are hard coded in the API, defining the topic name and message type are done in the command line. For example, $ ros_fuzzer -t / rosout -m rosgraph_msgs / Log, in which the user is fuzzing a Log message sent to the / rosout topic. The 2 authors evolved ros1-fuzzer to suit ROS 2 applications, resulting in ros2-fuzzer (<a href="https://github.com/aliasrobotics/ros2_fuzzer"> aliasrobotics/ros2 fuzzer</a>). ros2-fuzzer extends the interface enabling servicelevel fuzzing, not only message fuzzing as was ros1-fuzzer. The addition affected the API asking for an extra argument (service or message) in the command, e.g., $ ros2_fuzzer .py service example_interfaces / AddTwoInts add_two_ints. 
+          Error injection attempts to emulate the consequences of software faults by manipulating the runtime states/events of the system under scrutiny [8]. Developers can embed an interface within the ROS-based system enabling a set of operations to disturb it during runtime. For instance, <a href="https://github.com/aliasrobotics/ros1_fuzzer">ros1-fuzzer  </a> provides an API for ROS messages fuzzing. The API requests the topic’s name, the message type and datatype strategies to fuzzing the message’s content. Although the datatype and constraints are hard coded in the API, defining the topic name and message type are done in the command line. For example, $ ros_fuzzer -t / rosout -m rosgraph_msgs / Log, in which the user is fuzzing a Log message sent to the / rosout topic. The 2 authors evolved ros1-fuzzer to suit ROS 2 applications, resulting in <a href="https://github.com/aliasrobotics/ros2_fuzzer">ros2-fuzzer</a>. ros2-fuzzer extends the interface enabling servicelevel fuzzing, not only message fuzzing as was ros1-fuzzer. The addition affected the API asking for an extra argument (service or message) in the command, e.g., $ ros2_fuzzer .py service example_interfaces / AddTwoInts add_two_ints. 
         </p>
 
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
         <p> 
-          Providing an API for fault injection and error emulation with a representative set of possible operations enables balck-box robustness testing. It also may save time for the testing team, which can build scenarios on top of the provided interface.</p>
+          Providing an API for fault injection and error emulation with a representative set of possible operations enables black-box robustness testing. It also may save time for the testing team, which can build scenarios on top of the provided interface.</p>
 
 
         <p class="weaknesses" style="text-indent: 25px;">Weaknesses:</p>
