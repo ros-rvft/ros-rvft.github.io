@@ -114,8 +114,8 @@ table tr { border-bottom: 1px dotted #aeadad; }
 .site-title a:hover { background: #303030; }
 .site-logo { display: block; }
 .site-logo img { margin: 0; }
-.site-nav { list-style: none; margin: 28px 0 10px; padding: 0; }
-.site-nav-item { display: inline-block; font-size: 14px; font-weight: 700; margin: 0 10px; }
+.site-nav { list-style: none; margin: 28px 0 10px; padding: 0; position: fixed; }
+.site-nav-item { display: inline-block; font-size: 14px; font-weight: 700; margin: 0 10px; text-align: justify; }
 .site-nav-item a:hover { color: #424242; }
 #latest-post { display: none; }
 .post-container { margin: 0 40px; }
