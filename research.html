@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#">
 
-$("#htmlData").load("headerfile.html #Footer");
+<script src="./files/jquery-1.11.3.min.js.download"></script>
+<script src="./files/jquery.fitvids.js.download"></script>
+<script src="./files/highlight.min.js.download"></script>
+<script src="./files/scripts.js.download"></script>
+
+<!--Header-->
+<script>$(document).ready(function(){$("#htmlData").load("header.html #Header");});</script>
 
 <body>
     <div id="MathJax_Message" style="display: none;"></div>
@@ -110,12 +116,9 @@ Caldas, R., García, J. A. P., Schiopu, M., Pelliccione, P., Rodrigues, G., & Be
 
     </div>
 
-    $("#htmlData").load("footer.html #Footer");
-
-    <script src="./files/jquery-1.11.3.min.js.download"></script>
-    <script src="./files/jquery.fitvids.js.download"></script>
-    <script src="./files/highlight.min.js.download"></script>
-    <script src="./files/scripts.js.download"></script>
 </body>
+
+<!--Footer-->
+<script>$(document).ready(function(){$("#htmlData").load("footer.html #Footer");});</script>
 
 </html>
