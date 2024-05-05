@@ -208,7 +208,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>he QA team should be prepared to specify properties using unambiguous and precise languages like logic-based languages, as often required by verification tools. User-friendly instruments, like specification patterns http: <a href="http://ps-patterns.wikidot.com/">(patterns)</a>, might facilitate the error-prone specification process and make the specification accessible to people lacking expertise in logic. For example, HAROS (git: git-afsantos/haros) uses a logic-based language called HPL for property specification that is used to synthesize runtime monitors for testing and verification. 
+        <p>he QA team should be prepared to specify properties using unambiguous and precise languages like logic-based languages, as often required by verification tools. User-friendly instruments, like specification patterns (http: <a href="http://ps-patterns.wikidot.com/">ps-patterns</a>), might facilitate the error-prone specification process and make the specification accessible to people lacking expertise in logic. For example, HAROS (git: <a href="https://github.com/git-afsantos/haros">git-afsantos/haros</a>) uses a logic-based language called HPL for property specification that is used to synthesize runtime monitors for testing and verification. 
 
 
         <h2>Process (HOW)</h2>
@@ -226,9 +226,10 @@
 
         <p>Listing 1: LTL assertion to check if a robot reaches a desired position </p>
 
-        <blockquote>
-        <p>1 always((robot x1 = x1 &amp;&amp; robot y1 = y1 &amp;&amp; newGoal) 2 implies 3 (currentTime &lt; timeOut U robot x2 = x2 &amp;&amp; robot y2 = y2))</p></blockquote>
-
+        <pre style="font-family:monospace;color: rgb(84, 84, 84); background-color: rgb(254, 254, 254); font-weight: 400; ">
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">1</span> always((robot x1 <span style="color: rgb(84, 84, 84); font-weight: 400;">=</span> x1 <span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;&amp;</span> robot y1 <span style="color: rgb(84, 84, 84); font-weight: 400;">=</span> y1 <span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;&amp;</span> newGoal) 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">2</span> implies 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">3</span> (currentTime <span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;</span>lt; timeOut U robot x2 <span style="color: rgb(84, 84, 84); font-weight: 400;">=</span> x2 <span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;&amp;</span> robot y2 <span style="color: rgb(84, 84, 84); font-weight: 400;">=</span> y2))</pre>
         <h4 style="text-indent: 25px;">Signal Temporal Logic (STL)</h4>
 
         <p>
@@ -272,7 +273,7 @@
         <p>[2] A. F. F. Santos, “Safety verification for ros software,” Ph.D. dissertation, Universidade do Minho, 2021.  </p>
         <p>[3] M. Autili, L. Grunske et al., “Aligning qualitative, real-time, and probabilistic property specification patterns using a structured english grammar,” IEEE Transactions on Software Engineering, vol. 41, no. 7, pp. 620–638, 2015.  </p>
         <p>[4] A. Santos, A. Cunha et al., “The high-assurance ros framework,” in 2021 IEEE/ACM 3rd International Workshop on Robotics Software Engineering (RoSE). IEEE, 2021, pp. 37–40. </p>
-        [5] C. Lesire, S. Roussel et al., “Synthesis of real-time observers from pasttime linear temporal logic and timed specification,” in 2019 <p>International Conference on Robotics and Automation (ICRA), 2019, pp. 597–603. 3 </p>
+        <p>[5] C. Lesire, S. Roussel et al., “Synthesis of real-time observers from pasttime linear temporal logic and timed specification,” in 2019 <p>International Conference on Robotics and Automation (ICRA), 2019, pp. 597–603. 3 </p>
         <p>[6] C. Hu, W. Dong et al., “Runtime verification on hierarchical properties of ros-based robot swarms,” IEEE Transactions on Reliability, vol. 69, no. 2, pp. 674–689, 2019. </p>
         <p>[7] D. Niˇckovi´c and T. Yamaguchi, “Rtamt: Online robustness monitors from stl,” in International Symposium on Automated Technology for Verification and Analysis. Springer, 2020, pp. 564–571. </p>
         <p>[8] S. Aldegheri, N. Bombieri et al., “A containerized ros-compliant verification environment for robotic systems,” in 2021 Design, Automation & Test in Europe Conference & Exhibition (DATE). IEEE, 2021, pp. 222–225. </p>

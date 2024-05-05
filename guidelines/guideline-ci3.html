@@ -250,8 +250,8 @@
           Stadler et al., [5] uses the Esper Constraint Engine to check for violations of the safety constraints. Such constraints are specified using the EPL notation. Event Processing Language (EPL) is a SQL-standard language with extensions, offering SELECT, FROM, WHERE, GROUP BY, HAVING and ORDER BY clauses. For instance, they specify that an event such as JointEffortEvent (AEvent) will not exceed a maximum of 5.0 in an ESL constraint specification (i.e. <a href="https://github.com/MStadler-Organization/ROMoSu/blob/main/services/constraint_engines/src/main/resources/constraints/c1_mx_joint_effort.cst">max joint effort constraint</a>).
         </p>
 
-        <p>Listing 1: Safety constraint in EPL notation. 
-          select * from AEvent(MaxValue > 5.0) </p>
+        <p>Listing 1: Safety constraint in EPL notation.</p>
+        <pre style="font-family:monospace;color: rgb(84, 84, 84); background-color: rgb(254, 254, 254); font-weight: 400; "><span style="color: rgb(121, 40, 161); font-weight: 400;">select</span> <span style="color: rgb(84, 84, 84); font-weight: 400;">*</span> <span style="color: rgb(121, 40, 161); font-weight: 400;">from</span> AEvent(MaxValue <span style="color: rgb(84, 84, 84); font-weight: 400;">&gt;</span> <span style="color: rgb(170, 93, 0); font-weight: 400;">5.0</span>)</pre>
 
 
         <p>

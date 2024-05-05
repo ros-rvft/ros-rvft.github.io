@@ -210,7 +210,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>The QA team can use tools that generate noise or inject faults to gain confidence that a robotic system will behave safely when faced with unexpected situations. For instance, RoboFuzz (git: sslab-gatech/RoboFuzz) enables the generation of faults (in ROS 2 applications) through message mutation with three intents: violation of physical laws, violation of user-specified properties, and cyber-physical discrepancies. Moreover, RosPenTo (git: jr-robotics/ROSPenTo) enables security assessment by (un-) registering publishers or subscribers, isolating nodes or services, and injecting false data in the messages in ROS 1 applications. 
+        <p>The QA team can use tools that generate noise or inject faults to gain confidence that a robotic system will behave safely when faced with unexpected situations. For instance, RoboFuzz (git: <a href="https://github.com/sslab-gatech/RoboFuzz">sslab-gatech/RoboFuzz</a>) enables the generation of faults (in ROS 2 applications) through message mutation with three intents: violation of physical laws, violation of user-specified properties, and cyber-physical discrepancies. Moreover, RosPenTo (git: <a href="https://github.com/jr-robotics/ROSPenTo">jr-robotics/ROSPenTo</a>) enables security assessment by (un-) registering publishers or subscribers, isolating nodes or services, and injecting false data in the messages in ROS 1 applications. 
         </p>
 
 
@@ -228,7 +228,7 @@
         <h4 style="text-indent: 25px;">Noise Injection</h4>
 
         <p>
-          With the goal of effectively stressing a data-driven ROS system, Seulbae Kim et al. [3] implemented RoboFuzz <a href="https://github.com/sslab-gatech/RoboFuzz">(RoboFuzz)</a>, which is based on a data type-aware mutation technique aimed at finding correctness bugs in the system. RoboFuzz takes a target system and a test strategy as input and outputs the report of found bugs after performing a fuzzing technique based on message mutation. In addition, RosPenTo [6] (jr-robotics/ROSPenTo) a href="https://github.com/jr-robotics/ROSPenTo">(RosPenTo)</a> provides the operations of unregistering and registering publishers/subscribers, isolating nodes and services, and injecting false data in messages. As an example, the authors show how to use the tool to isolate the safety monitor node and to inject fault data in a robotic operation in such a way that the robot may harm humans [6]. 
+          With the goal of effectively stressing a data-driven ROS system, Seulbae Kim et al. [3] implemented RoboFuzz <a href="https://github.com/sslab-gatech/RoboFuzz">(RoboFuzz)</a>, which is based on a data type-aware mutation technique aimed at finding correctness bugs in the system. RoboFuzz takes a target system and a test strategy as input and outputs the report of found bugs after performing a fuzzing technique based on message mutation. In addition, RosPenTo [6]  <a href="https://github.com/jr-robotics/ROSPenTo">(jr-robotics/ROSPenTo)</a> provides the operations of unregistering and registering publishers/subscribers, isolating nodes and services, and injecting false data in messages. As an example, the authors show how to use the tool to isolate the safety monitor node and to inject fault data in a robotic operation in such a way that the robot may harm humans [6]. 
         </p>
 
         <h4 style="text-indent: 25px;">Fault Injection</h4>

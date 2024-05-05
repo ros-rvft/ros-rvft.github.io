@@ -240,10 +240,41 @@
 
         <p>Listing 1: Creating proxy-based MITM nodes in ROSRV. </p>
         
-        <blockquote>
-        <p>
-        1 void ServerManager::createInterceptors(){ 2 3 for (std::map<std::string,std::string>::iterator it=rv::monitor:: topicsAndTypes.begin(); it!=rv::monitor::topicsAndTypes.end(); ++it) { 4 string topic = it->first; 5 string datatype = it->second; 6 Monitor *monitor_p = NULL; 7 string monitorname = topic+MONITOR_POSTFIX; 8 9 XmlRpc::XmlRpcValue params, result, payload; 10 params[0] = monitorname; 11 params[1] = topic; 12 params[2] = datatype; 13 string m_uri = ""; 14 params[3] = m_uri; 15 16 //create a xmlrpcmanager-client for each monitor 17 monitor_p = new Monitor(params,rv_ros_host, monitorname); 18 monitorMap[topic] = monitor_p; 19 m_uri = monitor_p->getMonitorXmlRpcUri(); 20 params[3] = m_uri; 21 22 bool f = master::execute("registerSubscriber",params,result,payload,true); 23 24 //start a new thread with the params 25 boost::thread(boost::bind(&Monitor::monitorThreadFunc, monitor_p)); 26 27 result[0]=1; 28 result[1]="Subscribed to ["+topic+"]"; 29 XmlRpc::XmlRpcValue pubs_monitor; 30 pubs_monitor[0] = m_uri; 31 result[2] = pubs_monitor; 32 33 ROS_INFO("Monitor %s successfully registered a subscriber to topic %s", monitorname.c_str(), topic.c_str()); 2 34 } </p>
-        </blockquote>
+          <pre style="font-family:monospace;color: rgb(84, 84, 84); background-color: rgb(254, 254, 254); font-weight: 400; ">
+            <span style="color: rgb(170, 93, 0); font-weight: 400;">1</span> <span style="color: rgb(84, 84, 84); font-weight: 400;"><span style="color: rgb(170, 93, 0); font-weight: 400;">void</span> <span style="color: rgb(0, 127, 170); font-weight: 400;">ServerManager::createInterceptors</span><span style="color: rgb(170, 93, 0); font-weight: 400;">()</span></span>{ 
+            <span style="color: rgb(170, 93, 0); font-weight: 400;">2</span> 
+            <span style="color: rgb(170, 93, 0); font-weight: 400;">3</span> <span style="color: rgb(121, 40, 161); font-weight: 400;">for</span> (std::map&lt;std::string,std::string&gt;::iterator it=rv::monitor:: topicsAndTypes.<span style="color: rgb(170, 93, 0); font-weight: 400;">begin</span>(); it!=rv::monitor::topicsAndTypes.<span style="color: rgb(170, 93, 0); font-weight: 400;">end</span>(); ++it) { 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">4</span> string topic = it-&gt;first; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">5</span> string datatype = it-&gt;second; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">6</span> Monitor *monitor_p = <span style="color: rgb(170, 93, 0); font-weight: 400;">NULL</span>; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">7</span> string monitorname = topic+MONITOR_POSTFIX; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">8</span> 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">9</span> XmlRpc::XmlRpcValue params, result, payload; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">10</span> params[<span style="color: rgb(170, 93, 0); font-weight: 400;">0</span>] = monitorname; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">11</span> params[<span style="color: rgb(170, 93, 0); font-weight: 400;">1</span>] = topic; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">12</span> params[<span style="color: rgb(170, 93, 0); font-weight: 400;">2</span>] = datatype; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">13</span> string m_uri = <span style="color: rgb(0, 128, 0); font-weight: 400;">""</span>; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">14</span> params[<span style="color: rgb(170, 93, 0); font-weight: 400;">3</span>] = m_uri; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">15</span> 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">16</span> <span style="color: rgb(105, 105, 105); font-weight: 400;">//create a xmlrpcmanager-client for each monitor </span>
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">17</span> monitor_p = <span style="color: rgb(121, 40, 161); font-weight: 400;">new</span> <span style="color: rgb(170, 93, 0); font-weight: 400;">Monitor</span>(params,rv_ros_host, monitorname); 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">18</span> monitorMap[topic] = monitor_p; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">19</span> m_uri = monitor_p-&gt;<span style="color: rgb(170, 93, 0); font-weight: 400;">getMonitorXmlRpcUri</span>(); 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">20</span> params[<span style="color: rgb(170, 93, 0); font-weight: 400;">3</span>] = m_uri; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">21</span> 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">22</span> <span style="color: rgb(170, 93, 0); font-weight: 400;">bool</span> f = master::<span style="color: rgb(170, 93, 0); font-weight: 400;">execute</span>(<span style="color: rgb(0, 128, 0); font-weight: 400;">"registerSubscriber"</span>,params,result,payload,<span style="color: rgb(170, 93, 0); font-weight: 400;">true</span>); 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">23</span> 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">24</span> <span style="color: rgb(105, 105, 105); font-weight: 400;">//start a new thread with the params </span>
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">25</span> boost::<span style="color: rgb(170, 93, 0); font-weight: 400;">thread</span>(boost::<span style="color: rgb(170, 93, 0); font-weight: 400;">bind</span>(&amp;Monitor::monitorThreadFunc, monitor_p)); 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">26</span> 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">27</span> result[<span style="color: rgb(170, 93, 0); font-weight: 400;">0</span>]=<span style="color: rgb(170, 93, 0); font-weight: 400;">1</span>; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">28</span> result[<span style="color: rgb(170, 93, 0); font-weight: 400;">1</span>]=<span style="color: rgb(0, 128, 0); font-weight: 400;">"Subscribed to ["</span>+topic+<span style="color: rgb(0, 128, 0); font-weight: 400;">"]"</span>; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">29</span> XmlRpc::XmlRpcValue pubs_monitor; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">30</span> pubs_monitor[<span style="color: rgb(170, 93, 0); font-weight: 400;">0</span>] = m_uri; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">31</span> result[<span style="color: rgb(170, 93, 0); font-weight: 400;">2</span>] = pubs_monitor; 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">32</span> 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">33</span> <span style="color: rgb(170, 93, 0); font-weight: 400;">ROS_INFO</span>(<span style="color: rgb(0, 128, 0); font-weight: 400;">"Monitor %s successfully registered a subscriber to topic %s"</span>, monitorname.<span style="color: rgb(170, 93, 0); font-weight: 400;">c_str</span>(), topic.<span style="color: rgb(170, 93, 0); font-weight: 400;">c_str</span>()); <span style="color: rgb(170, 93, 0); font-weight: 400;">2</span> 
+              <span style="color: rgb(170, 93, 0); font-weight: 400;">34</span> }</pre>
 
         <h4 style="text-indent: 25px;">Topic remapping</h4>
 
@@ -252,10 +283,16 @@
         </p>
 
         <p>Listing 2: Topic remapping-based MITM in ROSMonitoring.  </p>
-        <blockquote>
-        <p>
-        1 def instrument_launch_files(nodes): 2 ... 3 for (name, package, topics) in launch_files[path]: 4 if node.get(’name’) == name and node.get(’pkg’) == package: 5 for topic in topics: 6 remap = ET.SubElement(node, ’remap’) 7 remap.set(’from’, topic) 8 remap.set(’to’, topic + ’_mon’) 9 break </p>
-        </blockquote>
+        <pre style="font-family:monospace;color: rgb(84, 84, 84); background-color: rgb(254, 254, 254); font-weight: 400; ">
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">1</span> def instrument_launch_files(nodes): 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">2</span> ...
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">3</span> <span style="color: rgb(121, 40, 161); font-weight: 400;">for</span> (name, package, topics) <span style="color: rgb(121, 40, 161); font-weight: 400;">in</span> launch_files[path]: 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">4</span> if node.get(’name’) <span style="color: rgb(84, 84, 84); font-weight: 400;">=</span><span style="color: rgb(84, 84, 84); font-weight: 400;">=</span> name <span style="color: rgb(121, 40, 161); font-weight: 400;">and</span> node.get(’pkg’) <span style="color: rgb(84, 84, 84); font-weight: 400;">=</span><span style="color: rgb(84, 84, 84); font-weight: 400;">=</span> package: 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">5</span> <span style="color: rgb(121, 40, 161); font-weight: 400;">for</span> topic <span style="color: rgb(121, 40, 161); font-weight: 400;">in</span> topics: 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">6</span> remap <span style="color: rgb(84, 84, 84); font-weight: 400;">=</span> ET.SubElement(node, ’remap’) 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">7</span> remap.set(’<span style="color: rgb(121, 40, 161); font-weight: 400;">from</span>’, topic) 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">8</span> remap.set(’<span style="color: rgb(121, 40, 161); font-weight: 400;">to</span>’, topic <span style="color: rgb(84, 84, 84); font-weight: 400;">+</span> ’_mon’) 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">9</span> break</pre>
 
 
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>

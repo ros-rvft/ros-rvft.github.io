@@ -228,30 +228,28 @@
         </p>
 
         <p>Listing 1: Snippet of the IM-FIT’s JSON library containing mutations for fault injection in ROS-based systems. </p>
-        <blockquote>
-        <p>1 {"all_faults": [ 
-          2 {"fault": { 
-          3 "Fault_Name": "Subscriber Delete", 
-          4 "Target_to_Change": "rospy.Subscriber", 
-          5 "Changed": " ", 6 "Explanation": "Subscriber deletes" 
-          7 }}, 
-          8 ... 
-          9 {"fault": { 
-          10 "Fault_Name": "Periodic Timer Change", 
-          11 "Target_to_Change": "rospy.Timer", 
-          12 "Changed": "rospy.Time", 
-          13 "Explanation": "Periodic timer is wrong" 
-          14 }}, 
-          15 ... 
-          16 {"fault": { 
-          17 "Fault_Name": "External ROS Message", 
-          18 "Target_to_Change": "[rospy.Message]{13}", 
-          19 "Changed": "rospy.Message rospy.Message", 
-          20 "Explanation": "External ROS Message"" 
+        <pre style="font-family:monospace;color: rgb(84, 84, 84); background-color: rgb(254, 254, 254); font-weight: 400; ">
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">1</span> {"all_faults": [ 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">2</span> {"fault": { 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">3</span> "Fault_Name": "Subscriber Delete", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">4</span> "Target_to_Change": "rospy.Subscriber", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">5</span> "Changed": " ", <span style="color: rgb(170, 93, 0); font-weight: 400;">6</span> "Explanation": "Subscriber deletes" 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">7</span> }}, 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">8</span> ... 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">9</span> {"fault": { 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">10</span> "Fault_Name": "Periodic Timer Change", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">11</span> "Target_to_Change": "rospy.Timer", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">12</span> "Changed": "rospy.Time", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">13</span> "Explanation": "Periodic timer is wrong" 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">14</span> }}, 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">15</span> ... 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">16</span> {"fault": { 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">17</span> "Fault_Name": "External ROS Message", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">18</span> "Target_to_Change": "[rospy.Message]{13}", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">19</span> "Changed": "rospy.Message rospy.Message", 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">20</span> "Explanation": "External ROS Message"" 
           21 }} 
-          22 ]} 
-          API for error emulation. 
-        </p></blockquote>
+          22 ]} </pre>
 
         <h4 style="text-indent: 25px;">API for error emulation</h4>
 

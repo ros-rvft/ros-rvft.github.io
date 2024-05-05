@@ -208,7 +208,7 @@
 
         <h2 id="occurences">Suggestion (WHAT)</h2>
 
-        <p>In complement to logic-based instruments, the QA team may opt to use verification tools that allow code-like specifications of properties to simplify the definition of the desired behavior. For example, ROSMonitoring (git: autonomy-and-verification-uol/ROSMonitoring) allows for code-like specifications of properties in a domain specific language (DSL) targeted to the properties such as writing assertions over the robot's position using if-else constructs. </p>
+        <p>In complement to logic-based instruments, the QA team may opt to use verification tools that allow code-like specifications of properties to simplify the definition of the desired behavior. For example, ROSMonitoring (git: <a href="https://github.com/autonomy-and-verification-uol/ROSMonitoring">autonomy-and-verification-uol/ROSMonitoring</a>) allows for code-like specifications of properties in a domain specific language (DSL) targeted to the properties such as writing assertions over the robot's position using if-else constructs. </p>
 
 
         <h2>Process (HOW)</h2>
@@ -228,9 +228,21 @@
         <p> Listing 1: Example of position and velocity property specification in ROSRV 
         </p>
 
-        <blockquote>
-          <p>1 event moveOrStop(double lx, double ly, double lz) 2 /landshark_control/base_velocity 3 geometry_msgs/TwistStamped 4 &rsquo;{twist:{linear:{x:lx,y:ly,z:lz}}}&rsquo; 5 { 6 if( posx &gt; 9 ) { 7 if(vectory * lx &lt; 0) { 8 ROS_WARN(&quot;Position not allowed&quot;); 9 return; 10 } 11 } 12 } </p>
-        </blockquote>
+
+        <pre style="font-family:monospace;color: rgb(84, 84, 84); background-color: rgb(254, 254, 254); font-weight: 400; ">
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">1</span> event moveOrStop(<span style="color: rgb(121, 40, 161); font-weight: 400;">double</span> lx, <span style="color: rgb(121, 40, 161); font-weight: 400;">double</span> ly, <span style="color: rgb(121, 40, 161); font-weight: 400;">double</span> lz) 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">2</span> <span style="color: rgb(84, 84, 84); font-weight: 400;">/</span>landshark_control<span style="color: rgb(84, 84, 84); font-weight: 400;">/</span>base_velocity 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">3</span> geometry_msgs<span style="color: rgb(84, 84, 84); font-weight: 400;">/</span>TwistStamped 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">4</span> <span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;</span>rsquo;{twist:{linear:{x:lx,y:ly,z:lz}}}<span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;</span>rsquo; 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">5</span> { 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">6</span> if( posx <span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;</span>gt; <span style="color: rgb(170, 93, 0); font-weight: 400;">9</span> ) { 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">7</span> if(vectory <span style="color: rgb(84, 84, 84); font-weight: 400;">*</span> lx <span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;</span>lt; <span style="color: rgb(170, 93, 0); font-weight: 400;">0</span>) { 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">8</span> ROS_WARN(<span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;</span>quot;Position <span style="color: rgb(121, 40, 161); font-weight: 400;">not</span> allowed<span style="color: rgb(84, 84, 84); font-weight: 400;">&amp;</span>quot;); 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">9</span> <span style="color: rgb(121, 40, 161); font-weight: 400;">return</span>; 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">10</span> } 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">11</span> } 
+          <span style="color: rgb(170, 93, 0); font-weight: 400;">12</span> }</pre>
+
 
         <h4 style="text-indent: 25px;">ROSRV and RuBaSS</h4>
 
