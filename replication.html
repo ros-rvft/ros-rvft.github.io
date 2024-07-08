@@ -147,9 +147,28 @@
 
             <div class="citation-block">
                 <pre>
-Search String = ( ros OR ”robotic operating system” ) AND ( ”runtime verification” OR ”runtime assurance” OR ”online assurance” OR ”online verification” OR ”runtime monitoring” OR ”runtime testing” OR ”online testing” OR ”on-line testing” OR ”field-based testing” OR ”field testing” OR ”in-vivo testing” 
+IEEE Xplore Search String = ("ros" OR "robotic operating system" OR "robot operating system") AND ("runtime verification" OR "run−time verification" OR "runtime assurance" OR "run−time assurance" OR "online verification" OR "on−line verification" OR "runtime monitoring" OR "run−time monitoring" OR "runtime testing" OR "run−time testing" OR "online testing" OR "on−line testing" OR "field−based testing" OR "field testing" OR "in−vivo testing")
                 </pre>
             </div>
+
+            <div class="citation-block">
+                <pre>
+Scopus Search String =TITLE−ABS−KEY ( ( ros OR "robotic operating system" OR "robot operating system" ) AND ( "runtime verification" OR "run−time
+verification" OR "runtime assurance" OR "run−time assurance" OR "online verification" OR "on−line verification" OR "
+runtime monitoring" OR "run−time monitoring" OR "runtime testing" OR "run−time testing" OR "online testing" OR "on−line
+testing" OR "field−based testing" OR "field testing" OR "in−vivo testing"))
+                </pre>
+            </div>
+
+            <div class="citation-block">
+                <pre>
+ACM DL Search String = Fulltext:(("ros" OR "robotic operating system" OR "robot operating system") AND ("runtime verification" OR "run−time verification
+" OR "runtime assurance" OR "run−time assurance" OR "online verification" OR "on−line verification" OR "runtime
+monitoring" OR "run−time monitoring" OR "runtime testing" OR "run−time testing" OR "online testing" OR "on−line testing"
+OR "field−based testing" OR "field testing" OR "in−vivo testing"))
+                </pre>
+            </div>
+            
             
             <p>   
                 The terminology was validated internally, through peer reviews and discussions with co-authors
@@ -191,29 +210,33 @@ Search String = ( ros OR ”robotic operating system” ) AND ( ”runtime verif
                     </tr>
                     <tr>
                         <td>IC_2</td>
-                        <td>Explicit description (or reference to peer-reviewed venue)</td>
-                        <td>Papers that do not explicitely describe the employed technique may lead to ambiguous interpretation.</td>
+                        <td>Explicit description (or reference to peer-reviwed venue) of the verification, validation, or testing technique.</td>
+                        <td>Papers that do not explicitly describe the employed technique may lead to ambiguous interpretation</td>
                     </tr>
                     <tr>
                         <td>EC_1</td>
-                        <td>Tutorial, artifact, short paper (less than 5pgs), keynote,</td>
-                        <td>Such papers do not provide enough contextual information</td>
+                        <td>Tutorial, artifact, short paper (less than 5pgs), keynote, secondary studies, roadmaps, duplicated study</td>
+                        <td>Such papers do not provide enough contextual information.</td>
                     </tr>
                     <tr>
                         <td>EC_2</td>
-                        <td>Verification, validation, or testing techniques that</td>
+                        <td>Verification, validation, or testing techniques that do not make use of the ROS Ecosystem</td>
                         <td>Papers targeting V&amp;V of non-ROS applications should be excluded.</td>
                     </tr>
                     <tr>
                         <td>EC_3</td>
-                        <td>Verification, validation, or testing techniques that</td>
+                        <td>Verification, validation, or testing techniques that do not address solely hardware properties</td>
                         <td>Papers targeting V&amp;V of hardware should be excluded</td>
+                    </tr>
+                    <tr>
+                        <td>EC_4</td>
+                        <td>Papers that are not in Computer Science or Engineering fields</td>
+                        <td>Papers from other fields should be excluded since they do not discuss means to engineering robotics systems.</td>
                     </tr>
                 </table>
                 <p class="center" style="text-align: center;"> <b>Table 1:</b> Inclusion Criterion (IC) and Exclusion Criterion (EC) </p>
                 <p> Finally, we selected the runtime verification and field-based testing
-                approaches according to a classification scheme. The classified approached
-                are detailed in a  <a title="Replication package"
+                approaches according to a classification scheme. <a title="Replication package"
                 href="https://ros-rvft.github.io/replication_package_extras/literature_review.xlsx"> spreadsheet</a></p>
 
             <h3>Guidelines Template</h3>
