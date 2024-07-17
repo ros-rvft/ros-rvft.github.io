@@ -2,7 +2,7 @@
 [![DOI](https://zenodo.org/badge/746253987.svg)](https://zenodo.org/doi/10.5281/zenodo.11117167)
 
 
-This repository complements the paper *"Runtime Verification and Field Testing for ROS-Based Robotic Systems"* and is an online repository of the guideline catalog for ROS-based Robotics projects.
+This repository complements the paper *"Runtime Verification and Field-based Testing for ROS-Based Robotic Systems"* and is an online repository of the guideline catalog for ROS-based Robotics projects.
 
 Contribute to our Guidelines by following the instructions:
 
