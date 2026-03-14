@@ -1,0 +1,23 @@
+name: Report a Gap
+description: Something is missing from the guidelines that should be covered — a topic, a category of tools, a common practice, etc.
+title: "[Gap] "
+labels: ["gap"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us identify what's missing. Even rough ideas are valuable.
+  - type: textarea
+    id: gap-description
+    attributes:
+      label: What's missing?
+      description: Describe the gap. What topic, practice, or category of tools should the guidelines cover?
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References (optional)
+      description: Any papers, tools, or links that relate to this gap?
+    validations:
+      required: false
