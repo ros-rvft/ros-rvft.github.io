@@ -45,4 +45,4 @@ Here's an example of a contribution: [Feedback Pull Request](https://github.com/
 
 Fork and make additions directly to the source files. Create a pull request and we'll begin discourse in the reviewing process!
 
-You can also forward suggestions directly to [ricardo.caldas@chalmers.se](mailto:"ricardo.caldas@chalmers.se")!
+You can also forward suggestions directly to [ricardo.caldas@gssi.it](mailto:"ricardo.caldas@gssi.it")!
