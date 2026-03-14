@@ -259,9 +259,16 @@
         </p>
 
 
+        <h4 style="text-indent: 25px;">Automated monitor generation: the FRET + Ogma + Copilot pipeline</h4>
+
+        <p>
+          A key automation opportunity is the generation of runtime monitors directly from requirements. The FRET + Ogma + Copilot pipeline [9, 10, 11] provides an end-to-end workflow: the QA team writes safety requirements in FRETISH (see <a href="https://ros-rvft.github.io/guidelines/guideline-sdb1">SDB1</a>), which FRET translates to temporal logic; Ogma (<a href="https://github.com/nasa/ogma">https://github.com/nasa/ogma</a>) reads the exported specifications and generates monitor code in Copilot, a stream-based runtime verification language; the Copilot compiler (<a href="https://github.com/Copilot-Language/copilot">https://github.com/Copilot-Language/copilot</a>) produces constant-time, constant-memory C99 monitors; and Ogma wraps these into a self-contained ROS 2 monitoring node that subscribes to relevant topics, re-evaluates monitors when new data arrives, and publishes requirement violations [9]. The generated package integrates into larger ROS 2 systems as a black box. This pipeline is part of the Space ROS ecosystem [12].
+        </p>
+
+
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p> 
-          Automation in testing activities can be executed repeatedly with low effort and cost. Moreover, it brings benefits in terms of efficiency, effectiveness, and reliability. 
+        <p>
+          Automation in testing activities can be executed repeatedly with low effort and cost. Moreover, it brings benefits in terms of efficiency, effectiveness, and reliability.
         </p>
 
 
@@ -282,7 +289,11 @@
                   <p>[6] A. Santos, A. Cunha et al., “Property-based testing for the robot operating system,” in Proceedings of the 9th ACM SIGSOFT International Workshop on Automating TEST Case Design, Selection, and Evaluation, 2018, pp. 56–62. </p>
                   <p>[7] A. Ortega, N. Hochgeschwender et al., “Testing service robots in the field: An experience report,” in 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEE, 2022, pp. 165–172.    </p>
                   <p>[8] C. Hildebrandt, S. Elbaum et al., “Feasible and stressful trajectory generation for mobile robots,” in Proceedings of the 29th ACM SIGSOFT International Symposium on Software Testing and Analysis, 2020, pp. 349–362. 4</p>
-  
+                  <p>[9] I. Perez, A. Mavridou, T. Pressburger, A. Will, and P. J. Martin, “Monitoring ROS2: from Requirements to Autonomous Robots,” in Electronic Proceedings in Theoretical Computer Science (EPTCS), vol. 371, pp. 200–215, 2022. </p>
+                  <p>[10] I. Perez, A. Mavridou, T. Pressburger, A. Goodloe, and D. Giannakopoulou, “Integrating FRET with Copilot: Automated Translation of Natural Language Requirements to Runtime Monitors,” in Tools and Algorithms for the Construction and Analysis of Systems (TACAS), LNCS, vol. 13244, Springer, 2022, pp. 379–395. </p>
+                  <p>[11] I. Perez and A. Goodloe, “Copilot 3,” NASA Technical Memorandum TM-2020-220587, 2020. </p>
+                  <p>[12] Space ROS Documentation, “Ogma - Runtime Monitor Generation,” https://space-ros.github.io/docs/rolling/Related-Projects/Ogma.html, accessed March 2026. </p>
+
           </blockquote> 
 
 

@@ -264,8 +264,15 @@
 
 
 
+        <h4 style="text-indent: 25px;">Structured Natural Language with FRET</h4>
+
+        <p>
+          An alternative approach to specifying properties in logic is to use structured natural language that automatically translates to temporal logic. NASA's Formal Requirements Elicitation Tool (FRET) [14, 15] allows the QA team to write requirements in FRETISH, a restricted English language with precise, unambiguous semantics. For each requirement, FRET automatically generates formalizations in both future-time and past-time metric temporal logic. FRETISH requirements follow a structured template; for example, a safety requirement can be expressed as: "When in_mission, the UAV shall always satisfy (current_consumption &lt; max_current)". FRET translates such requirements into temporal logic formulae that can be exported for use in analysis and monitor generation tools (see <a href="https://ros-rvft.github.io/guidelines/guideline-mta2">MTA2</a> for the automated monitor generation pipeline). FRET v3.0 further supports probabilistic requirement specification and automated test case generation [16]. FRET has been applied to robotics domains with a dedicated focus on ROS 2 applications [17] and is open-source at <a href="https://github.com/NASA-SW-VnV/fret">https://github.com/NASA-SW-VnV/fret</a>.
+        </p>
+
+
         <p class="strengths" style="text-indent: 25px;">Strengths:</p>
-        <p> 
+        <p>
           Using logic-based languages to specifying properties offers a standardized approach to validation in compliance with well-adopted specification pattern.
         </p>
 
@@ -290,7 +297,11 @@
         <p>[11] R. Halder, J. Proen¸ca et al., “Formal verification of ros-based robotic applications using timed-automata,” in 2017 IEEE/ACM 5th International FME Workshop on Formal Methods in Software Engineering (FormaliSE). IEEE, 2017, pp. 44–50. </p>
         <p>[12] C. Menghi, C. Tsigkanos et al., “Specification patterns for robotic missions,” IEEE Transactions on Software Engineering, vol. 47, no. 10, pp. 2208–2224, oct 2021. </p>
         <p>[13] ——, “Mission specification patterns for mobile robots: Providing support for quantitative properties,” IEEE Trans. Softw. Eng., vol. 49, no. 4, p. 2741–2760, dec 2022. </p>
-      
+        <p>[14] D. Giannakopoulou, T. Pressburger, A. Mavridou, J. Rhein, J. Schumann, and N. Shi, “Formal Requirements Elicitation with FRET,” in Joint Proceedings of REFSQ-2020 Workshops, CEUR Workshop Proceedings, vol. 2584, 2020. </p>
+        <p>[15] D. Giannakopoulou, T. Pressburger, A. Mavridou, and J. Schumann, “Automated formalization of structured natural language requirements,” Information and Software Technology, vol. 137, p. 106590, 2021. </p>
+        <p>[16] A. Katis, A. Mavridou, D. Giannakopoulou, T. Pressburger, and J. Schumann, “Capture, Analyze, Diagnose: Realizability Checking of Requirements in FRET,” in Computer Aided Verification (CAV), LNCS, vol. 13372, Springer, 2022, pp. 484–495. </p>
+        <p>[17] G. Vazquez, A. Mavridou, M. Farrell, T. Pressburger, and R. Calinescu, “Robotics: A New Mission for FRET Requirements,” in NASA Formal Methods (NFM), 2024. </p>
+
       </blockquote>
 
 
