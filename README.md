@@ -1,6 +1,7 @@
 # ROS-RVFT
 [![DOI](https://zenodo.org/badge/746253987.svg)](https://zenodo.org/doi/10.5281/zenodo.11117167)
 
+> **This is a living catalog.** The guidelines are actively maintained and extended beyond the original TSE publication. Community contributions — new tools, updated references, worked examples — are welcome. See the [Contribute page](https://ros-rvft.github.io/contribute) or [open an issue](https://github.com/ros-rvft/ros-rvft.github.io/issues/new).
 
 This repository complements the paper *"Runtime Verification and Field Testing for ROS-Based Robotic Systems"* and is an online repository of the guideline catalog for ROS-based Robotics projects.
 
