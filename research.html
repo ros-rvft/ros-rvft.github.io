@@ -25,6 +25,11 @@
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
     <meta property="og:url" content="-">
+    <script async src="https://rum.cronitor.io/script.js"></script>
+    <script>
+        window.cronitor = window.cronitor || function() { (window.cronitor.q = window.cronitor.q || []).push(arguments); };
+        cronitor('config', { clientKey: '97d9d4d8389c85dd1e533df8355e7602' });
+    </script>
     <script async="" src="./files/analytics.js.download"></script>
     <script src="./files/MathJax.js.download" id="">
         MathJax.Hub.Config({
@@ -74,6 +79,10 @@
             <li class="site-nav-item"> ROS-RVFT </li>
 
             <li class="site-nav-item">
+                <a href="https://ros-rvft.github.io/index#whats-new" title="What's New">What's New</a>
+            </li>
+
+            <li class="site-nav-item">
                 <a title="Guideline Catalog" href="https://ros-rvft.github.io/index">Guideline Catalog</a>
             </li>
             <li class="site-nav-item">
@@ -116,14 +125,18 @@
 
                     <div class="citation-block">
                         <pre>
-@misc{caldas2024guidelines,
-      title={Runtime Verification and Field Testing for ROS-Based Robotic Systems}, 
-      author={Ricardo Caldas and Juan Antonio Piñera García and Matei Schiopu and Patrizio Pelliccione and Genaína Rodrigues and Thorsten Berger},
-      year={2024},
-      eprint={2404.11498},
-      archivePrefix={arXiv},
-      primaryClass={cs.SE}
+@ARTICLE{caldas2024guidelines,
+  author={Caldas, Ricardo and Pi{\~n}era Garc{\'i}a, Juan Antonio and Schiopu, Matei and Pelliccione, Patrizio and Rodrigues, Gena{\'i}na and Berger, Thorsten},
+  journal={IEEE Transactions on Software Engineering}, 
+  title={Runtime Verification and Field-based Testing for ROS-based Robotic Systems}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-24},
+  keywords={Robots;Testing;Runtime;Guidelines;Software;Quality assurance;Robot kinematics;Field-based Testing;Runtime Verification;Robotic Systems;Robot Operating System (ROS);Uncertainty;Guidelines},
+  doi={10.1109/TSE.2024.3444697}
 }
+
                         </pre>
                     </div>
             
@@ -151,7 +164,7 @@ Caldas, R., García, J. A. P., Schiopu, M., Pelliccione, P., Rodrigues, G., & Be
 
             <p class="footer-copyright">
                 <span>Ricardo Caldas, Juan Antonio Pinera Garcia, Matei Schiopu,
-                Patrizio Pelliccione, Genaina Rodrigues, and Thorsten Berger © 2024 </span>
+                Patrizio Pelliccione, Genaina Rodrigues, and Thorsten Berger © 2024–2026 </span>
             </p>
             <p class="footer-copyright"></p>
         </div>
