@@ -1,0 +1,57 @@
+name: Update an Existing Guideline
+description: Report an update, correction, or improvement for an existing guideline (e.g., a tool has a new version, a link is broken, wording is unclear).
+title: "[Update] "
+labels: ["update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us keep the guidelines accurate and up to date.
+  - type: dropdown
+    id: guideline-id
+    attributes:
+      label: Which guideline?
+      options:
+        - CI1 — Identify timing constraints
+        - CI2 — Identify security and privacy constraints
+        - CI3 — Identify safety constraints
+        - CD1 — Strive for ROS nodes with single responsibility
+        - CD2 — Ensure global time monotonicity of events and states
+        - I1 — Provide an API for querying and updating internal lifecycle
+        - I2 — Provide an API for logging and filtering
+        - I3 — Provide an API for injecting faults in execution scenarios
+        - I4 — Isolate components for testing
+        - PE1 — Understand the overhead acceptance criteria
+        - PE2 — Create models for runtime assessment
+        - SDB1 — Define properties using a logic-based language
+        - SDB2 — Use Domain Specific Languages to specify properties
+        - SDB3 — Use languages and tools to scenario-based specification of test cases
+        - MTA1 — Improve robustness via noise and fault injection
+        - MTA2 — Exploit automation for test case generation, prioritization, oracle and monitor generation
+        - SE1 — Use record-and-replay for exploratory field tests
+        - SE2 — No GUIs! Prioritize headless simulation
+        - AR1 — Perform postmortem analysis to diagnose non-passing test cases
+        - AR2 — Use reliable tooling to manage field data
+        - General / multiple guidelines
+    validations:
+      required: true
+  - type: dropdown
+    id: update-type
+    attributes:
+      label: Type of update
+      options:
+        - Tool has a new version or new features
+        - Broken link or outdated reference
+        - Wording improvement or clarification
+        - Tool has been deprecated or superseded
+        - New example or use case to add
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Describe the update. Include links where relevant.
+    validations:
+      required: true

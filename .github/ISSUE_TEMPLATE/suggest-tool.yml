@@ -1,0 +1,62 @@
+name: Suggest a Tool or Technique
+description: Suggest a runtime verification tool, testing framework, or specification language for ROS that should be included in the guidelines.
+title: "[Tool] "
+labels: ["new-tool"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a tool! Please fill in what you can — even partial information is helpful.
+  - type: input
+    id: tool-name
+    attributes:
+      label: Tool name
+      placeholder: e.g., FRET, ROSMonitoring v2, Copilot
+    validations:
+      required: true
+  - type: input
+    id: tool-url
+    attributes:
+      label: Link to the tool (repository, website, or paper)
+      placeholder: e.g., https://github.com/NASA-SW-VnV/fret
+    validations:
+      required: true
+  - type: dropdown
+    id: guideline-category
+    attributes:
+      label: Which guideline category does it relate to?
+      description: Pick the closest match. If unsure, select "Not sure".
+      options:
+        - CI — Constraint Identification
+        - CD — Code Design and Implementation
+        - I — Instrumentation
+        - PE — Prepare Execution Environment
+        - SDB — Specify (Un)desired Behavior
+        - MTA — Monitor and Test Automation
+        - SE — System Execution
+        - AR — Analysis and Reporting
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Brief description
+      description: What does the tool do? How does it relate to ROS-based runtime verification or field-based testing?
+      placeholder: A few sentences are enough.
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: Your experience with the tool (optional)
+      description: Have you used it? Any tips, limitations, or examples you can share?
+    validations:
+      required: false
+  - type: input
+    id: ros-version
+    attributes:
+      label: ROS version compatibility (optional)
+      placeholder: e.g., ROS 2 Humble, ROS 1 Noetic, both
+    validations:
+      required: false
