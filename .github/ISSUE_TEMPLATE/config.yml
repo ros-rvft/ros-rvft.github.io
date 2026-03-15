@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Email the maintainer
+    url: mailto:ricardo.caldas@gssi.it
+    about: Prefer email? Reach out directly.
