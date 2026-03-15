@@ -1,0 +1,59 @@
+# Site settings
+title: "ROS-RVFT"
+subtitle: "Guidelines for Developers and QA Teams"
+description: "Runtime Verification and Field-based Testing for ROS-Based Robotic Systems"
+url: "https://ros-rvft.github.io"
+baseurl: ""
+
+# Theme
+remote_theme: "mmistakes/minimal-mistakes@4.28.0"
+minimal_mistakes_skin: "default"
+
+# Build
+markdown: kramdown
+permalink: pretty
+
+# Search (lunr.js built into Minimal Mistakes)
+search: true
+search_full_content: true
+
+# Plugins
+plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - replication_package_extras
+  - guideline_template.html
+
+# Footer
+footer:
+  links: []
+
+copyright: "Ricardo Caldas, Juan Antonio Pinera Garcia, Matei Schiopu, Patrizio Pelliccione, Genaina Rodrigues, and Thorsten Berger &copy; 2024&ndash;2026"
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: single
+      sidebar:
+        nav: "guidelines"
+  - scope:
+      path: "guidelines"
+    values:
+      layout: single
+      sidebar:
+        nav: "guidelines"
+      toc: true
+      toc_label: "On this page"
+      toc_sticky: true
