@@ -31,6 +31,8 @@ Fault injection is a testing technique to evaluate the robustness of a system th
 
 With the goal of effectively stressing a data-driven ROS system, Seulbae Kim et al. [3] implemented RoboFuzz[(RoboFuzz)](https://github.com/sslab-gatech/RoboFuzz), which is based on a data type-aware mutation technique aimed at finding correctness bugs in the system. RoboFuzz takes a target system and a test strategy as input and outputs the report of found bugs after performing a fuzzing technique based on message mutation. In addition, RosPenTo [6][(jr-robotics/ROSPenTo)](https://github.com/jr-robotics/ROSPenTo)provides the operations of unregistering and registering publishers/subscribers, isolating nodes and services, and injecting false data in messages. As an example, the authors show how to use the tool to isolate the safety monitor node and to inject fault data in a robotic operation in such a way that the robot may harm humans [6].
 
+More recently, R2D2 [7] advances ROS 2 fuzzing by leveraging the system's runtime states as guidance. Unlike prior fuzzers that rely on code coverage alone, R2D2 instruments the ROS 2 middleware to capture callback traces in real-time, profiling the current system state to guide input generation towards unexplored state space. In evaluation on four ROS 2 applications, R2D2 achieved 3.91x and 2.56x improvement in code coverage compared to Ros2Fuzz and RoboFuzz respectively, and uncovered 39 previously unknown vulnerabilities. Similarly, ROFER [8] introduces dimension-level mutation that considers each input dimension's contribution to coverage, combined with a message-guided fuzzing approach using a novel coverage metric based on message features. ROFER was evaluated on 13 ROS 2 programs and found 88 real bugs, 46 confirmed by ROS developers.
+
 #### Fault Injection
 
 Targeting the inclusion of Fault Injection in the system, the imfit  tool, which is based on applying mutation testing to relevant files with the ROS source code, is of great value [4]. The tool allows the user to create fault injection plans and select the operating conditions for the mutation process. Furthermore, fault metrics and diagrams can be obtained afterwards to analyze the system’s response. 
@@ -56,4 +58,7 @@ Designing and implementing fault and(or) noise injection scenarios can be comple
 > [5] Y.-S. Hsiao, Z. Wan et al., “Mavfi: An end-to-end fault analysis framework with anomaly detection and recovery for micro aerial vehicles,” arXiv preprint arXiv:2105.12882, 2021.
 >
 > [6] B. Dieber, R. White et al., “Penetration testing ros,” Robot Operating System (ROS), p. 183, 2020. 3
----------------------------------- GUIDELINE CONTENT END ----------------------------------
+>
+> [7] Y. Shen, H. Huang, J. Liu, Y. Jiang, and J. Bai, “Enhancing ROS System Fuzzing through Callback Tracing,” in Proceedings of the 33rd ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA), 2024, pp. 763–778.
+>
+> [8] J.-J. Bai, H.-X. Song, and S.-M. Hu, “Multi-dimensional and Message-Guided Fuzzing for Robotic Programs in Robot Operating System,” in Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS), vol. 2, 2024, pp. 763–778.

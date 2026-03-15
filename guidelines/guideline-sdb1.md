@@ -54,6 +54,10 @@ Timed automata is one of the most widely used formal models to specify and verif
 
 In [4], the authors introduce HAROS, which is a framework for quality assurance of ROS-based code. The use of the formal language HPL ensures that after entering a state of high priority (where the messages in the topic ’/state’ have data greater than 0), the system should remain in that state for, at least, one second. This can be accomplished through the following property definition: "globally: /state {data > 0} forbids /state {not data > 0} within 1000 ms". As can be seen, the property specification makes use of specification patterns, similar to the absence pattern with a time constraint [3]. Recently, other sets of patterns specific to robotics have been defined [12, 13]; even though they have been conceived for mission specification, they could be profitably used for verification and (scenario-based) testing.
 
+#### Structured Natural Language with FRET
+
+An alternative approach to specifying properties in logic is to use structured natural language that automatically translates to temporal logic. NASA's Formal Requirements Elicitation Tool (FRET) [14, 15] allows the QA team to write requirements in FRETISH, a restricted English language with precise, unambiguous semantics. For each requirement, FRET automatically generates formalizations in both future-time and past-time metric temporal logic. FRETISH requirements follow a structured template; for example, a safety requirement can be expressed as: "When in\_mission, the UAV shall always satisfy (current\_consumption &lt; max\_current)". FRET translates such requirements into temporal logic formulae that can be exported for use in analysis and monitor generation tools (see [MTA2](/guidelines/guideline-mta2) for the automated monitor generation pipeline). FRET v3.0 further supports probabilistic requirement specification and automated test case generation [16]. FRET has been applied to robotics domains with a dedicated focus on ROS 2 applications [17] and is open-source at [https://github.com/NASA-SW-VnV/fret](https://github.com/NASA-SW-VnV/fret).
+
 Strengths:
 
 Using logic-based languages to specifying properties offers a standardized approach to validation in compliance with well-adopted specification pattern.
@@ -90,4 +94,11 @@ References
 > [12] C. Menghi, C. Tsigkanos et al., “Specification patterns for robotic missions,” IEEE Transactions on Software Engineering, vol. 47, no. 10, pp. 2208–2224, oct 2021.
 >
 > [13] ——, “Mission specification patterns for mobile robots: Providing support for quantitative properties,” IEEE Trans. Softw. Eng., vol. 49, no. 4, p. 2741–2760, dec 2022.
----------------------------------- GUIDELINE CONTENT END ----------------------------------
+>
+> [14] D. Giannakopoulou, T. Pressburger, A. Mavridou, J. Rhein, J. Schumann, and N. Shi, “Formal Requirements Elicitation with FRET,” in Joint Proceedings of REFSQ-2020 Workshops, CEUR Workshop Proceedings, vol. 2584, 2020.
+>
+> [15] D. Giannakopoulou, T. Pressburger, A. Mavridou, and J. Schumann, “Automated formalization of structured natural language requirements,” Information and Software Technology, vol. 137, p. 106590, 2021.
+>
+> [16] A. Katis, A. Mavridou, D. Giannakopoulou, T. Pressburger, and J. Schumann, “Capture, Analyze, Diagnose: Realizability Checking of Requirements in FRET,” in Computer Aided Verification (CAV), LNCS, vol. 13372, Springer, 2022, pp. 484–495.
+>
+> [17] G. Vazquez, A. Mavridou, M. Farrell, T. Pressburger, and R. Calinescu, “Robotics: A New Mission for FRET Requirements,” in NASA Formal Methods (NFM), 2024.

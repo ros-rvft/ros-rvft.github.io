@@ -43,6 +43,10 @@ Santos et al. [6] rely on property-based testing (PBT) to generate test cases dr
 
 As a test selection mechanism, one commonly used technique is Equivalent Partitioning. The objective of equivalence partitioning is to minimize test case explosion, i.e. reduce the high number of possible combinations of the properties that will be tested. The idea behind Equivalence Partitioning is to group the test cases into equivalence classes according to how they handle valid or invalid data [7]. The authors report the experience of field testing in the domain of service robotics. In particular, the system under study was the Kelo AD disinfection robot whose software stack is based on ROS. To implement the equivalence testing, the criteria for defining the classes included robot motion, person posture, existence of occlusions and obstacle positions.
 
+#### Automated monitor generation: the FRET + Ogma + Copilot pipeline
+
+A key automation opportunity is the generation of runtime monitors directly from requirements. The FRET + Ogma + Copilot pipeline [9, 10, 11] provides an end-to-end workflow: the QA team writes safety requirements in FRETISH (see [SDB1](/guidelines/guideline-sdb1)), which FRET translates to temporal logic; Ogma ([https://github.com/nasa/ogma](https://github.com/nasa/ogma)) reads the exported specifications and generates monitor code in Copilot, a stream-based runtime verification language; the Copilot compiler ([https://github.com/Copilot-Language/copilot](https://github.com/Copilot-Language/copilot)) produces constant-time, constant-memory C99 monitors; and Ogma wraps these into a self-contained ROS 2 monitoring node that subscribes to relevant topics, re-evaluates monitors when new data arrives, and publishes requirement violations [9]. The generated package integrates into larger ROS 2 systems as a black box. This pipeline is part of the Space ROS ecosystem [12].
+
 Strengths:
 
 Automation in testing activities can be executed repeatedly with low effort and cost. Moreover, it brings benefits in terms of efficiency, effectiveness, and reliability.
@@ -66,4 +70,11 @@ There is a high initial investment of time and resources. There is also a mainte
 > [7] A. Ortega, N. Hochgeschwender et al., “Testing service robots in the field: An experience report,” in 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEE, 2022, pp. 165–172.
 >
 > [8] C. Hildebrandt, S. Elbaum et al., “Feasible and stressful trajectory generation for mobile robots,” in Proceedings of the 29th ACM SIGSOFT International Symposium on Software Testing and Analysis, 2020, pp. 349–362. 4
----------------------------------- GUIDELINE CONTENT END ----------------------------------
+>
+> [9] I. Perez, A. Mavridou, T. Pressburger, A. Will, and P. J. Martin, “Monitoring ROS2: from Requirements to Autonomous Robots,” in Electronic Proceedings in Theoretical Computer Science (EPTCS), vol. 371, pp. 200–215, 2022.
+>
+> [10] I. Perez, A. Mavridou, T. Pressburger, A. Goodloe, and D. Giannakopoulou, “Integrating FRET with Copilot: Automated Translation of Natural Language Requirements to Runtime Monitors,” in Tools and Algorithms for the Construction and Analysis of Systems (TACAS), LNCS, vol. 13244, Springer, 2022, pp. 379–395.
+>
+> [11] I. Perez and A. Goodloe, “Copilot 3,” NASA Technical Memorandum TM-2020-220587, 2020.
+>
+> [12] Space ROS Documentation, “Ogma - Runtime Monitor Generation,” https://space-ros.github.io/docs/rolling/Related-Projects/Ogma.html, accessed March 2026.

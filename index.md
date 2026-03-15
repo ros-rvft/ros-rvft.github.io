@@ -13,9 +13,9 @@ You can further find the [guidelines](/) and information on the [evaluation](/ev
 <div style="border: 1px solid #ddd; border-radius: 6px; padding: 20px 24px; margin: 24px 0; background-color: #f9f9f9;">
   <h2 id="whats-new" style="margin-top: 0;">What's New</h2>
   <ul style="list-style: none; padding-left: 0;">
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — Website refresh: updated contact info, copyright, and contribution guidelines.</li>
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New guideline tools coming soon: FRET + Copilot monitor generation pipeline, updated ROSMonitoring references, and more. <a href="https://github.com/ros-rvft/ros-rvft.github.io/issues">Follow progress on GitHub Issues</a>.</li>
-    <li style="margin-bottom: 10px;"><strong>July 2024</strong> — Initial release of the guideline catalog accompanying the TSE paper.</li>
+    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplar added: UPPAAL automated verification toolchain for ROS 2 timing and scheduling analysis (<a href="/guidelines/guideline-pe2">PE2</a>).</li>
+    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplars added: R2D2 and ROFER ROS 2 fuzzers for noise injection and robustness testing (<a href="/guidelines/guideline-mta1">MTA1</a>).</li>
+    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplars added: FRET for structured natural language specification (<a href="/guidelines/guideline-sdb1">SDB1</a>) and the FRET+Ogma+Copilot automated monitor generation pipeline (<a href="/guidelines/guideline-mta2">MTA2</a>).</li>
   </ul>
 </div>
 

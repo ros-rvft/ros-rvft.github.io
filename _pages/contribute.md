@@ -61,11 +61,17 @@ You can also forward suggestions directly to [ricardo.caldas@gssi.it](mailto:ric
 
 We welcome several kinds of contributions:
 
-- **New tools or techniques:** Know a runtime verification tool, testing framework, or specification language for ROS that we haven't covered? Suggest it! You can [open a GitHub Issue](https://github.com/ros-rvft/ros-rvft.github.io/issues/new) describing the tool and which guideline it relates to — no need to write HTML.
+- **New tools or techniques:** Know a runtime verification tool, testing framework, or specification language for ROS that we haven't covered? Suggest it! You can [open a GitHub Issue](https://github.com/ros-rvft/ros-rvft.github.io/issues/new/choose) describing the tool and which guideline it relates to — no need to write HTML.
 - **Updates to existing guidelines:** Tools evolve. If a tool we reference has a new version, new features, or has been superseded, let us know.
 - **New worked examples:** Practical examples showing how to apply a guideline with a specific tool are especially valuable.
 - **Corrections and improvements:** Typos, broken links, unclear wording — all welcome.
 
 ### Lightweight contribution (no Git required)
 
-If you don't want to fork and PR, you can simply [open a GitHub Issue](https://github.com/ros-rvft/ros-rvft.github.io/issues/new) describing your suggestion. We'll take it from there.
+If you don't want to fork and PR, you can simply [open a GitHub Issue](https://github.com/ros-rvft/ros-rvft.github.io/issues/new/choose) and pick from one of our templates:
+
+- **Suggest a Tool or Technique** — for new tools we should cover.
+- **Update an Existing Guideline** — for corrections, new versions, broken links.
+- **Report a Gap** — for topics or practices the guidelines should address.
+
+No Git, no HTML, no forking required.
