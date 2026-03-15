@@ -47,3 +47,15 @@ Here's an example of a contribution: [Feedback Pull Request](https://github.com/
 Fork and make additions directly to the source files. Create a pull request and we'll begin discourse in the reviewing process!
 
 You can also forward suggestions directly to [ricardo.caldas@gssi.it](mailto:"ricardo.caldas@gssi.it")!
+
+## Local Development
+
+This site is built with [Jekyll](https://jekyllrb.com/) using the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme.
+
+To build locally:
+
+1. Install Ruby and Bundler.
+2. Run `bundle install` to install dependencies.
+3. Run `bundle exec jekyll serve` to start a local server at `http://localhost:4000`.
+
+Changes to `_config.yml` require restarting the server.

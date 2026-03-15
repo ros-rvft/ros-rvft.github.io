@@ -1,0 +1,75 @@
+# Top navigation bar
+main:
+  - title: "What's New"
+    url: /#whats-new
+  - title: "Guideline Catalog"
+    url: /
+  - title: "Replication Package"
+    url: /replication
+  - title: "Evaluation"
+    url: /evaluation
+  - title: "Contribute"
+    url: /contribute
+  - title: "Authors"
+    url: /authors
+  - title: "Cite Us!"
+    url: /research
+
+# Sidebar navigation for guidelines
+guidelines:
+  - title: "Constraint Identification"
+    children:
+      - title: "CI1 — Timing constraints"
+        url: /guidelines/guideline-ci1
+      - title: "CI2 — Security & privacy"
+        url: /guidelines/guideline-ci2
+      - title: "CI3 — Safety constraints"
+        url: /guidelines/guideline-ci3
+  - title: "Code Design & Implementation"
+    children:
+      - title: "CD1 — Single responsibility"
+        url: /guidelines/guideline-cd1
+      - title: "CD2 — Time monotonicity"
+        url: /guidelines/guideline-cd2
+  - title: "Instrumentation"
+    children:
+      - title: "I1 — Lifecycle API"
+        url: /guidelines/guideline-i1
+      - title: "I2 — Logging API"
+        url: /guidelines/guideline-i2
+      - title: "I3 — Fault injection API"
+        url: /guidelines/guideline-i3
+      - title: "I4 — Isolate components"
+        url: /guidelines/guideline-i4
+  - title: "Prepare Execution Environment"
+    children:
+      - title: "PE1 — Overhead criteria"
+        url: /guidelines/guideline-pe1
+      - title: "PE2 — Runtime models"
+        url: /guidelines/guideline-pe2
+  - title: "Specify Behavior"
+    children:
+      - title: "SDB1 — Logic-based"
+        url: /guidelines/guideline-sdb1
+      - title: "SDB2 — DSLs"
+        url: /guidelines/guideline-sdb2
+      - title: "SDB3 — Scenario-based"
+        url: /guidelines/guideline-sdb3
+  - title: "Monitor & Test Automation"
+    children:
+      - title: "MTA1 — Noise & fault injection"
+        url: /guidelines/guideline-mta1
+      - title: "MTA2 — Automation"
+        url: /guidelines/guideline-mta2
+  - title: "System Execution"
+    children:
+      - title: "SE1 — Record & replay"
+        url: /guidelines/guideline-se1
+      - title: "SE2 — Headless simulation"
+        url: /guidelines/guideline-se2
+  - title: "Analysis & Reporting"
+    children:
+      - title: "AR1 — Postmortem analysis"
+        url: /guidelines/guideline-ar1
+      - title: "AR2 — Field data tooling"
+        url: /guidelines/guideline-ar2
