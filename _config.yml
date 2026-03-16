@@ -23,6 +23,7 @@ plugins:
   - jekyll-include-cache
   - jekyll-sitemap
   - jekyll-feed
+  - jekyll-redirect-from
 
 # Include directories that Jekyll ignores by default
 include:
