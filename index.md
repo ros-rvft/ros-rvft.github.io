@@ -19,6 +19,31 @@ You can further find the [guidelines](/) and information on the [evaluation](/pa
 
 [View all news →](/news)
 
+## Browse by Role
+
+<div style="display: flex; gap: 20px; margin: 20px 0; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 260px; border: 1px solid #ddd; border-radius: 6px; padding: 16px;">
+    <h3 style="margin-top: 0;">For Developers</h3>
+    <p>Guidelines for preparing ROS-based systems for verification and testing.</p>
+    <ul>
+      <li><a href="/guidelines/guideline-ci1">CI1–CI3</a> — Constraint Identification</li>
+      <li><a href="/guidelines/guideline-cd1">CD1–CD2</a> — Code Design</li>
+      <li><a href="/guidelines/guideline-i1">I1–I4</a> — Instrumentation</li>
+    </ul>
+  </div>
+  <div style="flex: 1; min-width: 260px; border: 1px solid #ddd; border-radius: 6px; padding: 16px;">
+    <h3 style="margin-top: 0;">For QA Teams</h3>
+    <p>Guidelines for performing runtime verification and field-based testing.</p>
+    <ul>
+      <li><a href="/guidelines/guideline-pe1">PE1–PE2</a> — Prepare Environment</li>
+      <li><a href="/guidelines/guideline-sdb1">SDB1–SDB3</a> — Specify Behavior</li>
+      <li><a href="/guidelines/guideline-mta1">MTA1–MTA2</a> — Monitor & Test</li>
+      <li><a href="/guidelines/guideline-se1">SE1–SE2</a> — System Execution</li>
+      <li><a href="/guidelines/guideline-ar1">AR1–AR2</a> — Analysis & Reporting</li>
+    </ul>
+  </div>
+</div>
+
 ## Guideline Catalog
 
 ![Development and Test Process](/files/dev_test_process.png)
