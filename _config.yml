@@ -24,13 +24,16 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
 
+# Include directories that Jekyll ignores by default
+include:
+  - _pages
+
 # Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
   - LICENSE
   - README.md
-  - replication_package_extras
   - guideline_template.html
 
 # Footer
