@@ -13,6 +13,10 @@ main:
 
 # Sidebar navigation for guidelines
 guidelines:
+  - title: "Browse"
+    children:
+      - title: "Browse by Tag"
+        url: /tags/
   - title: "Constraint Identification"
     children:
       - title: "CI1 — Timing constraints"
