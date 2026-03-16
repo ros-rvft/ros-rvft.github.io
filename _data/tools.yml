@@ -1,0 +1,592 @@
+# Runtime Verification
+- name: "ROSMonitoring"
+  description: "Runtime verification framework for ROS with topic remapping-based monitors"
+  url: "https://github.com/autonomy-and-verification-uol/ROSMonitoring"
+  guidelines:
+    - id: CI3
+      url: /guidelines/guideline-ci3
+    - id: I2
+      url: /guidelines/guideline-i2
+    - id: I4
+      url: /guidelines/guideline-i4
+    - id: PE1
+      url: /guidelines/guideline-pe1
+    - id: SDB2
+      url: /guidelines/guideline-sdb2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Runtime Verification"
+
+- name: "ROSRV"
+  description: "Runtime verification framework for safety and security properties with access control"
+  url: "https://github.com/cansuerdogan/ROSRV"
+  guidelines:
+    - id: CI2
+      url: /guidelines/guideline-ci2
+    - id: CI3
+      url: /guidelines/guideline-ci3
+    - id: I4
+      url: /guidelines/guideline-i4
+  ros_versions: ["ROS 1"]
+  category: "Runtime Verification"
+
+- name: "RTAMT"
+  description: "Runtime verification tool for Signal Temporal Logic with robustness semantics"
+  url: ""
+  guidelines:
+    - id: SDB1
+      url: /guidelines/guideline-sdb1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Runtime Verification"
+
+- name: "Ogma"
+  description: "Generates runtime monitors from FRET specifications using the Copilot language"
+  url: "https://github.com/nasa/ogma"
+  guidelines:
+    - id: MTA2
+      url: /guidelines/guideline-mta2
+  ros_versions: ["ROS 2"]
+  category: "Runtime Verification"
+
+- name: "Copilot"
+  description: "Stream-based runtime verification language producing constant-time C99 monitors"
+  url: "https://github.com/Copilot-Language/copilot"
+  guidelines:
+    - id: MTA2
+      url: /guidelines/guideline-mta2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Runtime Verification"
+
+- name: "ROMoSu"
+  description: "Runtime monitoring support using Esper Constraint Engine for ROS applications"
+  url: ""
+  guidelines:
+    - id: CI3
+      url: /guidelines/guideline-ci3
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Runtime Verification"
+
+- name: "Overseer"
+  description: "Multi-robot monitoring infrastructure combining Nagios and ros/diagnostics"
+  url: ""
+  guidelines:
+    - id: AR1
+      url: /guidelines/guideline-ar1
+    - id: AR2
+      url: /guidelines/guideline-ar2
+  ros_versions: ["ROS 1"]
+  category: "Runtime Verification"
+
+- name: "Nagios"
+  description: "General-purpose open-source monitoring tool for collecting and visualizing runtime data"
+  url: "https://www.nagios.org/"
+  guidelines:
+    - id: AR1
+      url: /guidelines/guideline-ar1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Runtime Verification"
+
+- name: "ros2_tracing"
+  description: "Low-overhead tracing tool for ROS 2 systems for performance analysis"
+  url: "https://github.com/ros2/ros2_tracing"
+  guidelines:
+    - id: PE1
+      url: /guidelines/guideline-pe1
+  ros_versions: ["ROS 2"]
+  category: "Runtime Verification"
+
+- name: "Autoware Perf"
+  description: "Framework for tracing and calculating response time and latency in ROS 2 applications"
+  url: "https://github.com/azu-lab/ROS2-E2E-Evaluation"
+  guidelines:
+    - id: CI1
+      url: /guidelines/guideline-ci1
+  ros_versions: ["ROS 2"]
+  category: "Runtime Verification"
+
+- name: "PerceMon"
+  description: "Runtime verification tool for spatio-temporal specifications on perception systems"
+  url: ""
+  guidelines:
+    - id: SDB3
+      url: /guidelines/guideline-sdb3
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Runtime Verification"
+
+- name: "message_filters"
+  description: "ROS message filter for synchronizing messages by timestamps"
+  url: "http://wiki.ros.org/message_filters"
+  guidelines:
+    - id: CD2
+      url: /guidelines/guideline-cd2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Runtime Verification"
+
+- name: "ros2-picas"
+  description: "Priority-aware scheduling algorithm for ROS 2"
+  url: "https://github.com/rtenlab/ros2-picas"
+  guidelines:
+    - id: CD2
+      url: /guidelines/guideline-cd2
+  ros_versions: ["ROS 2"]
+  category: "Runtime Verification"
+
+- name: "ApexAI Performance Test"
+  description: "Tool for benchmarking nominal performance of ROS 2 applications"
+  url: "https://gitlab.com/ApexAI/performance_test"
+  guidelines:
+    - id: PE1
+      url: /guidelines/guideline-pe1
+  ros_versions: ["ROS 2"]
+  category: "Runtime Verification"
+
+# Specification
+- name: "FRET"
+  description: "NASA tool for writing requirements in structured English that translates to temporal logic"
+  url: "https://github.com/NASA-SW-VnV/fret"
+  guidelines:
+    - id: SDB1
+      url: /guidelines/guideline-sdb1
+    - id: MTA2
+      url: /guidelines/guideline-mta2
+  ros_versions: ["ROS 2"]
+  category: "Specification"
+
+- name: "Specification Patterns"
+  description: "Collection of known recurrent patterns for temporal logic property specification"
+  url: "http://ps-patterns.wikidot.com/"
+  guidelines:
+    - id: SDB1
+      url: /guidelines/guideline-sdb1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Specification"
+
+- name: "GeoScenario"
+  description: "Behavior tree-based DSL for scenario specification in autonomous driving"
+  url: "https://github.com/rodrigoqueiroz/geoscenarioserver"
+  guidelines:
+    - id: SDB3
+      url: /guidelines/guideline-sdb3
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Specification"
+
+- name: "SCENIC"
+  description: "Probability-based programming language for specifying rare events in environment models"
+  url: "https://github.com/BerkeleyLearnVerify/Scenic"
+  guidelines:
+    - id: SDB3
+      url: /guidelines/guideline-sdb3
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Specification"
+
+- name: "RuBaSS"
+  description: "Property definition DSL with time-aware rule definitions for safety monitoring"
+  url: ""
+  guidelines:
+    - id: SDB2
+      url: /guidelines/guideline-sdb2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Specification"
+
+- name: "Micro-ROS system modes"
+  description: "Extension of ROS 2 lifecycle to embedded systems with hierarchical state machine modes"
+  url: "https://github.com/micro-ROS/system_modes"
+  guidelines:
+    - id: I1
+      url: /guidelines/guideline-i1
+  ros_versions: ["ROS 2"]
+  category: "Specification"
+
+# Code Analysis
+- name: "HAROS"
+  description: "Static analysis framework for ROS applications with property-based testing support"
+  url: "https://github.com/git-afsantos/haros"
+  guidelines:
+    - id: SDB1
+      url: /guidelines/guideline-sdb1
+    - id: MTA2
+      url: /guidelines/guideline-mta2
+  ros_versions: ["ROS 1"]
+  category: "Code Analysis"
+
+# Testing
+- name: "Hypothesis"
+  description: "Property-based testing framework for generating test cases from specifications"
+  url: "https://github.com/HypothesisWorks/hypothesis"
+  guidelines:
+    - id: MTA2
+      url: /guidelines/guideline-mta2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Testing"
+
+- name: "rostest"
+  description: "ROS framework for full integration testing across multiple nodes"
+  url: "http://wiki.ros.org/rostest"
+  guidelines:
+    - id: MTA2
+      url: /guidelines/guideline-mta2
+  ros_versions: ["ROS 1"]
+  category: "Testing"
+
+- name: "Mithra"
+  description: "Unsupervised oracle learning for Cyber-Physical Systems using telemetry data"
+  url: ""
+  guidelines:
+    - id: MTA2
+      url: /guidelines/guideline-mta2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Testing"
+
+- name: "VERIFAI"
+  description: "Toolkit for design and analysis of AI-based systems supporting scenario generation"
+  url: ""
+  guidelines:
+    - id: SDB3
+      url: /guidelines/guideline-sdb3
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Testing"
+
+# Fault Injection
+- name: "RoboFuzz"
+  description: "Fuzzing tool for ROS 2 using data type-aware message mutation"
+  url: "https://github.com/sslab-gatech/RoboFuzz"
+  guidelines:
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 2"]
+  category: "Fault Injection"
+
+- name: "R2D2"
+  description: "ROS 2 fuzzer leveraging runtime callback traces as guidance"
+  url: ""
+  guidelines:
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 2"]
+  category: "Fault Injection"
+
+- name: "ROFER"
+  description: "ROS fuzzer with dimension-level mutation and message-guided coverage metric"
+  url: ""
+  guidelines:
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 2"]
+  category: "Fault Injection"
+
+- name: "ros1_fuzzer"
+  description: "API for ROS 1 message fuzzing with datatype strategies"
+  url: "https://github.com/aliasrobotics/ros1_fuzzer"
+  guidelines:
+    - id: I3
+      url: /guidelines/guideline-i3
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 1"]
+  category: "Fault Injection"
+
+- name: "ros2_fuzzer"
+  description: "Extension of ros1_fuzzer for ROS 2 with service-level fuzzing"
+  url: "https://github.com/aliasrobotics/ros2_fuzzer"
+  guidelines:
+    - id: I3
+      url: /guidelines/guideline-i3
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 2"]
+  category: "Fault Injection"
+
+- name: "IM-FIT"
+  description: "Mutation-based software fault injection tool for ROS applications"
+  url: "https://github.com/cembglm/imfit"
+  guidelines:
+    - id: I3
+      url: /guidelines/guideline-i3
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 1"]
+  category: "Fault Injection"
+
+- name: "camfitool"
+  description: "ROS tool for injecting faults in images with a graphical interface"
+  url: "http://wiki.ros.org/camfitool"
+  guidelines:
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 1"]
+  category: "Fault Injection"
+
+# Security Testing
+- name: "RosPenTo"
+  description: "Penetration testing tool for ROS 1 with publisher/subscriber manipulation"
+  url: "https://github.com/jr-robotics/ROSPenTo"
+  guidelines:
+    - id: MTA1
+      url: /guidelines/guideline-mta1
+  ros_versions: ["ROS 1"]
+  category: "Security Testing"
+
+- name: "SROS2"
+  description: "ROS 2 security workgroup tool for analyzing and fixing security vulnerabilities"
+  url: "https://github.com/ros2/sros2"
+  guidelines:
+    - id: CI2
+      url: /guidelines/guideline-ci2
+  ros_versions: ["ROS 2"]
+  category: "Security Testing"
+
+- name: "RVD"
+  description: "Robotics Vulnerability Database by Alias Robotics"
+  url: "https://github.com/aliasrobotics/RVD"
+  guidelines:
+    - id: CI2
+      url: /guidelines/guideline-ci2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Security Testing"
+
+- name: "FAST-DDS Security"
+  description: "DDS implementation with authentication, access control, encryption and logging"
+  url: "https://fast-dds.docs.eprosima.com/en/latest/fastdds/security/security.html"
+  guidelines:
+    - id: CI2
+      url: /guidelines/guideline-ci2
+  ros_versions: ["ROS 2"]
+  category: "Security Testing"
+
+- name: "ROSploit"
+  description: "Security tool for preventing ROS-based applications from malicious attackers"
+  url: "https://github.com/seanrivera/rosploit"
+  guidelines:
+    - id: PE1
+      url: /guidelines/guideline-pe1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Security Testing"
+
+# Formal Verification
+- name: "UPPAAL"
+  description: "Tool suite for automatic verification of real-time systems using timed automata"
+  url: ""
+  guidelines:
+    - id: CD2
+      url: /guidelines/guideline-cd2
+    - id: PE2
+      url: /guidelines/guideline-pe2
+    - id: SDB1
+      url: /guidelines/guideline-sdb1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Formal Verification"
+
+- name: "UPPAAL Tron"
+  description: "Model-based test execution engine based on UPPAAL for ROS applications"
+  url: ""
+  guidelines:
+    - id: PE2
+      url: /guidelines/guideline-pe2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Formal Verification"
+
+# Logging
+- name: "rosbag"
+  description: "Standard ROS package for recording and replaying message exchange"
+  url: "http://wiki.ros.org/rosbag"
+  guidelines:
+    - id: I2
+      url: /guidelines/guideline-i2
+    - id: SE1
+      url: /guidelines/guideline-se1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Logging"
+
+- name: "ros/diagnostics"
+  description: "Standard tooling for collecting and aggregating runtime data in ROS"
+  url: "http://wiki.ros.org/diagnostics"
+  guidelines:
+    - id: AR1
+      url: /guidelines/guideline-ar1
+  ros_versions: ["ROS 1"]
+  category: "Logging"
+
+- name: "AWS CloudWatch Logs"
+  description: "AWS service for monitoring and filtering ROS application logs via rosout"
+  url: "https://github.com/aws-robotics/cloudwatchlogs-ros2"
+  guidelines:
+    - id: I2
+      url: /guidelines/guideline-i2
+  ros_versions: ["ROS 2"]
+  category: "Logging"
+
+- name: "Robotic Black Box"
+  description: "Isolated component for listening to data traffic with MongoDB logging"
+  url: "https://github.com/ropod-project/black-box"
+  guidelines:
+    - id: I2
+      url: /guidelines/guideline-i2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Logging"
+
+- name: "warehouse_ros_mongo"
+  description: "MongoDB backend for persistently recording states, scenes and messages"
+  url: "https://github.com/moveit/warehouse_ros_mongo"
+  guidelines:
+    - id: AR2
+      url: /guidelines/guideline-ar2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Logging"
+
+- name: "warehouse_ros_sqlite"
+  description: "SQLite backend for persistently recording states, scenes and messages"
+  url: "https://github.com/moveit/warehouse_ros_sqlite"
+  guidelines:
+    - id: AR2
+      url: /guidelines/guideline-ar2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Logging"
+
+- name: "Field Test Tool (FTT)"
+  description: "Tool for logging, annotating and generating reports of field trials"
+  url: "https://github.com/fkie/field_test_tool"
+  guidelines:
+    - id: AR2
+      url: /guidelines/guideline-ar2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Logging"
+
+- name: "Rerun.io"
+  description: "Visualization tool for ROS bag data with perception algorithm datatypes"
+  url: "https://github.com/rerun-io/rerun"
+  guidelines:
+    - id: SE1
+      url: /guidelines/guideline-se1
+  ros_versions: ["ROS 2"]
+  category: "Logging"
+
+- name: "rclc_lifecycle"
+  description: "Library for managing ROS 2 node lifecycle with finite state machines"
+  url: "https://github.com/ros2/rclc/tree/master/rclc_lifecycle"
+  guidelines:
+    - id: I1
+      url: /guidelines/guideline-i1
+  ros_versions: ["ROS 2"]
+  category: "Logging"
+
+- name: "modes"
+  description: "ROS 2 package providing lifecycle management for nodes"
+  url: "https://github.com/ros2/demos"
+  guidelines:
+    - id: I1
+      url: /guidelines/guideline-i1
+  ros_versions: ["ROS 2"]
+  category: "Logging"
+
+# Simulation
+- name: "Gazebo"
+  description: "Open-source robotics simulator supporting headless mode"
+  url: "https://github.com/gazebosim/gz-sim"
+  guidelines:
+    - id: SE2
+      url: /guidelines/guideline-se2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Simulation"
+
+- name: "MORSE"
+  description: "Modular open robotic simulation engine supporting headless operation"
+  url: "https://morse-simulator.github.io/"
+  guidelines:
+    - id: SE2
+      url: /guidelines/guideline-se2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Simulation"
+
+- name: "V-REP / CoppeliaSim"
+  description: "Versatile robot simulator supporting headless mode for scalable testing"
+  url: "http://wiki.ros.org/vrep_ros_bridge"
+  guidelines:
+    - id: SE2
+      url: /guidelines/guideline-se2
+    - id: SDB3
+      url: /guidelines/guideline-sdb3
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Simulation"
+
+- name: "ARGOS"
+  description: "Modular multi-engine simulator for multi-robot systems"
+  url: "https://www.argos-sim.info/"
+  guidelines:
+    - id: SE2
+      url: /guidelines/guideline-se2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Simulation"
+
+- name: "MVSim"
+  description: "Lightweight simulator for real-time multi-vehicle scenarios"
+  url: "https://github.com/MRPT/mvsim"
+  guidelines:
+    - id: SE2
+      url: /guidelines/guideline-se2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Simulation"
+
+- name: "CARLA"
+  description: "Open-source urban driving simulator with ROS integration"
+  url: "https://github.com/carla-simulator/carla"
+  guidelines:
+    - id: SDB3
+      url: /guidelines/guideline-sdb3
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Simulation"
+
+- name: "OpenDaVINCI"
+  description: "Middleware for autonomous driving systems with ROS interface"
+  url: "https://github.com/se-research/OpenDaVINCI"
+  guidelines:
+    - id: SE2
+      url: /guidelines/guideline-se2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Simulation"
+
+# Digital Twin
+- name: "CPSAML"
+  description: "Language and code generation framework for digital twin based monitoring"
+  url: "https://github.com/me-big-tuwien-ac-at/cpsaml"
+  guidelines:
+    - id: PE2
+      url: /guidelines/guideline-pe2
+  ros_versions: ["ROS 2"]
+  category: "Digital Twin"
+
+# Metamodeling
+- name: "ROS model (RosTooling)"
+  description: "Eclipse Ecore metamodels for creating, validating, and generating ROS models"
+  url: "https://github.com/ipa320/RosTooling"
+  guidelines:
+    - id: PE2
+      url: /guidelines/guideline-pe2
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Metamodeling"
+
+# Diagnosis
+- name: "CARE"
+  description: "Causal model-based diagnosis for configuration faults in ROS systems"
+  url: "https://github.com/softsys4ai/care"
+  guidelines:
+    - id: AR1
+      url: /guidelines/guideline-ar1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Testing"
+
+- name: "Rason"
+  description: "Multi-robot collaborative fault diagnosis using behavior trees"
+  url: "https://github.com/lsa-pucrs/rason"
+  guidelines:
+    - id: AR1
+      url: /guidelines/guideline-ar1
+  ros_versions: ["ROS 1", "ROS 2"]
+  category: "Testing"
+
+- name: "MAVROS"
+  description: "Library for flight control with logical time synchronization support"
+  url: "https://github.com/mavlink/mavros"
+  guidelines:
+    - id: CD2
+      url: /guidelines/guideline-cd2
+  ros_versions: ["ROS 2"]
+  category: "Logging"
