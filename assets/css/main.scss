@@ -1,0 +1,20 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
+// Reduce base font size slightly for denser content
+html {
+  font-size: 14px;
+
+  @media (min-width: 80em) {
+    font-size: 14px;
+  }
+}
+
+// Widen the content area for pages using classes: wide
+.wide .page__inner-wrap {
+  max-width: 100%;
+}

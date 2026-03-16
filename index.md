@@ -2,6 +2,7 @@
 title: "Guidelines for Developers and QA Teams"
 layout: single
 permalink: /
+classes: wide
 sidebar:
   nav: "guidelines"
 ---
@@ -46,7 +47,7 @@ You can further find the [guidelines](/) and information on the [evaluation](/pa
 
 ## Guideline Catalog
 
-![Development and Test Process](/files/dev_test_process.png)
+<img src="/files/dev_test_process.png" alt="Development and Test Process" style="width: 100%; max-width: 100%;">
 
 ## Guidelines
 {: #patternsref}
