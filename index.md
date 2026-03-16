@@ -6,7 +6,7 @@ sidebar:
   nav: "guidelines"
 ---
 
-This page complements the paper [*"Runtime Verification and Field-based Testing for ROS-Based Robotic Systems"*](https://arxiv.org/abs/2404.11498) and is an online repository of the guideline catalog for ROS-based Robotics projects.
+This page complements the paper [*"Runtime Verification and Field-based Testing for ROS-Based Robotic Systems"*](https://doi.org/10.1109/TSE.2024.3444697) and is an online repository of the guideline catalog for ROS-based Robotics projects.
 
 You can further find the [guidelines](/) and information on the [evaluation](/paper#evaluation) process. Reproduction kits, specifications, and accompanying code can be found in our [replication package](/paper#replication-package).
 
