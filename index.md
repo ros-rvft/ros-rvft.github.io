@@ -10,14 +10,14 @@ This page complements the paper [*"Runtime Verification and Field-based Testing 
 
 You can further find the [guidelines](/) and information on the [evaluation](/paper#evaluation) process. Reproduction kits, specifications, and accompanying code can be found in our [replication package](/paper#replication-package).
 
-<div style="border: 1px solid #ddd; border-radius: 6px; padding: 20px 24px; margin: 24px 0; background-color: #f9f9f9;">
-  <h2 id="whats-new" style="margin-top: 0;">What's New</h2>
-  <ul style="list-style: none; padding-left: 0;">
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplar added: UPPAAL automated verification toolchain for ROS 2 timing and scheduling analysis (<a href="/guidelines/guideline-pe2">PE2</a>).</li>
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplars added: R2D2 and ROFER ROS 2 fuzzers for noise injection and robustness testing (<a href="/guidelines/guideline-mta1">MTA1</a>).</li>
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplars added: FRET for structured natural language specification (<a href="/guidelines/guideline-sdb1">SDB1</a>) and the FRET+Ogma+Copilot automated monitor generation pipeline (<a href="/guidelines/guideline-mta2">MTA2</a>).</li>
-  </ul>
-</div>
+## What's New
+{: #whats-new}
+
+* **March 2026** — New exemplar added: UPPAAL automated verification toolchain for ROS 2 ([PE2](/guidelines/guideline-pe2)).
+* **March 2026** — New exemplars: R2D2 and ROFER ROS 2 fuzzers ([MTA1](/guidelines/guideline-mta1)).
+* **March 2026** — New exemplars: FRET ([SDB1](/guidelines/guideline-sdb1)) and FRET+Ogma+Copilot pipeline ([MTA2](/guidelines/guideline-mta2)).
+
+[View all news →](/news)
 
 ## Guideline Catalog
 
