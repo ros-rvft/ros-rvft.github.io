@@ -2,11 +2,6 @@
 title: "About the Paper"
 layout: single
 permalink: /paper
-redirect_from:
-  - /authors
-  - /research
-  - /evaluation
-  - /replication
 sidebar:
   nav: "guidelines"
 toc: true
