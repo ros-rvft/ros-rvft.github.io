@@ -7,6 +7,7 @@ sidebar:
 toc: true
 toc_label: "On this page"
 toc_sticky: true
+tags: [property-specification, temporal-logic, formal-verification, qa-team]
 ---
 
 ## Context (WHEN)

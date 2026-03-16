@@ -7,6 +7,7 @@ sidebar:
 toc: true
 toc_label: "On this page"
 toc_sticky: true
+tags: [security, privacy, constraints, developer, ros2]
 ---
 
 ## Context (WHEN)

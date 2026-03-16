@@ -1,19 +1,232 @@
 ---
-title: "Replication Package"
+title: "About the Paper"
 layout: single
-permalink: /replication
+permalink: /paper
+redirect_from:
+  - /authors
+  - /research
+  - /evaluation
+  - /replication
+sidebar:
+  nav: "guidelines"
+toc: true
+toc_label: "On this page"
+toc_sticky: true
 ---
+
+## Citation
+{: #citation}
+
+R. Caldas, J. A. Pinera Garcia, M. Schiopu, P. Pelliccione, G. Rodrigues, and T. Berger, "Runtime Verification and Field-based Testing for ROS-based Robotic Systems," *IEEE Transactions on Software Engineering*, vol. 50, no. 10, pp. 2544–2567, 2024. DOI: [10.1109/TSE.2024.3444697](https://doi.org/10.1109/TSE.2024.3444697)
+
+[![DOI](https://zenodo.org/badge/DOI/10.1109/TSE.2024.3444697.svg)](https://doi.org/10.1109/TSE.2024.3444697)
+
+### BibTeX
+
+```bibtex
+@ARTICLE{caldas2024guidelines,
+  author={Caldas, Ricardo and Pi{\~n}era Garc{\'i}a, Juan Antonio and Schiopu, Matei and Pelliccione, Patrizio and Rodrigues, Gena{\'i}na and Berger, Thorsten},
+  journal={IEEE Transactions on Software Engineering},
+  title={Runtime Verification and Field-based Testing for ROS-based Robotic Systems},
+  year={2024},
+  volume={50},
+  number={10},
+  pages={2544--2567},
+  keywords={Robots;Testing;Runtime;Guidelines;Software;Quality assurance;Robot kinematics;Field-based Testing;Runtime Verification;Robotic Systems;Robot Operating System (ROS);Uncertainty;Guidelines},
+  doi={10.1109/TSE.2024.3444697}
+}
+```
+
+## Authors
+{: #authors}
+
+<p><img src="/img/ricardo.jpg" style="float:right; overflow: auto; width:200px; margin-left: 1em;"></p>
+
+### Ricardo Caldas (primary contact)
+
+PhD. Candidate, Chalmers University of Technology, Interaction Design and Software Engineering, Computer Science and Engineering
+
+[Contact Information](https://ricardocaldas.me/)
+
+Email: [ricardo.caldas@gssi.it](mailto:ricardo.caldas@gssi.it)
+
+<p style="clear:both;"><br></p>
+
+<p><img src="/img/tony.png" style="float:right; overflow: auto; width:200px; margin-left: 1em;"></p>
+
+### Juan Antonio Pinera Garcia
+
+PhD Candidate, Gran Sasso Science Institute
+
+[Contact Information](https://www.gssi.it/people/students/students-computer-science/item/15647-pinera-garcia-juan-antonio)
+
+<p style="clear:both;"><br></p>
+
+<p><img src="/img/matei.jpg" style="float:right; overflow: auto; width:200px; margin-left: 1em;"></p>
+
+### Matei Schiopu
+
+Assistant Researcher, Chalmers University of Technology
+
+[Contact Information](https://www.linkedin.com/in/matei-schiopu-37aa071a1/)
+
+<p style="clear:both;"><br></p>
+
+<p><img src="/img/patrizio.jpg" style="float:right; overflow: auto; width:200px; margin-left: 1em;"></p>
+
+### Patrizio Pelliccione
+
+Director of the Computer Science area and Professor in Computer Science and Software Engineering at GSSI (Gran Sasso Science Institute), Italy.
+
+[Contact Information](http://www.patriziopelliccione.com/)
+
+<p style="clear:both;"><br></p>
+
+<p><img src="/img/geanina.jpg" style="float:right; overflow: auto; width:200px; margin-left: 1em;"></p>
+
+### Genaína Nunes Rodrigues
+
+Associate Professor of Computer Science, University of Brasilia
+
+[Contact Information](https://genaina.github.io/)
+
+<p style="clear:both;"><br></p>
+
+<p><img src="/img/thorsten.jpg" style="float:right; overflow: auto; width:200px; margin-left: 1em;"></p>
+
+### Thorsten Berger
+
+Chair of Software Engineering / Professor Ruhr University Bochum, Germany
+
+[Contact Information](https://se.ruhr-uni-bochum.de/thorsten-berger/)
+
+<p style="clear:both;"><br></p>
+
+## Evaluation
+{: #evaluation}
+
+This section presents the outcomes of our validation with industry and academia experts, conducted through questionnaires available in the replication package section of the website. Our aim is to assess whether the guidelines synthesized from literature and insights from open-source ROS repositories are perceived as useful, clear, and applicable by developers and QA teams testing and verifying ROS code. We formulate three hypotheses per guideline:
+
+- H1. Overall, the guideline is useful. (Usefulness)
+- H2. The formulation of the guideline is clear. (Clarity)
+- H3. The guideline is applicable to ROS-based systems. (Applicability)
+
+Unlike usefulness, applicability refers to the extent to which respondents consider that the guideline could be directly applied to ROS-based systems they have worked with. Conversely, usefulness pertains to ROS-based systems in general.
+
+### Summary of Respondent Profiles
+
+<table>
+  <tr>
+    <td><b>ID</b></td>
+    <td><b>Time</b></td>
+    <td><b>Experience</b></td>
+    <td><b>Organization</b></td>
+    <td><b>Domain</b></td>
+    <td><b>Role</b></td>
+    <td><b>Individuals</b></td>
+  </tr>
+  <tr>
+    <td>P1</td>
+    <td>&gt;10y</td>
+    <td>Contributed to ROS packages</td>
+    <td>Academia and Industry</td>
+    <td>Service Robotics</td>
+    <td>Developer</td>
+    <td>18</td>
+  </tr>
+  <tr>
+    <td>P2</td>
+    <td>3-5y</td>
+    <td>Worked on applications using ROS</td>
+    <td>Industry</td>
+    <td>Industrial automation</td>
+    <td>Developer</td>
+    <td>17</td>
+  </tr>
+  <tr>
+    <td>P3</td>
+    <td>1-3y</td>
+    <td>Contributed to ROS packages</td>
+    <td>Academia</td>
+    <td>General-purpose</td>
+    <td>Developer</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>P4</td>
+    <td>1-3y</td>
+    <td>Worked on applications using ROS</td>
+    <td>Academia and Industry</td>
+    <td>General-purpose</td>
+    <td>QA</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>P5</td>
+    <td>3-5y</td>
+    <td>Worked on applications using ROS</td>
+    <td>Academia and Independent Groups</td>
+    <td>Marine Robotics</td>
+    <td>QA</td>
+    <td>11</td>
+  </tr>
+</table>
+
+We received 55 questionnaire responses, with 33 from developers and 22 from QA teams. These responses were obtained through targeted emails and posts in the ROS discourse forum. The questionnaire was tailored to test the three hypotheses, and respondents were also asked about their experience in robotics, ROS experience, organizational background, and robotics domains they've worked on.
+
+### Likert Plot for Questionnaire Answers
+
+![Likert plot for the questionnaire answers](/img/linkert2.png)
+{: style="text-align: center;"}
+
+*Figure 1: Likert plot for the questionnaire answers*
+{: style="text-align: center;"}
+
+The Likert plot provides an overview of the questionnaire responses. While most votes lean towards 'Agree,' some guidelines received 'Strongly Disagree' votes. We focus on analyzing disagreements, as they may indicate areas for further research.
+
+![Boxplots for the results bird's eye view](/img/boxplots.png)
+{: style="text-align: center;"}
+
+*Figure 2: Boxplots for the results bird's eye view*
+{: style="text-align: center;"}
+
+In addition to the Likert plot, we conducted statistical analysis using boxplots to visualize whether the hypotheses hold for each guideline. Overall, developers and QA teams agree that the synthesized guidelines are applicable, useful, and clear.
+
+### Statistical Significance
+
+![Wilcoxon one-sample test](/img/statistical_sig.png)
+{: style="text-align: center;"}
+
+*Figure 3: Wilcoxon one-sample test for statistical significance (hypothesis: μ ≥ 0)*
+{: style="text-align: center;"}
+
+We tested the hypotheses for statistical significance using the one-sample Wilcoxon test. The tests confirm the statistical significance of the correlation between guidelines and attributes of applicability, clarity, and usefulness, except for guidelines CI2, MTA2, and PE2.
+
+### Practical Significance
+
+![Effect size for one sample Wilcoxon test](/img/practical_sig.png)
+{: style="text-align: center;"}
+
+*Figure 4: Effect size for one sample Wilcoxon test for practical significance*
+{: style="text-align: center;"}
+
+Practical significance was assessed using the effect size calculated from the one-sample Wilcoxon signed-rank test. Guidelines with small effect sizes (CI2, MTA2, and PE2) required further data to strengthen conclusions, while guidelines with moderate and large effect sizes justify their practical significance.
+
+Ultimately, we conducted a follow-up discussion with respondents who disagreed with the usefulness/applicability of CI2, MTA2, and PE2, and modified the guidelines.
+
+## Replication Package
+{: #replication-package}
 
 *Would you like to replicate our study?* This page will take you through the steps to replicate our study. We use the methodology to guide you through the replication process. We understand that some steps are hard or even impossible to replicate, thus we provide artifacts (protocols, scripts, spreadsheets with results) generated during our study to help you follow along. Please, contact us in case you have any doubts.
 
 Before you start, [click here](/replication_package_extras/replication_package.zip) to download the replication package as a .zip.
 
-We followed design science to synthesize the guidelines. We guide you through each cycle of the design science process from Fig 1.
+We followed design science to synthesize the guidelines. We guide you through each cycle of the design science process from Fig 5.
 
 <img style="width: 75%;" class="center" src="/img/cycles.png">
-<p class="center" style="text-align: center;"><b>Figure 1:</b> Activities to synthesizing guidelines according to design science</p>
+<p class="center" style="text-align: center;"><b>Figure 5:</b> Activities to synthesizing guidelines according to design science</p>
 
-## First Cycle: Survey Elicitation and Terminology
+### First Cycle: Survey Elicitation and Terminology
 
 The first cycle is devoted to establishing awareness of the state-of-the-art and building the terminology used in the study.
 
@@ -45,16 +258,16 @@ ACM DL Search String = Fulltext:(("ros" OR "robotic operating system" OR "robot 
 
 The terminology was validated internally, through peer reviews and discussions with co-authors to consolidate the scope of our study.
 
-## Second Cycle: Literature Review, Guideline Templates, External Validation
+### Second Cycle: Literature Review, Guideline Templates, External Validation
 
 The Second Cycle focused on performing a literature review, synthesizing the guideline templates, and performing an external validation of the template.
 
-### Systematic Literature Review
+#### Systematic Literature Review
 
-We used the search string to perform a systematic literature review to understand the studies discussing runtime verification and field-based testing for ROS applications. The SLR followed the activities in Fig. 2.
+We used the search string to perform a systematic literature review to understand the studies discussing runtime verification and field-based testing for ROS applications. The SLR followed the activities in Fig. 6.
 
 <img style="width: 75%;" class="center" src="/img/systematic_literature_review.png">
-<p class="center" style="text-align: center;"><b>Figure 2:</b> Activities to conducting the systematic literature review</p>
+<p class="center" style="text-align: center;"><b>Figure 6:</b> Activities to conducting the systematic literature review</p>
 
 We present precise descriptions for each activity in a [protocol](/replication_package_extras/slr_protocol.pdf).
 
@@ -104,7 +317,7 @@ Then, we used the inclusion and exclusion criteria from Tab. 1 to filter out rel
 
 Finally, we selected the runtime verification and field-based testing approaches according to a classification scheme. [spreadsheet](/replication_package_extras/literature_review.xlsx)
 
-### Guidelines Template
+#### Guidelines Template
 
 Then, we understood what was necessary for a guideline and designed a template, see Tab. 2. We used the template to synthesize our initial set of guideline sketches.
 
@@ -153,26 +366,26 @@ Then, we understood what was necessary for a guideline and designed a template, 
 
 <p class="center" style="text-align: center;"><b>Table 2:</b> Template for Guideline Specification</p>
 
-### External validation
+#### External validation
 
 Finally, we shared, through a [questionnaire](/replication_package_extras/pre-external_questionnaire.pdf), the sketches with members of the Robotics Software Engineering Workshop. Three experts sent us their [feedback](/replication_package_extras/pre-external_answers.xlsx).
 
-## Third Cycle: Repos Mining, Guidelines with Exemplars, Online Survey
+### Third Cycle: Repos Mining, Guidelines with Exemplars, Online Survey
 
 The third cycle was devoted to consolidating the guidelines with concrete examples, clustering, organizing the guidelines, and validating with researchers and practitioners.
 
-### Consolidating the Guidelines
+#### Consolidating the Guidelines
 
-To consolidate the guidelines we further looked for specific papers on the topic of the guideline and performed a data mining. For the specific search, we used Google Scholar with terms extracted from the guideline sketches. The repositories mining followed the procedure described in Fig. 3.
+To consolidate the guidelines we further looked for specific papers on the topic of the guideline and performed a data mining. For the specific search, we used Google Scholar with terms extracted from the guideline sketches. The repositories mining followed the procedure described in Fig. 7.
 
 <img class="center" style="width: 75%;" src="/replication_package_extras/methodology.png">
-<p class="center" style="text-align: center;"><b>Figure 3:</b> Data mining activities</p>
+<p class="center" style="text-align: center;"><b>Figure 7:</b> Data mining activities</p>
 
-For more details, check the [GitHub repository](https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining) with scripts and the [protocol](/replication_package_extras/Datamining_Paper.pdf) with details explaining the steps in Fig. 3.
+For more details, check the [GitHub repository](https://github.com/SchiopuMatei/Chalmers-ROS-RM-FT-Datamining) with scripts and the [protocol](/replication_package_extras/Datamining_Paper.pdf) with details explaining the steps in Fig. 7.
 
 This step resulted in the guidelines catalog. Each guideline follows a template and they are all documented in a separate [guidelines.pdf file](/replication_package_extras/clustered_guidelines_3rd cycle.pdf).
 
-### Online Survey
+#### Online Survey
 
 Finally, we validated the final set of guidelines with practitioners and researchers. To this end, we designed and distributed an online questionnaire.
 
@@ -185,4 +398,4 @@ The questionnaire was split in two targeting developers or quality assurance tea
   - [QA Team's Questionnaire Form](/replication_package_extras/QATeamSurvey.pdf)
   - [QA Team's Answers](/replication_package_extras/QATeamSurvey.csv)
 
-The results from the third cycle confirmed the guidelines' relevance and helped us fine-tune them. The analysis that followed up the questionnaires is available in the [Validation](/evaluation) section.
+The results from the third cycle confirmed the guidelines' relevance and helped us fine-tune them. The analysis that followed up the questionnaires is available in the [Evaluation](#evaluation) section above.

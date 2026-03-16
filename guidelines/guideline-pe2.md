@@ -7,6 +7,7 @@ sidebar:
 toc: true
 toc_label: "On this page"
 toc_sticky: true
+tags: [model-based-testing, formal-verification, digital-twin, qa-team]
 ---
 
 ## Context (WHEN)

@@ -2,26 +2,52 @@
 title: "Guidelines for Developers and QA Teams"
 layout: single
 permalink: /
+classes: wide
 sidebar:
   nav: "guidelines"
 ---
 
-This page complements the paper [*"Runtime Verification and Field-based Testing for ROS-Based Robotic Systems"*](https://arxiv.org/abs/2404.11498) and is an online repository of the guideline catalog for ROS-based Robotics projects.
+This page complements the paper [*"Runtime Verification and Field-based Testing for ROS-Based Robotic Systems"*](https://doi.org/10.1109/TSE.2024.3444697) and is an online repository of the guideline catalog for ROS-based Robotics projects.
 
-You can further find the [guidelines](/) and information on the [evaluation](/evaluation) process. Reproduction kits, specifications, and accompanying code can be found in our [replication package](/replication).
+You can further find the [guidelines](/) and information on the [evaluation](/paper#evaluation) process. Reproduction kits, specifications, and accompanying code can be found in our [replication package](/paper#replication-package).
 
-<div style="border: 1px solid #ddd; border-radius: 6px; padding: 20px 24px; margin: 24px 0; background-color: #f9f9f9;">
-  <h2 id="whats-new" style="margin-top: 0;">What's New</h2>
-  <ul style="list-style: none; padding-left: 0;">
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplar added: UPPAAL automated verification toolchain for ROS 2 timing and scheduling analysis (<a href="/guidelines/guideline-pe2">PE2</a>).</li>
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplars added: R2D2 and ROFER ROS 2 fuzzers for noise injection and robustness testing (<a href="/guidelines/guideline-mta1">MTA1</a>).</li>
-    <li style="margin-bottom: 10px;"><strong>March 2026</strong> — New exemplars added: FRET for structured natural language specification (<a href="/guidelines/guideline-sdb1">SDB1</a>) and the FRET+Ogma+Copilot automated monitor generation pipeline (<a href="/guidelines/guideline-mta2">MTA2</a>).</li>
-  </ul>
+## What's New
+{: #whats-new}
+
+* **March 2026** — New exemplar added: UPPAAL automated verification toolchain for ROS 2 ([PE2](/guidelines/guideline-pe2)).
+* **March 2026** — New exemplars: R2D2 and ROFER ROS 2 fuzzers ([MTA1](/guidelines/guideline-mta1)).
+* **March 2026** — New exemplars: FRET ([SDB1](/guidelines/guideline-sdb1)) and FRET+Ogma+Copilot pipeline ([MTA2](/guidelines/guideline-mta2)).
+
+[View all news →](/news)
+
+## Browse by Role
+
+<div style="display: flex; gap: 20px; margin: 20px 0; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 260px; border: 1px solid #ddd; border-radius: 6px; padding: 16px;">
+    <h3 style="margin-top: 0;">For Developers</h3>
+    <p>Guidelines for preparing ROS-based systems for verification and testing.</p>
+    <ul>
+      <li><a href="/guidelines/guideline-ci1">CI1–CI3</a> — Constraint Identification</li>
+      <li><a href="/guidelines/guideline-cd1">CD1–CD2</a> — Code Design</li>
+      <li><a href="/guidelines/guideline-i1">I1–I4</a> — Instrumentation</li>
+    </ul>
+  </div>
+  <div style="flex: 1; min-width: 260px; border: 1px solid #ddd; border-radius: 6px; padding: 16px;">
+    <h3 style="margin-top: 0;">For QA Teams</h3>
+    <p>Guidelines for performing runtime verification and field-based testing.</p>
+    <ul>
+      <li><a href="/guidelines/guideline-pe1">PE1–PE2</a> — Prepare Environment</li>
+      <li><a href="/guidelines/guideline-sdb1">SDB1–SDB3</a> — Specify Behavior</li>
+      <li><a href="/guidelines/guideline-mta1">MTA1–MTA2</a> — Monitor & Test</li>
+      <li><a href="/guidelines/guideline-se1">SE1–SE2</a> — System Execution</li>
+      <li><a href="/guidelines/guideline-ar1">AR1–AR2</a> — Analysis & Reporting</li>
+    </ul>
+  </div>
 </div>
 
 ## Guideline Catalog
 
-![Development and Test Process](/files/dev_test_process.png)
+<img src="/files/dev_test_process.png" alt="Development and Test Process" style="width: 100%; max-width: 100%;">
 
 ## Guidelines
 {: #patternsref}

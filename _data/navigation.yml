@@ -1,22 +1,22 @@
 # Top navigation bar
 main:
-  - title: "What's New"
-    url: /#whats-new
-  - title: "Guideline Catalog"
+  - title: "Guidelines"
     url: /
-  - title: "Replication Package"
-    url: /replication
-  - title: "Evaluation"
-    url: /evaluation
+  - title: "Tool Directory"
+    url: /tools
+  - title: "News"
+    url: /news
   - title: "Contribute"
     url: /contribute
-  - title: "Authors"
-    url: /authors
-  - title: "Cite Us!"
-    url: /research
+  - title: "About the Paper"
+    url: /paper
 
 # Sidebar navigation for guidelines
 guidelines:
+  - title: "Browse"
+    children:
+      - title: "Browse by Tag"
+        url: /tags/
   - title: "Constraint Identification"
     children:
       - title: "CI1 — Timing constraints"
