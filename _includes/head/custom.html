@@ -1,2 +1,6 @@
-<!-- Cronitor Real User Monitoring -->
-<script async src="https://rum.cronitor.io/script.js" data-client-key="97d9d4d8389c85dd1e533df8355e7602"></script>
+<!-- Cronitor RUM -->
+<script async src="https://rum.cronitor.io/script.js"></script>
+<script>
+    window.cronitor = window.cronitor || function() { (window.cronitor.q = window.cronitor.q || []).push(arguments); };
+    cronitor('config', { clientKey: '97d9d4d8389c85dd1e533df8355e7602' });
+</script>
